@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import { href } from "../lib/paths";
+---
+
+<BaseLayout
+  title="Page not found"
+  description="That page is not on Dumpster Price Check. College Station and Bryan dumpster prices are linked from here."
+>
+  <h1>That page is not here.</h1>
+  <p class="lede">The prices that exist today are for College Station and Bryan.</p>
+  <ul class="clean">
+    <li><a href={href("/")}>Home</a></li>
+    <li><a href={href("/cities/college-station")}>College Station prices</a></li>
+    <li><a href={href("/cities/bryan")}>Bryan prices</a></li>
+    <li><a href={href("/guides/10-vs-15-vs-20-yard-dumpsters")}>10 vs 15 vs 20 yard</a></li>
+    <li><a href={href("/about")}>About and how prices are checked</a></li>
+  </ul>
+</BaseLayout>

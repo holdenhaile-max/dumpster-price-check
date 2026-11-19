@@ -1,0 +1,34 @@
+{
+  "name": "College Station",
+  "state": "TX",
+  "title": "Dumpster rental prices in College Station",
+  "description": "Published dumpster rental prices for College Station, TX. Each price links to the company page and shows the day it was checked.",
+  "summary": "These companies serve College Station. On Nov 19, 2026, none of them published a College Station price that differs from Bryan. Sort by price, size, or days.",
+  "order": 1,
+  "faqs": [
+    {
+      "question": "How much does a dumpster cost in College Station?",
+      "answer": "The published base prices checked on Nov 19, 2026 run from $300 to $475. Aggieland Dumpster Rentals lists a 1-day trailer at $300 plus tax, with 2 tons included. A rental whose own page states 7 days is $420, $425, or $450 before weight fees. Many companies do not publish a price at all."
+    },
+    {
+      "question": "Which companies posted a price?",
+      "answer": "Aggieland Dumpster Rentals, BCS Junk Removal, and Waste Falcon posted rental prices on their own pages. Texas Disposal Systems, CTI Response, Pronto Services, Texas Commercial Waste, Bin There Dump That Aggieland, and BVR Waste and Recycling did not post a dollar rental price. Those rows say Call for quote."
+    },
+    {
+      "question": "What does Call for quote mean?",
+      "answer": "The company has a public page for this area, and that page does not list a dollar price. Use the phone number on the company row. This site does not fill one in."
+    },
+    {
+      "question": "What does Not listed mean?",
+      "answer": "That fact was not on the company page. A row can show a verified price and still say Not listed for days, tons, tax, or an extra fee."
+    },
+    {
+      "question": "Is Aggieland a 20-yard dumpster?",
+      "answer": "Aggieland does not state an exact yard size. The FAQ says the trailers average just under 20 yards and sit within a few yards of each other. The prices are by the day: $300, $350, $400, and $450, plus tax, with 2 tons included."
+    },
+    {
+      "question": "Why do Waste Falcon's pages disagree?",
+      "answer": "The marketing page says $45 per ton and $8 a day after day 7. The 20-yard and 30-yard booking pages say $42 per ton and $8 a day after day 10. The table uses the booking page and marks those rows Sources disagree. The 10-yard and 15-yard booking pages do not list days or a per-ton fee, so those fees are left as Not listed."
+    }
+  ]
+}

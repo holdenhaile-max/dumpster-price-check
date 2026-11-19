@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../components/BaseLayout.astro";
+import FaqList from "../../components/FaqList.astro";
+import PriceTable from "../../components/PriceTable.astro";
+import { absoluteUrl, href } from "../../lib/paths";
+import { breadcrumbSchema, faqSchema } from "../../lib/schema.mjs";
+
+export async function getStaticPaths() {
+  const cities = await getCollection("cities");
+  return cities.map((city) => ({ params: { slug: city.id }, props: { city } }));
+}
+
+const { city } = Astro.props;
+const pageUrl = absoluteUrl(`/cities/${city.id}`);
+
+const jsonLd = [
+  faqSchema(city.data.faqs),
+  breadcrumbSchema([
+    { name: "Home", url: absoluteUrl("/") },
+    { name: "Cities", url: absoluteUrl("/cities") },
+    { name: city.data.name, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout title={city.data.title} description={city.data.description} jsonLd={jsonLd}>
+  <p class="crumbs">
+    <a href={href("/")}>Home</a> / <a href={href("/cities")}>Cities</a> / {city.data.name}
+  </p>
+  <p class="eyebrow">{city.data.name}, {city.data.state}</p>
+  <h1>{city.data.title}</h1>
+  <p class="lede">{city.data.summary}</p>
+  <PriceTable city={city.id} caption={`${city.data.name} dumpster rental prices`} />
+  <FaqList items={city.data.faqs} />
+  <p class="prose">
+    <a href={href("/guides/10-vs-15-vs-20-yard-dumpsters")}>10 vs 15 vs 20 yard dumpsters</a>
+    {" · "}
+    <a href={href("/guides/cheapest-7-day-dumpster-brazos-valley")}>Cheapest 7-day dumpster</a>
+  </p>
+</BaseLayout>

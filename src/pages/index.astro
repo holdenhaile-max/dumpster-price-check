@@ -1,0 +1,120 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../components/BaseLayout.astro";
+import FaqList from "../components/FaqList.astro";
+import PriceTable from "../components/PriceTable.astro";
+import { absoluteUrl, href } from "../lib/paths";
+import { faqSchema } from "../lib/schema.mjs";
+
+const cities = (await getCollection("cities")).sort((a, b) => a.data.order - b.data.order);
+const guides = (await getCollection("guides"))
+  .filter((guide) => guide.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const cards = [
+  ...cities.map((city) => ({
+    eyebrow: city.data.name,
+    title: city.data.title,
+    text: city.data.summary,
+    href: href(`/cities/${city.id}`),
+    link: "See the prices",
+  })),
+  ...guides.map((guide) => ({
+    eyebrow: guide.data.eyebrow,
+    title: guide.data.title,
+    text: guide.data.description,
+    href: href(`/guides/${guide.id}`),
+    link: "Read the comparison",
+  })),
+];
+
+const homeFaqs = [
+  {
+    question: "Which prices are real?",
+    answer:
+      "Only numbers printed on the company's own page. Aggieland Dumpster Rentals, BCS Junk Removal, and Waste Falcon published rental prices. Everyone else in the table is Call for quote. Nothing here is an estimate.",
+  },
+  {
+    question: "What does Not listed mean?",
+    answer:
+      "The company did not publish that fact. Days, tons, tax, delivery, or an extra fee can say Not listed even when the base price was checked.",
+  },
+  {
+    question: "Why do some Waste Falcon rows say sources disagree?",
+    answer:
+      "The marketing page says $45 per ton and $8 a day after day 7. The 20-yard and 30-yard booking pages say $42 per ton and $8 a day after day 10. Those rows show the booking page. The 10-yard and 15-yard booking pages do not list days or a per-ton fee, so those cells stay Not listed.",
+  },
+  {
+    question: "Does Aggieland rent a 20-yard dumpster?",
+    answer:
+      "They do not state an exact yard size. The FAQ says the trailers average just under 20 yards. Prices are $300, $350, $400, and $450 plus tax for 1, 2, 3, and 7 days, with 2 tons included.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Dumpster Price Check",
+    url: absoluteUrl("/"),
+    description:
+      "Independent comparison of published dumpster rental prices in College Station and Bryan, Texas.",
+    publisher: {
+      "@type": "Organization",
+      name: "Dumpster Price Check",
+      url: absoluteUrl("/"),
+    },
+  },
+  faqSchema(homeFaqs),
+];
+---
+
+<BaseLayout
+  title="Dumpster rental prices in College Station and Bryan"
+  description="Compare published dumpster rental prices in College Station and Bryan. Size, days, tons, and price are on the row. Missing facts say Not listed."
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">College Station and Bryan</p>
+      <h1>Dumpster rental prices, checked.</h1>
+      <p class="lede">
+        Compare named dumpster companies before you call. The size, the days, the tons included,
+        and the price are on the row. If the company did not publish a number, the row says so.
+      </p>
+    </div>
+    <aside class="notice">
+      <p>
+        <strong>Checked Nov 19, 2026</strong> from each company's own page. This site is not those
+        companies. Open the source link before you pay.
+      </p>
+      <p class="small">
+        Three companies posted a price. The rest say call for a quote. No price on this site is a guess.
+      </p>
+    </aside>
+  </section>
+
+  <h2>Start with the page you need</h2>
+  <div class="card-grid two">
+    {
+      cards.map((card) => (
+        <article class="card">
+          <p class="eyebrow">{card.eyebrow}</p>
+          <h3>{card.title}</h3>
+          <p>{card.text}</p>
+          <a class="more" href={card.href}>
+            {card.link}
+          </a>
+        </article>
+      ))
+    }
+  </div>
+
+  <h2>All checked offers</h2>
+  <p class="prose">
+    Lowest published price first. Call for quote stays at the bottom until you sort another column.
+  </p>
+  <PriceTable caption="Dumpster rental prices in College Station and Bryan" />
+
+  <FaqList items={homeFaqs} />
+</BaseLayout>
