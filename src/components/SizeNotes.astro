@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import { selectOffers } from "../lib/filters.mjs";
+import { daysText, priceText, tonsText } from "../lib/present.mjs";
+import SourceCite from "./SourceCite.astro";
+
+const companies = await getCollection("companies");
+const rows = selectOffers(companies, { sizes: "10,15,20", product: "rental" });
+const groups = [10, 15, 20].map((size) => ({
+  size,
+  rows: rows.filter((row) => row.offer.sizeYards === size),
+}));
+const trailers = companies.filter((company) => company.data.kind === "dump-trailer");
+---
+
+<div class="fit-list">
+  {
+    groups.map((group) => (
+      <section class="fit-card">
+        <h3>{group.size} yard</h3>
+        {group.rows.map((row) => (
+          <p>
+            <strong>{row.company.name}.</strong> {priceText(row.offer)}. Days: {daysText(row.offer)}.
+            Tons: {tonsText(row.offer)}. {row.offer.fit} {row.offer.shortNote}
+            <SourceCite
+              href={row.offer.sourceUrl}
+              label={row.offer.sourceLabel}
+              lastVerified={row.offer.checked}
+            />
+          </p>
+        ))}
+      </section>
+    ))
+  }
+  {
+    trailers.map((company) => (
+      <section class="fit-card">
+        <h3>Not placed in a yard size</h3>
+        <p>
+          <strong>{company.data.name}.</strong> {company.data.summary}
+        </p>
+      </section>
+    ))
+  }
+</div>

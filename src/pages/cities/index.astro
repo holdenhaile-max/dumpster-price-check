@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../components/BaseLayout.astro";
+import { href } from "../../lib/paths";
+
+const cities = (await getCollection("cities")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Dumpster prices by city"
+  description="Dumpster rental price pages for College Station and Bryan, Texas. Add a city by adding a data file."
+>
+  <p class="crumbs"><a href={href("/")}>Home</a> / Cities</p>
+  <h1>Cities</h1>
+  <p class="lede">Each city page lists the companies that name that city on their own page.</p>
+  <div class="card-grid two">
+    {
+      cities.map((city) => (
+        <article class="card">
+          <p class="eyebrow">{city.data.state}</p>
+          <h2>{city.data.title}</h2>
+          <p>{city.data.summary}</p>
+          <a class="more" href={href(`/cities/${city.id}`)}>
+            See {city.data.name} prices
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

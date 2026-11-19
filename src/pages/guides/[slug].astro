@@ -1,0 +1,80 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../components/BaseLayout.astro";
+import FaqList from "../../components/FaqList.astro";
+import PriceTable from "../../components/PriceTable.astro";
+import { absoluteUrl, href } from "../../lib/paths";
+import { breadcrumbSchema, faqSchema } from "../../lib/schema.mjs";
+
+export async function getStaticPaths() {
+  const guides = await getCollection("guides");
+  return guides.map((guide) => ({ params: { slug: guide.id }, props: { guide } }));
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+const pageUrl = absoluteUrl(`/guides/${guide.id}`);
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guide.data.title,
+    description: guide.data.description,
+    dateModified: guide.data.updated,
+    datePublished: guide.data.updated,
+    mainEntityOfPage: pageUrl,
+    author: { "@type": "Organization", name: "Dumpster Price Check" },
+    publisher: {
+      "@type": "Organization",
+      name: "Dumpster Price Check",
+      url: absoluteUrl("/"),
+    },
+  },
+  breadcrumbSchema([
+    { name: "Home", url: absoluteUrl("/") },
+    { name: "Guides", url: absoluteUrl("/guides") },
+    { name: guide.data.title, url: pageUrl },
+  ]),
+];
+if (guide.data.faqs.length) jsonLd.push(faqSchema(guide.data.faqs));
+---
+
+<BaseLayout title={guide.data.title} description={guide.data.description} jsonLd={jsonLd}>
+  <article class="guide">
+    <p class="crumbs">
+      <a href={href("/")}>Home</a> / <a href={href("/guides")}>Guides</a> / {guide.data.eyebrow}
+    </p>
+    <p class="eyebrow">{guide.data.eyebrow}</p>
+    <h1>{guide.data.title}</h1>
+    <p class="lede">{guide.data.description}</p>
+    {
+      guide.data.tables.map((table) => (
+        <PriceTable
+          caption={table.caption}
+          sizes={table.sizes}
+          days={table.days}
+          maxDays={table.maxDays}
+          pricedOnly={table.pricedOnly}
+          quotesOnly={table.quotesOnly}
+          exactDays={table.exactDays}
+          product={table.product}
+          companies={table.companies}
+          only={table.only}
+          city={table.city}
+        />
+      ))
+    }
+    <Content />
+    {guide.data.faqs.length > 0 && <FaqList items={guide.data.faqs} />}
+    <h2>Sources for this page</h2>
+    <ul class="clean">
+      {
+        guide.data.sources.map((source) => (
+          <li>
+            <a href={source.url} rel="noopener noreferrer">{source.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </article>
+</BaseLayout>

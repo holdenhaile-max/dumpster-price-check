@@ -1,0 +1,34 @@
+{
+  "name": "Bryan",
+  "state": "TX",
+  "title": "Dumpster rental prices in Bryan",
+  "description": "Published dumpster rental prices for Bryan, TX. Each price links to the company page and shows the day it was checked.",
+  "summary": "These companies serve Bryan. On Nov 19, 2026, none of them published a Bryan price that differs from College Station. Sort by price, size, or days.",
+  "order": 2,
+  "faqs": [
+    {
+      "question": "How much does a dumpster cost in Bryan?",
+      "answer": "The same published base prices as College Station, because these companies did not post a separate Bryan rate. Checked Nov 19, 2026, the base prices run from $300 to $475. Weight, tax, and extra days can change the bill. If a fee was not on the page, the row says Not listed."
+    },
+    {
+      "question": "Who serves Bryan with a posted price?",
+      "answer": "Aggieland Dumpster Rentals, BCS Junk Removal, and Waste Falcon posted rental prices. Texas Disposal Systems, CTI Response, Pronto Services, Texas Commercial Waste, Bin There Dump That Aggieland, and BVR Waste and Recycling list the area and say to call. Their price cells say Call for quote."
+    },
+    {
+      "question": "What is the cheapest 7-day price that includes the days on the page?",
+      "answer": "BCS Junk Removal lists a 15-yard dumpster for 7 days at $420. That price does not include a ton allowance. The dump fee is $60 per ton. Waste Falcon's 20-yard booking page is $425 for up to 7 days, with 0 tons included. Aggieland's 7-day trailer is $450 plus tax and includes 2 tons."
+    },
+    {
+      "question": "What does Not listed mean?",
+      "answer": "The company page did not state that fact. It is left blank on purpose. Call for quote means the page did not state a dollar rental price."
+    },
+    {
+      "question": "Does Aggieland state a yard size?",
+      "answer": "No. Aggieland rents dump trailers and does not state an exact yard size. The FAQ says the trailers average just under 20 yards. Do not read the 7-day price as a confirmed 20-yard roll-off."
+    },
+    {
+      "question": "Which page should I trust when Waste Falcon lists two fees?",
+      "answer": "Use the booking page for the size you would book. The 20-yard and 30-yard booking pages say $42 per ton and $8 a day after day 10. The marketing page says $45 per ton and $8 a day after day 7. This site shows the booking figures and says the pages disagree."
+    }
+  ]
+}

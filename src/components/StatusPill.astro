@@ -1,0 +1,10 @@
+---
+import { statusLabel } from "../lib/format.mjs";
+
+interface Props {
+  status: "verified" | "quote" | "conflict" | "unverified";
+}
+const { status } = Astro.props;
+---
+
+<span class:list={["pill", status]}>{statusLabel(status)}</span>

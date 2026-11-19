@@ -1,0 +1,182 @@
+---
+import { getCollection } from "astro:content";
+import { selectOffers } from "../lib/filters.mjs";
+import {
+  daysText,
+  extraFeesText,
+  priceText,
+  sizeDetail,
+  sizeText,
+  taxLine,
+  tonsText,
+} from "../lib/present.mjs";
+import { href } from "../lib/paths";
+import { numberSort, sortRows, textSortValue } from "../lib/sort-keys.mjs";
+import CheckedNote from "./CheckedNote.astro";
+import SourceCite from "./SourceCite.astro";
+import StatusPill from "./StatusPill.astro";
+
+interface Props {
+  caption?: string;
+  sizes?: string;
+  days?: number;
+  maxDays?: number;
+  pricedOnly?: boolean;
+  quotesOnly?: boolean;
+  exactDays?: boolean;
+  product?: "rental" | "swap";
+  companies?: string;
+  only?: string;
+  city?: string;
+}
+
+const {
+  caption = "Published dumpster rental prices",
+  sizes,
+  days,
+  maxDays,
+  pricedOnly,
+  quotesOnly,
+  exactDays,
+  product,
+  companies: companyFilter,
+  only,
+  city,
+} = Astro.props;
+
+const companies = await getCollection("companies");
+const selected = selectOffers(companies, {
+  sizes,
+  days,
+  maxDays,
+  pricedOnly,
+  quotesOnly,
+  exactDays,
+  product,
+  companies: companyFilter,
+  only,
+  city,
+});
+
+const rows = sortRows(
+  selected.map((row) => ({
+    ...row,
+    priceSort: numberSort(row.offer.price),
+    sizeSort: numberSort(row.offer.sizeYards),
+    daysSort: numberSort(row.offer.daysIncluded),
+    tonsSort: numberSort(row.offer.includedTons),
+    nameSort: textSortValue(row.company.name),
+  })),
+  "priceSort",
+  "asc",
+);
+---
+
+{
+  rows.length === 0 ? (
+    <p class="notice">No published row matches this list.</p>
+  ) : (
+    <div class="table-scroll">
+      <CheckedNote />
+      <table data-sortable="true">
+        <caption>{caption}</caption>
+        <thead>
+          <tr>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="name" data-sort-name="company">
+                Company
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="size" data-sort-name="size">
+                Size
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="days" data-sort-name="days">
+                Days
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="tons" data-sort-name="tons included">
+                Tons included
+              </button>
+            </th>
+            <th scope="col" aria-sort="ascending">
+              <button type="button" class="sort-button" data-sort="price" data-sort-name="price">
+                Price
+              </button>
+            </th>
+            <th scope="col">Extra fees</th>
+            <th scope="col">Status</th>
+            <th scope="col">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row, index) => {
+              const detail = sizeDetail(row.company, row.offer);
+              const tax = taxLine(row.offer);
+              return (
+                <tr
+                  data-original={index}
+                  data-name={row.nameSort.missing ? undefined : row.nameSort.value}
+                  data-name-missing={String(row.nameSort.missing)}
+                  data-size={row.sizeSort.missing ? undefined : String(row.sizeSort.value)}
+                  data-size-missing={String(row.sizeSort.missing)}
+                  data-size-type="number"
+                  data-days={row.daysSort.missing ? undefined : String(row.daysSort.value)}
+                  data-days-missing={String(row.daysSort.missing)}
+                  data-days-type="number"
+                  data-tons={row.tonsSort.missing ? undefined : String(row.tonsSort.value)}
+                  data-tons-missing={String(row.tonsSort.missing)}
+                  data-tons-type="number"
+                  data-price={row.priceSort.missing ? undefined : String(row.priceSort.value)}
+                  data-price-missing={String(row.priceSort.missing)}
+                  data-price-type="number"
+                >
+                  <th scope="row">
+                    <a href={href(`/companies/${row.companyId}`)}>{row.company.name}</a>
+                    {row.company.phone && <div class="small muted">{row.company.phone}</div>}
+                  </th>
+                  <td>
+                    {sizeText(row.offer)}
+                    {detail && <div class="small muted">{detail}</div>}
+                  </td>
+                  <td>{daysText(row.offer)}</td>
+                  <td>{tonsText(row.offer)}</td>
+                  <td>
+                    <div class="price-main">{priceText(row.offer)}</div>
+                    {tax && <div class="small muted">{tax}</div>}
+                    {row.offer.shortNote && <div class="small">{row.offer.shortNote}</div>}
+                  </td>
+                  <td>{extraFeesText(row.offer)}</td>
+                  <td>
+                    <StatusPill status={row.offer.status} />
+                  </td>
+                  <td>
+                    <SourceCite
+                      href={row.offer.sourceUrl}
+                      label={row.offer.sourceLabel}
+                      lastVerified={row.offer.checked}
+                    />
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+      <p class="sort-note">
+        Sort by company, size, days, tons included, or price. Anything not listed stays at the
+        bottom. Call for quote has no dollar price, so those rows stay at the bottom when you sort
+        by price.
+      </p>
+    </div>
+  )
+}
+
+<script>
+  import { initSortableTables } from "../scripts/sort-table.mjs";
+  initSortableTables();
+</script>

@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../components/BaseLayout.astro";
+import { href } from "../../lib/paths";
+
+const guides = (await getCollection("guides")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Dumpster rental guides"
+  description="Comparisons built from the same checked dumpster prices: sizes, 7-day rentals, and later guides you add as pages."
+>
+  <p class="crumbs"><a href={href("/")}>Home</a> / Guides</p>
+  <h1>Guides</h1>
+  <p class="lede">Each guide reads the price files. A new guide is a new page file, not a new layout.</p>
+  <div class="card-grid two">
+    {
+      guides.map((guide) => (
+        <article class="card">
+          <p class="eyebrow">{guide.data.eyebrow}</p>
+          <h2>{guide.data.title}</h2>
+          <p>{guide.data.description}</p>
+          <a class="more" href={href(`/guides/${guide.id}`)}>
+            Read the guide
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../components/BaseLayout.astro";
+import { kindLabel } from "../../lib/present.mjs";
+import { href } from "../../lib/paths";
+
+const companies = (await getCollection("companies")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name),
+);
+---
+
+<BaseLayout
+  title="Dumpster companies"
+  description="Named dumpster and roll-off companies checked for College Station and Bryan. Priced companies and call-for-quote companies are both listed."
+>
+  <p class="crumbs"><a href={href("/")}>Home</a> / Companies</p>
+  <h1>Companies</h1>
+  <p class="lede">
+    Open a company for the phone, the item rules, and every offer. Prices stay in the data files.
+  </p>
+  <div class="card-grid two">
+    {
+      companies.map((company) => (
+        <article class="card">
+          <p class="eyebrow">{kindLabel(company.data.kind)}</p>
+          <h2>{company.data.name}</h2>
+          <p>{company.data.summary}</p>
+          <a class="more" href={href(`/companies/${company.id}`)}>
+            {company.data.name} details
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

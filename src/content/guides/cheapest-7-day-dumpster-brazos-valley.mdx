@@ -1,0 +1,64 @@
+---
+title: Cheapest 7-day dumpster in the Brazos Valley
+description: The lowest published 7-day dumpster price in Bryan and College Station, with the tons and fees that change the bill.
+eyebrow: 7-day price
+updated: "2026-11-19"
+order: 2
+featured: true
+tables:
+  - caption: Published 7-day rental prices
+    days: 7
+    pricedOnly: true
+    exactDays: true
+    product: rental
+faqs:
+  - question: What is the cheapest 7-day dumpster?
+    answer: The lowest published base price that states 7 days is $420 from BCS Junk Removal for a 15-yard dumpster. No ton allowance is listed. The dump fee is $60 per ton.
+  - question: Is the $365 10-yard cheaper for 7 days?
+    answer: Waste Falcon's 10-yard booking page lists $365 and does not list the days. The marketing page says rentals include 7 days. Because the booking page does not say 7 days, that $365 is not counted as a checked 7-day price.
+  - question: What if the load is 2 tons?
+    answer: Aggieland's 7-day price is $450 plus tax and includes 2 tons. BCS is $420 plus $60 per ton, which is $540 for 2 tons before any tax the page does not list. Waste Falcon's 20-yard booking page is $425 plus $42 per ton, which is $509 for 2 tons. This is arithmetic from the published rates, not a quote. The 2-ton line is Aggieland's included weight, used so you can compare. It is not a guess about your debris.
+  - question: What is the cheapest short rental?
+    answer: Aggieland lists 1 day at $300 plus tax, with 2 tons included. That is a dump trailer, and the yard size is not exact.
+sources:
+  - label: BCS Junk Removal dumpster rental
+    url: https://bcsjunkremoval.com/dumpster-rental-service
+  - label: Waste Falcon 20-yard booking page
+    url: https://book.wastefalcon.com/items/20-yard-dumpster/
+  - label: Waste Falcon 10-yard booking page
+    url: https://book.wastefalcon.com/items/10-yard-dumpster/
+  - label: Waste Falcon pricing page
+    url: https://wastefalcon.com/pricing/
+  - label: Aggieland Dumpster Rentals
+    url: https://aggielanddumpsters.com/
+---
+
+import PriceTable from "../../components/PriceTable.astro";
+
+## Read the tons before you pick the lowest price
+
+The lowest base price in the table is $420 from BCS Junk Removal. That is not a full bill. BCS does not state included tons and bills $60 per ton. Waste Falcon's 20-yard booking page is $425 with 0 tons included and $42 per ton. Aggieland is $450 plus tax and includes 2 tons.
+
+For 2 tons, using only those published rates:
+
+- Aggieland, 7 days: $450 plus tax. The 2 tons are included, so the ton fee does not add if you stay at 2 tons. Delivery is included within 20 miles of 77845.
+- Waste Falcon 20-yard booking page: $425 plus $42 per ton. Two tons is $84. $425 plus $84 is $509. Tax is not listed. The marketing page's $45 per ton would make two tons $90, and $425 plus $90 is $515. This row does not use $45.
+- BCS Junk Removal, 7 days: $420 plus $60 per ton. Two tons is $120. $420 plus $120 is $540. Tax is not listed. This math treats every ton as billed, because the page does not state an allowance.
+
+These lines are addition. They are not quotes. Your debris weight can be different, and a fee that says Not listed can still show up on the invoice.
+
+## Prices that are not a checked 7-day rental
+
+Waste Falcon's smaller booking pages list a dollar price and do not list the days. The 30-yard booking page includes 10 days, not 7. They are real prices. They are not in the 7-day ranking.
+
+<PriceTable caption="Booked prices that do not state a 7-day rental" only="waste-falcon/10-yard,waste-falcon/15-yard,waste-falcon/15-yard-swap,waste-falcon/30-yard" />
+
+## 7 days mentioned, no dollar price
+
+<PriceTable caption="Call for a price. Days are not a published package rate." companies="bin-there-dump-that-aggieland,pronto-services" product="rental" />
+
+## Shorter than 7 days
+
+Aggieland publishes 1-day, 2-day, and 3-day trailer prices. BCS publishes a 3-day 15-yard price. Those are the short rentals with a number on the page.
+
+<PriceTable caption="Published rentals of 3 days or less" maxDays={3} pricedOnly exactDays product="rental" />

@@ -1,0 +1,45 @@
+{
+  "name": "BVR Waste and Recycling",
+  "website": "https://www.bvrwasteandrecycling.com/",
+  "phone": "979-260-0006",
+  "cities": ["college-station", "bryan"],
+  "kind": "roll-off",
+  "summary": "Roll-off dumpster rentals advertised for Brenham, College Station, and the Brazos Valley. The homepage does not publish sizes or dollar prices.",
+  "checked": "2026-11-19",
+  "accepted": null,
+  "prohibited": null,
+  "address": "8825 Stewarts Meadow, College Station, TX 77845",
+  "gaps": [
+    "Dumpster sizes",
+    "Rental days",
+    "Included tons",
+    "Dollar prices",
+    "Accepted and prohibited items"
+  ],
+  "junkRemoval": null,
+  "offers": [
+    {
+      "id": "roll-off",
+      "product": "rental",
+      "sizeYards": null,
+      "dimensions": null,
+      "fit": "The homepage advertises roll-off rentals and does not name a yard size. A second address on the page is 1555 Highway 36 North, Brenham, TX 77833.",
+      "daysIncluded": null,
+      "daysAreTypical": false,
+      "includedTons": null,
+      "weightLimitTons": null,
+      "price": null,
+      "taxIncluded": null,
+      "perTon": null,
+      "extraDay": null,
+      "extraDayLabel": null,
+      "deliveryLabel": null,
+      "status": "quote",
+      "shortNote": "No size, days, tons, or dollar price is published.",
+      "note": "Homepage advertises roll-off dumpster rentals near Brenham, College Station, and the Brazos Valley, plus curbside trash, portable toilets, temporary fencing, demolition, and metal recycling. No dumpster sizes, rental periods, included tons, or dollar prices are published. Addresses listed: 1555 Highway 36 North, Brenham, TX 77833 and 8825 Stewarts Meadow, College Station, TX 77845.",
+      "sourceUrl": "https://www.bvrwasteandrecycling.com/",
+      "sourceLabel": "BVR Waste and Recycling",
+      "checked": "2026-11-19"
+    }
+  ]
+}

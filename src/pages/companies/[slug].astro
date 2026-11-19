@@ -1,0 +1,135 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../components/BaseLayout.astro";
+import PriceTable from "../../components/PriceTable.astro";
+import { money } from "../../lib/format.mjs";
+import { NOT_LISTED } from "../../lib/format.mjs";
+import { kindLabel } from "../../lib/present.mjs";
+import { absoluteUrl, href } from "../../lib/paths";
+import { breadcrumbSchema } from "../../lib/schema.mjs";
+
+export async function getStaticPaths() {
+  const companies = await getCollection("companies");
+  return companies.map((company) => ({
+    params: { slug: company.id },
+    props: { company },
+  }));
+}
+
+const { company } = Astro.props;
+const data = company.data;
+const pageUrl = absoluteUrl(`/companies/${company.id}`);
+const phoneHref = data.phone ? `tel:+1${data.phone.replace(/\D/g, "")}` : "";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: data.name,
+    url: data.website,
+    telephone: data.phone || undefined,
+    address: data.address || undefined,
+  },
+  breadcrumbSchema([
+    { name: "Home", url: absoluteUrl("/") },
+    { name: "Companies", url: absoluteUrl("/companies") },
+    { name: data.name, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title={`${data.name} dumpster prices`}
+  description={`${data.name} dumpster rental facts checked Nov 19, 2026. Published prices are listed. Missing facts say Not listed.`}
+  jsonLd={jsonLd}
+>
+  <p class="crumbs">
+    <a href={href("/")}>Home</a> / <a href={href("/companies")}>Companies</a> / {data.name}
+  </p>
+  <p class="eyebrow">{kindLabel(data.kind)}</p>
+  <h1>{data.name}</h1>
+  <p class="lede">{data.summary}</p>
+  <p>
+    <a href={data.website} rel="noopener noreferrer">Company site</a>
+    {data.phone && (
+      <>
+        {" · "}
+        <a href={phoneHref}>{data.phone}</a>
+      </>
+    )}
+  </p>
+  {data.address && <p class="small muted">{data.address}</p>}
+
+  <PriceTable companies={company.id} caption={`${data.name} offers`} />
+
+  <h2>What can go in</h2>
+  <p class="prose">{data.accepted || NOT_LISTED}</p>
+  <h2>What they say to keep out</h2>
+  <p class="prose">{data.prohibited || NOT_LISTED}</p>
+
+  <h2>Not on the page</h2>
+  <ul class="clean">
+    {data.gaps.map((gap) => <li>{gap}</li>)}
+  </ul>
+
+  {
+    data.junkRemoval && (
+      <>
+        <h2>Junk removal, separate from the dumpster price</h2>
+        <p class="prose">{data.junkRemoval.summary}</p>
+        {data.junkRemoval.items.length > 0 && (
+          <div class="table-scroll">
+            <table>
+              <caption>{data.name} junk removal prices</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Published amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.junkRemoval.items.map((item) => (
+                  <tr>
+                    <th scope="row">{item.label}</th>
+                    <td>
+                      {item.amount == null ? item.detail || NOT_LISTED : money(item.amount)}
+                      {item.amount != null && item.detail && <div class="small muted">{item.detail}</div>}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        <ul class="clean">
+          {data.junkRemoval.sources.map((source) => (
+            <li>
+              <a href={source.url} rel="noopener noreferrer">
+                {source.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  <h2>Offer notes</h2>
+  {
+    data.offers.map((offer) => (
+      <section>
+        <h3>
+          {offer.product === "swap" ? "Swap" : "Rental"}
+          {offer.sizeYards == null ? ", size not stated" : `, ${offer.sizeYards} yard`}
+          {offer.daysIncluded == null ? ", days not stated" : `, ${offer.daysIncluded} ${offer.daysIncluded === 1 ? "day" : "days"}${offer.daysAreTypical ? " typical" : ""}`}
+        </h3>
+        <p>{offer.note}</p>
+        <p class="small">
+          <a href={offer.sourceUrl} rel="noopener noreferrer">
+            {offer.sourceLabel}
+          </a>
+        </p>
+      </section>
+    ))
+  }
+</BaseLayout>

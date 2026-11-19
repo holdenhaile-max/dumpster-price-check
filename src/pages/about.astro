@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import { absoluteUrl, href } from "../lib/paths";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About Dumpster Price Check",
+  url: absoluteUrl("/about"),
+  description:
+    "How Dumpster Price Check reads dumpster rental prices, and what it leaves blank when a company does not publish a number.",
+  isPartOf: {
+    "@type": "WebSite",
+    name: "Dumpster Price Check",
+    url: absoluteUrl("/"),
+  },
+};
+---
+
+<BaseLayout
+  title="About this price check"
+  description="Dumpster Price Check is independent of the dumpster companies it lists. Here is how a price gets on the page, and how a wrong price is handled."
+  jsonLd={jsonLd}
+>
+  <p class="crumbs"><a href={href("/")}>Home</a> / About</p>
+  <p class="eyebrow">About</p>
+  <h1>How these dumpster prices are checked</h1>
+  <div class="prose stack">
+    <p>
+      Dumpster Price Check is a comparison for people renting a dumpster in College Station or
+      Bryan. It is not Aggieland Dumpster Rentals, BCS Junk Removal, Waste Falcon, Texas Disposal
+      Systems, CTI Response, Pronto Services, Texas Commercial Waste, Bin There Dump That
+      Aggieland, or BVR Waste and Recycling. It is not the City of College Station or the City of
+      Bryan.
+    </p>
+    <h2>How a price gets on the page</h2>
+    <p>
+      A price, a size, a day count, or a fee is listed only when that company's own page states it.
+      The row links that page and says Checked Nov 19, 2026. That is the day the page was read, not
+      a promise that the price is still current. If the page does not state a fact, the row says
+      Not listed. If the page tells you to call, the price says Call for quote. Search snippets,
+      ads, and review sites are not used as prices. No number on this site is an estimate.
+    </p>
+    <h2>When two pages disagree</h2>
+    <p>
+      Waste Falcon's marketing page says $45 per ton and $8 a day after day 7. The 20-yard and
+      30-yard booking pages say $42 per ton and $8 a day after day 10. Those rows show the booking
+      page and say the sources disagree. The 20-yard booking page also says up to 7 days are
+      included, then $8 a day after day 10, and it does not say what days 8, 9, and 10 cost.
+    </p>
+    <p>
+      Aggieland Dumpster Rentals does not state an exact yard size. The FAQ says the trailers
+      average just under 20 yards. The size column does not say 20 yards, because that would be a
+      guess. The homepage prices are plus tax. The tax amount is not published.
+    </p>
+    <p>
+      BCS Junk Removal lists a dump fee of $60 per ton and does not state an included tonnage. The
+      tons column says Not listed. It does not say 0 tons, because the page did not say 0.
+    </p>
+    <h2>Sites that did not load</h2>
+    <p>
+      5 Star Dumpsters (5stardumps.com) and Aggregate Underground &amp; Turf (aggregateuat.com) did
+      not load on Nov 19, 2026. They are not in the tables. No price was taken from an old listing
+      or a search snippet.
+    </p>
+    <h2>Paid links</h2>
+    <p>
+      No link on this site is paid, and no affiliate program has been joined. If that changes, the
+      link will say Sponsored. Open the company page before you pay. A price can change after the
+      day on the row.
+    </p>
+    <h2>What you cannot do here</h2>
+    <ul class="clean">
+      <li>No accounts, no booking, and no payment.</li>
+      <li>No ad trackers.</li>
+    </ul>
+    <h2>A wrong price</h2>
+    <p>
+      This site has no contact form, no email address, and no phone number. Open the source link on
+      the row and read the company page. The day on the row is the day that page was read.
+    </p>
+  </div>
+</BaseLayout>
