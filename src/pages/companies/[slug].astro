@@ -2,8 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../components/BaseLayout.astro";
 import PriceTable from "../../components/PriceTable.astro";
-import { money } from "../../lib/format.mjs";
-import { NOT_LISTED } from "../../lib/format.mjs";
+import { formatDate, money, NOT_LISTED } from "../../lib/format.mjs";
 import { kindLabel } from "../../lib/present.mjs";
 import { absoluteUrl, href } from "../../lib/paths";
 import { breadcrumbSchema } from "../../lib/schema.mjs";
@@ -40,7 +39,7 @@ const jsonLd = [
 
 <BaseLayout
   title={`${data.name} dumpster prices`}
-  description={`${data.name} dumpster rental facts checked Nov 19, 2026. Published prices are listed. Missing facts say Not listed.`}
+  description={`${data.name} dumpster rental facts checked ${formatDate(data.checked)}. Published prices are listed. Missing facts say Not listed.`}
   jsonLd={jsonLd}
 >
   <p class="crumbs">

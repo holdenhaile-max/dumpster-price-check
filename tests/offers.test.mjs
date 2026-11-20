@@ -17,6 +17,11 @@ const companies = await Promise.all(
 
 const priced = new Set([300, 350, 400, 450, 365, 380, 420, 425, 475]);
 const perTon = new Set([50, 60, 42]);
+const recheckedOnNov20 = new Set([
+  "aggieland-dumpster-rentals",
+  "bcs-junk-removal",
+  "waste-falcon",
+]);
 
 test("excluded companies are not in the price files", () => {
   const blob = JSON.stringify(companies);
@@ -28,16 +33,20 @@ test("excluded companies are not in the price files", () => {
 test("every published dollar amount is one of the checked prices", () => {
   const offers = companies.flatMap((company) => company.data.offers);
   assert.equal(offers.length, 28);
-  for (const offer of offers) {
-    assert.equal(offer.checked, "2026-11-19");
-    if (offer.price == null) {
-      assert.equal(offer.status, "quote");
-    } else {
-      assert.equal(priced.has(offer.price), true);
-      assert.notEqual(offer.status, "quote");
+  for (const company of companies) {
+    const expectedChecked = recheckedOnNov20.has(company.id) ? "2026-11-20" : "2026-11-19";
+    assert.equal(company.data.checked, expectedChecked);
+    for (const offer of company.data.offers) {
+      assert.equal(offer.checked, expectedChecked);
+      if (offer.price == null) {
+        assert.equal(offer.status, "quote");
+      } else {
+        assert.equal(priced.has(offer.price), true);
+        assert.notEqual(offer.status, "quote");
+      }
+      if (offer.perTon != null) assert.equal(perTon.has(offer.perTon), true);
+      assert.notEqual(offer.perTon, 45);
     }
-    if (offer.perTon != null) assert.equal(perTon.has(offer.perTon), true);
-    assert.notEqual(offer.perTon, 45);
   }
 });
 
@@ -92,6 +101,49 @@ test("Waste Falcon booking figures are stored, and the marketing rate is not", (
   assert.equal(ten.daysIncluded, null);
   assert.equal(daysText(ten), "Not listed");
   assert.equal(ten.perTon, null);
+});
+
+test("1-3 day rentals are the priced rows that state 3 days or less", () => {
+  const rows = selectOffers(companies, {
+    maxDays: 3,
+    pricedOnly: true,
+    exactDays: true,
+    product: "rental",
+  });
+  assert.deepEqual(
+    rows
+      .map((row) => [row.company.name, row.offer.daysIncluded, row.offer.price])
+      .sort((a, b) => a[2] - b[2] || a[1] - b[1]),
+    [
+      ["Aggieland Dumpster Rentals", 1, 300],
+      ["Aggieland Dumpster Rentals", 2, 350],
+      ["BCS Junk Removal", 3, 380],
+      ["Aggieland Dumpster Rentals", 3, 400],
+    ],
+  );
+});
+
+test("the 1-3 day guide is linked and uses only those published short prices", async () => {
+  const guide = await readFile(
+    path.resolve("src/content/guides/1-3-day-weekend-dumpster-prices.mdx"),
+    "utf8",
+  );
+  const header = await readFile(path.resolve("src/components/Header.astro"), "utf8");
+  const footer = await readFile(path.resolve("src/components/Footer.astro"), "utf8");
+  assert.match(guide, /title: 1-3 day weekend dumpster prices/);
+  assert.match(guide, /maxDays: 3/);
+  assert.match(guide, /pricedOnly: true/);
+  assert.match(guide, /exactDays: true/);
+  assert.match(guide, /updated: "2026-11-20"/);
+  assert.match(guide, /\$300 plus tax/);
+  assert.match(guide, /\$350 plus tax/);
+  assert.match(guide, /\$400 plus tax/);
+  assert.match(guide, /\$380/);
+  assert.match(guide, /\$60 per ton/);
+  assert.match(guide, /does not list the days/);
+  assert.equal(guide.includes("\u2014") || guide.includes("\u2013"), false);
+  assert.match(header, /\/guides\/1-3-day-weekend-dumpster-prices/);
+  assert.match(footer, /\/guides\/1-3-day-weekend-dumpster-prices/);
 });
 
 test("missing prices sort last and call for quote does not look like a dollar amount", () => {

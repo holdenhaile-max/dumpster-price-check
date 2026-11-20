@@ -97,4 +97,4 @@ Node 22.23.4 is selected in the workflow. The `engines` field in `package.json` 
 
 ## What this version checked
 
-Facts were read from company pages on November 19, 2026. A missing fact says Not listed. A company that does not publish a dollar price says Call for quote. Two company sites did not load and are named on the About page, not in the price table.
+Facts were read from company pages on November 19, 2026. On November 20, 2026, Aggieland Dumpster Rentals, BCS Junk Removal, and Waste Falcon were read again. Their published dollar amounts were the same, so only those checked dates moved. A missing fact says Not listed. A company that does not publish a dollar price says Call for quote. Two company sites did not load and are named on the About page, not in the price table.
