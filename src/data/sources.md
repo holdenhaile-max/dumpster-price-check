@@ -35,3 +35,14 @@ Texas Disposal Systems, CTI Response, Pronto Services, Texas Commercial Waste, B
 ## Not in the table
 
 5 Star Dumpsters (5stardumps.com) and Aggregate Underground & Turf (aggregateuat.com) did not load on 2026-11-19. No price was taken from a search snippet.
+
+## Recheck on 2026-11-20
+
+Aggieland Dumpster Rentals, BCS Junk Removal, and Waste Falcon were the priced companies, so they were read again. Every published dollar amount matched the price files. No price was changed. Their checked dates moved to 2026-11-20. The other six companies were not re-read, so their checked date stays 2026-11-19.
+
+- Aggieland homepage: 1 day $300, 2 days $350, 3 days $400, 7 days $450, all plus tax, 2 tons included, $50 per ton over 2 tons, $125 mid-rental swap, delivery included within 20 miles of 77845.
+- Aggieland FAQ: trailers average just under 20 yards. $50 if the delivery is farther than 20 miles from the shop in College Station. Tires, Freon units, and chemicals can add a fee. Those fee amounts are not published.
+- BCS dumpster page and terms: 15-yard, 3 days $380, 7 days $420, dump fee $60 per ton. Included tons, extra day fee, delivery fee, and tax are still not published.
+- BCS junk removal and live load pages: minimum $125, tires $10 each, furniture and appliances $20 to $30 each, full 15-yard haul-off $650, 45-minute live load $325, 90-minute live load $385 with 1 ton then $60 per ton. Same numbers.
+- Waste Falcon booking pages: 10-yard $365, 15-yard $380, 15-yard swap $380, 20-yard $425, 30-yard $475. The 10-yard, 15-yard, and swap pages still do not list days or tons. The 20-yard page still says up to 7 days, 0 tons, $42 per ton, and $8 a day after day 10. The 30-yard page still says up to 10 days, 0 tons, $42 per ton, and $8 a day after day 10.
+- Waste Falcon pricing page still says $45 per ton and $8 a day after day 7. The 20-yard and 30-yard rows still use the booking page and stay marked sources disagree. No 1-day, 2-day, or 3-day Waste Falcon price was found.
