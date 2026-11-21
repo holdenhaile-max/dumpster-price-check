@@ -3,7 +3,17 @@ import test from "node:test";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { selectOffers } from "../src/lib/filters.mjs";
-import { daysText, extraFeesText, priceText, sizeText, tonsText } from "../src/lib/present.mjs";
+import { statusLabel } from "../src/lib/format.mjs";
+import {
+  daysText,
+  deliveryText,
+  extraDayText,
+  extraFeesText,
+  perTonText,
+  priceText,
+  sizeText,
+  tonsText,
+} from "../src/lib/present.mjs";
 import { numberSort, sortRows, textSortValue } from "../src/lib/sort-keys.mjs";
 
 const dir = path.resolve("src/data/companies");
@@ -22,6 +32,11 @@ const recheckedOnNov20 = new Set([
   "bcs-junk-removal",
   "waste-falcon",
 ]);
+const recheckedOnNov21 = new Set([
+  "bin-there-dump-that-aggieland",
+  "cti-response",
+  "pronto-services",
+]);
 
 test("excluded companies are not in the price files", () => {
   const blob = JSON.stringify(companies);
@@ -34,7 +49,9 @@ test("every published dollar amount is one of the checked prices", () => {
   const offers = companies.flatMap((company) => company.data.offers);
   assert.equal(offers.length, 28);
   for (const company of companies) {
-    const expectedChecked = recheckedOnNov20.has(company.id) ? "2026-11-20" : "2026-11-19";
+    let expectedChecked = "2026-11-19";
+    if (recheckedOnNov20.has(company.id)) expectedChecked = "2026-11-20";
+    if (recheckedOnNov21.has(company.id)) expectedChecked = "2026-11-21";
     assert.equal(company.data.checked, expectedChecked);
     for (const offer of company.data.offers) {
       assert.equal(offer.checked, expectedChecked);
@@ -144,6 +161,74 @@ test("the 1-3 day guide is linked and uses only those published short prices", a
   assert.equal(guide.includes("\u2014") || guide.includes("\u2013"), false);
   assert.match(header, /\/guides\/1-3-day-weekend-dumpster-prices/);
   assert.match(footer, /\/guides\/1-3-day-weekend-dumpster-prices/);
+});
+
+test("the Nov 21 recheck kept call-for-quote prices and moved only the date", () => {
+  for (const id of recheckedOnNov21) {
+    const company = companies.find((item) => item.id === id);
+    assert.equal(company.data.checked, "2026-11-21");
+    for (const offer of company.data.offers) {
+      assert.equal(offer.price, null);
+      assert.equal(offer.status, "quote");
+      assert.equal(offer.checked, "2026-11-21");
+      assert.equal(offer.perTon, null);
+      assert.equal(offer.extraDay, null);
+    }
+  }
+  const pronto = companies.find((company) => company.id === "pronto-services");
+  assert.deepEqual(
+    pronto.data.offers.map((offer) => [offer.id, offer.weightLimitTons, tonsText(offer)]),
+    [
+      ["20-yard", 4, "4 tons limit"],
+      ["30-yard", 5, "5 tons limit"],
+      ["40-yard", 6, "6 tons limit"],
+    ],
+  );
+  const bin = companies.find((company) => company.id === "bin-there-dump-that-aggieland");
+  assert.equal(daysText(bin.data.offers[0]), "7 days, typical");
+  assert.equal(statusLabel("unverified"), "Unverified");
+});
+
+test("inclusion cells use the published fee and say Not listed when the page does not", () => {
+  const aggieland = companies.find((company) => company.id === "aggieland-dumpster-rentals");
+  const trailer = aggieland.data.offers[0];
+  assert.equal(perTonText(trailer), "$50 per ton");
+  assert.equal(deliveryText(trailer), "Included within 20 miles of 77845. $50 if farther.");
+  assert.equal(extraDayText(trailer), "Not listed");
+  const bcs = companies.find((company) => company.id === "bcs-junk-removal");
+  assert.equal(perTonText(bcs.data.offers[0]), "$60 per ton");
+  assert.equal(deliveryText(bcs.data.offers[0]), "Not listed");
+  const falcon = companies.find((company) => company.id === "waste-falcon");
+  const twenty = falcon.data.offers.find((offer) => offer.id === "20-yard");
+  assert.equal(tonsText(twenty), "0 included");
+  assert.equal(perTonText(twenty), "$42 per ton");
+  assert.equal(extraDayText(twenty), "$8 a day after day 10");
+  assert.equal(deliveryText(twenty), "Not listed");
+  const ten = falcon.data.offers.find((offer) => offer.id === "10-yard");
+  assert.equal(perTonText(ten), "Not listed");
+  assert.equal(extraDayText(ten), "Not listed");
+});
+
+test("the what's included guide is linked and uses published inclusion facts", async () => {
+  const guide = await readFile(
+    path.resolve("src/content/guides/whats-included-dumpster-rental.mdx"),
+    "utf8",
+  );
+  const header = await readFile(path.resolve("src/components/Header.astro"), "utf8");
+  const footer = await readFile(path.resolve("src/components/Footer.astro"), "utf8");
+  const cities = await readFile(path.resolve("src/pages/cities/[slug].astro"), "utf8");
+  assert.match(guide, /title: "What's included: tons, delivery, overage, extra days"/);
+  assert.match(guide, /IncludedTable/);
+  assert.match(guide, /\$50 per ton/);
+  assert.match(guide, /\$60 per ton/);
+  assert.match(guide, /\$42 per ton/);
+  assert.match(guide, /\$8 a day after day 10/);
+  assert.match(guide, /Not listed/);
+  assert.match(guide, /8,000 lbs/);
+  assert.equal(guide.includes("\u2014") || guide.includes("\u2013"), false);
+  assert.match(header, /\/guides\/whats-included-dumpster-rental/);
+  assert.match(footer, /\/guides\/whats-included-dumpster-rental/);
+  assert.match(cities, /\/guides\/whats-included-dumpster-rental/);
 });
 
 test("missing prices sort last and call for quote does not look like a dollar amount", () => {

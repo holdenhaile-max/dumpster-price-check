@@ -36,7 +36,7 @@ npm run preview
 | A city page | `src/data/cities/<id>.json` |
 | A written comparison | `src/content/guides/<id>.mdx` |
 
-Company files hold every price, date, and gap. Each offer has `sourceUrl`, `sourceLabel`, `checked`, and a `status` of `verified`, `quote`, or `conflict`. An unknown number is `null`. The templates render that as "Not listed". A company with no published dollar price uses `status: "quote"` and `price: null`, which renders as "Call for quote". Do not invent a price to fill a hole.
+Company files hold every price, date, and gap. Each offer has `sourceUrl`, `sourceLabel`, `checked`, and a `status` of `verified`, `quote`, `conflict`, or `unverified`. An unknown number is `null`. The templates render that as "Not listed". A company with no published dollar price uses `status: "quote"` and `price: null`, which renders as "Call for quote". If the company's page cannot be read, set `status` to `unverified` and leave `checked` on the last day the page was actually read. Do not invent a price to fill a hole.
 
 Schemas are in `src/content.config.ts`. A bad file fails the build.
 
@@ -97,4 +97,4 @@ Node 22.23.4 is selected in the workflow. The `engines` field in `package.json` 
 
 ## What this version checked
 
-Facts were read from company pages on November 19, 2026. On November 20, 2026, Aggieland Dumpster Rentals, BCS Junk Removal, and Waste Falcon were read again. Their published dollar amounts were the same, so only those checked dates moved. A missing fact says Not listed. A company that does not publish a dollar price says Call for quote. Two company sites did not load and are named on the About page, not in the price table.
+Facts were read from company pages on November 19, 2026. On November 20, 2026, Aggieland Dumpster Rentals, BCS Junk Removal, and Waste Falcon were read again. Their published dollar amounts were the same, so only those checked dates moved. On November 21, 2026, Bin There Dump That Aggieland, CTI Response, and Pronto Services were read again. None of them published a dollar rental price, so those prices stayed Call for quote and only the checked dates moved. A missing fact says Not listed. A company that does not publish a dollar price says Call for quote. Two company sites did not load and are named on the About page, not in the price table.

@@ -2,7 +2,7 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const date = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
-const status = z.enum(["verified", "quote", "conflict"]);
+const status = z.enum(["verified", "quote", "conflict", "unverified"]);
 
 const offer = z.object({
   id: z.string(),

@@ -1,0 +1,198 @@
+---
+import { getCollection } from "astro:content";
+import { selectOffers } from "../lib/filters.mjs";
+import {
+  daysText,
+  deliveryText,
+  extraDayText,
+  perTonText,
+  sizeDetail,
+  sizeText,
+  tonsText,
+} from "../lib/present.mjs";
+import { href } from "../lib/paths";
+import { numberSort, sortRows, textSortValue } from "../lib/sort-keys.mjs";
+import CheckedNote from "./CheckedNote.astro";
+import SourceCite from "./SourceCite.astro";
+
+interface Props {
+  caption?: string;
+  sizes?: string;
+  days?: number;
+  maxDays?: number;
+  pricedOnly?: boolean;
+  quotesOnly?: boolean;
+  exactDays?: boolean;
+  product?: "rental" | "swap";
+  companies?: string;
+  only?: string;
+  city?: string;
+}
+
+const {
+  caption = "Included tons, days, delivery, and extra fees",
+  sizes,
+  days,
+  maxDays,
+  pricedOnly,
+  quotesOnly,
+  exactDays,
+  product,
+  companies: companyFilter,
+  only,
+  city,
+} = Astro.props;
+
+const companies = await getCollection("companies");
+const selected = selectOffers(companies, {
+  sizes,
+  days,
+  maxDays,
+  pricedOnly,
+  quotesOnly,
+  exactDays,
+  product,
+  companies: companyFilter,
+  only,
+  city,
+});
+
+const rows = sortRows(
+  selected.map((row) => {
+    const tonsValue =
+      row.offer.includedTons != null ? row.offer.includedTons : row.offer.weightLimitTons;
+    return {
+      ...row,
+      nameSort: textSortValue(row.company.name),
+      sizeSort: numberSort(row.offer.sizeYards),
+      daysSort: numberSort(row.offer.daysIncluded),
+      tonsSort: numberSort(tonsValue),
+      deliverySort: textSortValue(row.offer.deliveryLabel),
+      perTonSort: numberSort(row.offer.perTon),
+      extraSort: numberSort(row.offer.extraDay),
+    };
+  }),
+  "nameSort",
+  "asc",
+);
+---
+
+{
+  rows.length === 0 ? (
+    <p class="notice">No published row matches this list.</p>
+  ) : (
+    <div class="table-scroll">
+      <CheckedNote />
+      <table data-sortable="true">
+        <caption>{caption}</caption>
+        <thead>
+          <tr>
+            <th scope="col" aria-sort="ascending">
+              <button type="button" class="sort-button" data-sort="name" data-sort-name="company">
+                Company
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="size" data-sort-name="size">
+                Size
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="days" data-sort-name="days included">
+                Days included
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="tons" data-sort-name="tons">
+                Tons
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="delivery" data-sort-name="delivery">
+                Delivery
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="perton" data-sort-name="per ton">
+                Per ton
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="extra" data-sort-name="extra day">
+                Extra day
+              </button>
+            </th>
+            <th scope="col">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row, index) => {
+              const detail = sizeDetail(row.company, row.offer);
+              return (
+                <tr
+                  data-original={index}
+                  data-name={row.nameSort.missing ? undefined : row.nameSort.value}
+                  data-name-missing={String(row.nameSort.missing)}
+                  data-size={row.sizeSort.missing ? undefined : String(row.sizeSort.value)}
+                  data-size-missing={String(row.sizeSort.missing)}
+                  data-size-type="number"
+                  data-days={row.daysSort.missing ? undefined : String(row.daysSort.value)}
+                  data-days-missing={String(row.daysSort.missing)}
+                  data-days-type="number"
+                  data-tons={row.tonsSort.missing ? undefined : String(row.tonsSort.value)}
+                  data-tons-missing={String(row.tonsSort.missing)}
+                  data-tons-type="number"
+                  data-delivery={row.deliverySort.missing ? undefined : row.deliverySort.value}
+                  data-delivery-missing={String(row.deliverySort.missing)}
+                  data-perton={row.perTonSort.missing ? undefined : String(row.perTonSort.value)}
+                  data-perton-missing={String(row.perTonSort.missing)}
+                  data-perton-type="number"
+                  data-extra={row.extraSort.missing ? undefined : String(row.extraSort.value)}
+                  data-extra-missing={String(row.extraSort.missing)}
+                  data-extra-type="number"
+                >
+                  <th scope="row">
+                    <a href={href(`/companies/${row.companyId}`)}>{row.company.name}</a>
+                    {row.company.phone && <div class="small muted">{row.company.phone}</div>}
+                  </th>
+                  <td>
+                    {sizeText(row.offer)}
+                    {detail && <div class="small muted">{detail}</div>}
+                  </td>
+                  <td>{daysText(row.offer)}</td>
+                  <td>{tonsText(row.offer)}</td>
+                  <td>{deliveryText(row.offer)}</td>
+                  <td>
+                    {perTonText(row.offer)}
+                    {row.offer.status === "conflict" && row.offer.shortNote && (
+                      <div class="small">{row.offer.shortNote}</div>
+                    )}
+                  </td>
+                  <td>{extraDayText(row.offer)}</td>
+                  <td>
+                    <SourceCite
+                      href={row.offer.sourceUrl}
+                      label={row.offer.sourceLabel}
+                      lastVerified={row.offer.checked}
+                    />
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+      <p class="sort-note">
+        Sort by company, size, days, tons, delivery, per ton, or extra day. Anything not listed
+        stays at the bottom. A weight limit sorts with the ton number. It is not the same as tons
+        included in the price.
+      </p>
+    </div>
+  )
+}
+
+<script>
+  import { initSortableTables } from "../scripts/sort-table.mjs";
+  initSortableTables();
+</script>
