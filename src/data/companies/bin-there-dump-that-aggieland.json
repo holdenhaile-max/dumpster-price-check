@@ -5,7 +5,7 @@
   "cities": ["college-station", "bryan"],
   "kind": "roll-off",
   "summary": "Local franchise at 3608 E. 29th St, Suite 205, Bryan, TX 77802. The rates page says to contact them for a quote. No dollar rate is published. The FAQ says a typical rental is 7 days.",
-  "checked": "2026-11-19",
+  "checked": "2026-11-21",
   "accepted": "Household junk, construction debris, yard waste, and renovation materials. Size pages also mention furniture, roof shingles, and heavy items such as gravel, plus flood and fire debris on the larger bins.",
   "prohibited": "Hazardous materials such as chemicals and asbestos.",
   "address": "3608 E. 29th St, Suite 205, Bryan, TX 77802",
@@ -39,7 +39,7 @@
       "note": "Bin rates page says to contact them for a personalized quote and does not publish dollar rates. The FAQ says a typical rental is 7 days. Included tons, overage, extra day fee, and deposit are not published. Delivery and pickup are described as included, without a dollar split.",
       "sourceUrl": "https://www.bintheredumpthat.com/aggieland-dumpster-rentals/bin-rates-sizes/",
       "sourceLabel": "Bin There Dump That Aggieland rates",
-      "checked": "2026-11-19"
+      "checked": "2026-11-21"
     },
     {
       "id": "6-yard",
@@ -62,7 +62,7 @@
       "note": "Bin rates page says to contact them for a personalized quote and does not publish dollar rates. The FAQ says a typical rental is 7 days.",
       "sourceUrl": "https://www.bintheredumpthat.com/aggieland-dumpster-rentals/bin-rates-sizes/",
       "sourceLabel": "Bin There Dump That Aggieland rates",
-      "checked": "2026-11-19"
+      "checked": "2026-11-21"
     },
     {
       "id": "10-yard",
@@ -85,7 +85,7 @@
       "note": "Bin rates page says to contact them for a personalized quote and does not publish dollar rates. The FAQ says a typical rental is 7 days.",
       "sourceUrl": "https://www.bintheredumpthat.com/aggieland-dumpster-rentals/bin-rates-sizes/",
       "sourceLabel": "Bin There Dump That Aggieland rates",
-      "checked": "2026-11-19"
+      "checked": "2026-11-21"
     },
     {
       "id": "15-yard",
@@ -108,7 +108,7 @@
       "note": "Bin rates page says to contact them for a personalized quote and does not publish dollar rates. The FAQ says a typical rental is 7 days.",
       "sourceUrl": "https://www.bintheredumpthat.com/aggieland-dumpster-rentals/bin-rates-sizes/",
       "sourceLabel": "Bin There Dump That Aggieland rates",
-      "checked": "2026-11-19"
+      "checked": "2026-11-21"
     },
     {
       "id": "20-yard",
@@ -131,7 +131,7 @@
       "note": "Bin rates page says to contact them for a personalized quote and does not publish dollar rates. The FAQ says a typical rental is 7 days.",
       "sourceUrl": "https://www.bintheredumpthat.com/aggieland-dumpster-rentals/bin-rates-sizes/",
       "sourceLabel": "Bin There Dump That Aggieland rates",
-      "checked": "2026-11-19"
+      "checked": "2026-11-21"
     }
   ]
 }

@@ -51,12 +51,27 @@ export function tonsText(offer) {
   return NOT_LISTED;
 }
 
+export function perTonText(offer) {
+  if (offer.perTon == null) return NOT_LISTED;
+  return `${money(offer.perTon)} per ton`;
+}
+
+export function extraDayText(offer) {
+  if (offer.extraDayLabel) return offer.extraDayLabel;
+  if (offer.extraDay != null) return `${money(offer.extraDay)} per extra day`;
+  return NOT_LISTED;
+}
+
+export function deliveryText(offer) {
+  if (!offer.deliveryLabel) return NOT_LISTED;
+  return offer.deliveryLabel;
+}
+
 export function extraFeesText(offer) {
-  const ton = offer.perTon == null ? "Per ton: Not listed" : `${money(offer.perTon)} per ton`;
-  let extraDay = "Extra day: Not listed";
-  if (offer.extraDayLabel) extraDay = offer.extraDayLabel;
-  else if (offer.extraDay != null) extraDay = `${money(offer.extraDay)} per extra day`;
-  const delivery = offer.deliveryLabel ? `Delivery: ${offer.deliveryLabel}` : "Delivery: Not listed";
+  const ton = offer.perTon == null ? `Per ton: ${NOT_LISTED}` : perTonText(offer);
+  const extraDay =
+    offer.extraDayLabel || offer.extraDay != null ? extraDayText(offer) : `Extra day: ${NOT_LISTED}`;
+  const delivery = offer.deliveryLabel ? `Delivery: ${deliveryText(offer)}` : `Delivery: ${NOT_LISTED}`;
   return `${ton}. ${extraDay}. ${delivery}`;
 }
 

@@ -46,3 +46,11 @@ Aggieland Dumpster Rentals, BCS Junk Removal, and Waste Falcon were the priced c
 - BCS junk removal and live load pages: minimum $125, tires $10 each, furniture and appliances $20 to $30 each, full 15-yard haul-off $650, 45-minute live load $325, 90-minute live load $385 with 1 ton then $60 per ton. Same numbers.
 - Waste Falcon booking pages: 10-yard $365, 15-yard $380, 15-yard swap $380, 20-yard $425, 30-yard $475. The 10-yard, 15-yard, and swap pages still do not list days or tons. The 20-yard page still says up to 7 days, 0 tons, $42 per ton, and $8 a day after day 10. The 30-yard page still says up to 10 days, 0 tons, $42 per ton, and $8 a day after day 10.
 - Waste Falcon pricing page still says $45 per ton and $8 a day after day 7. The 20-yard and 30-yard rows still use the booking page and stay marked sources disagree. No 1-day, 2-day, or 3-day Waste Falcon price was found.
+
+## Recheck on 2026-11-21
+
+Bin There Dump That Aggieland, CTI Response, and Pronto Services were the companies still dated 2026-11-19, so their price source pages were read again. No dollar rental price was published. No price field changed. Their checked dates moved to 2026-11-21. A page that cannot be read would stay on the old date with status unverified. That did not happen on this pass.
+
+- Bin There Dump That Aggieland rates page: 4, 6, 10, 15, and 20 yard bins. Contact them for a quote. No dollar rate. Typical rental is 7 days. Included tons, per-ton fee, extra day fee, and a delivery dollar amount are not published.
+- CTI Response Bryan and College Station page: 10, 20, 30, and 40 yard roll-off boxes. Same-day delivery is advertised. No rental price, included days, included tons, per-ton fee, extra day fee, or delivery dollar amount is published.
+- Pronto Services residential page: 20-yard up to 8,000 lbs, 30-yard up to 10,000 lbs, 40-yard up to 12,000 lbs. Rentals run 7 to 10 days with daily extensions. No dollar rental price, per-ton fee, or extra day price is published.
