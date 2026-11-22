@@ -35,6 +35,7 @@ const about = path.join("about", "index.html");
 const weekend = path.join("guides", "1-3-day-weekend-dumpster-prices", "index.html");
 const week = path.join("guides", "cheapest-7-day-dumpster-brazos-valley", "index.html");
 const included = path.join("guides", "whats-included-dumpster-rental", "index.html");
+const versus = path.join("guides", "dumpster-vs-junk-removal", "index.html");
 const required = [
   "index.html",
   path.join("cities", "college-station", "index.html"),
@@ -43,6 +44,7 @@ const required = [
   week,
   weekend,
   included,
+  versus,
   about,
 ];
 
@@ -70,11 +72,41 @@ for (const rel of required) {
     }
     continue;
   }
-  if (rel !== about && !html.includes("Nov 19, 2026")) {
-    problems.push(`${rel} is missing the checked date`);
+  if (rel === versus) {
+    for (const phrase of [
+      "Published dumpster prices and junk removal prices",
+      "Which one fits you",
+      "$300 plus tax",
+      "$380",
+      "$420",
+      "$650",
+      "$325",
+      "$385",
+      "$60 per ton",
+      "$125",
+      "$20 to $30",
+      "$150",
+      "About $900",
+      "$40 to $60",
+      "ME3 Junk Solutions",
+      "979 Junk Removal",
+      "Call for quote",
+      'datetime="2026-11-22"',
+      'datetime="2026-11-20"',
+    ]) {
+      if (!html.includes(phrase)) problems.push(`Dumpster vs junk removal page is missing ${phrase}`);
+    }
+    if (!html.includes(`${normalized}/guides/dumpster-vs-junk-removal/`)) {
+      problems.push("Dumpster vs junk removal page is missing its own nav link");
+    }
+    continue;
   }
-  if (rel !== about && !html.includes('datetime="2026-11-19"')) {
-    problems.push(`${rel} is missing a machine-readable checked date`);
+  const hasNov19 =
+    html.includes("Nov 19, 2026") && html.includes('datetime="2026-11-19"');
+  const hasNov22 =
+    html.includes("Nov 22, 2026") && html.includes('datetime="2026-11-22"');
+  if (rel !== about && !hasNov19 && !hasNov22) {
+    problems.push(`${rel} is missing a Nov 19 or Nov 22 checked date`);
   }
 }
 
@@ -132,6 +164,26 @@ if (!includedHtml.includes(`${normalized}/guides/whats-included-dumpster-rental/
   problems.push("What's included page is missing its own nav link");
 }
 
+for (const id of ["bvr-waste-and-recycling", "texas-commercial-waste", "texas-disposal-systems"]) {
+  const html = must(path.join("companies", id, "index.html"));
+  if (!html.includes('datetime="2026-11-22"')) {
+    problems.push(`${id} is missing the Nov 22 checked date`);
+  }
+  if (html.includes("2026-11-19")) {
+    problems.push(`${id} still shows the old checked date`);
+  }
+  if (!html.includes("Call for quote")) {
+    problems.push(`${id} no longer shows Call for quote`);
+  }
+}
+const tdsPage = must(path.join("companies", "texas-disposal-systems", "index.html"));
+if (!tdsPage.includes("22L x 8W x 3.5H") || !tdsPage.includes("Unit not stated")) {
+  problems.push("Texas Disposal Systems page is missing the published dimensions");
+}
+if (/\bft\b|feet|foot/i.test(tdsPage.match(/22L x 8W x 3\.5H[\s\S]{0,80}/)?.[0] || "")) {
+  problems.push("Texas Disposal Systems dimensions were given a unit the page did not name");
+}
+
 for (const id of ["bin-there-dump-that-aggieland", "cti-response", "pronto-services"]) {
   const html = must(path.join("companies", id, "index.html"));
   if (!html.includes('datetime="2026-11-21"')) {
@@ -154,6 +206,9 @@ if (!sitemap.includes("/guides/1-3-day-weekend-dumpster-prices/")) {
 }
 if (!sitemap.includes("/guides/whats-included-dumpster-rental/")) {
   problems.push("Sitemap is missing the what's included guide");
+}
+if (!sitemap.includes("/guides/dumpster-vs-junk-removal/")) {
+  problems.push("Sitemap is missing the dumpster vs junk removal guide");
 }
 
 if (problems.length) {

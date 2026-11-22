@@ -54,3 +54,15 @@ Bin There Dump That Aggieland, CTI Response, and Pronto Services were the compan
 - Bin There Dump That Aggieland rates page: 4, 6, 10, 15, and 20 yard bins. Contact them for a quote. No dollar rate. Typical rental is 7 days. Included tons, per-ton fee, extra day fee, and a delivery dollar amount are not published.
 - CTI Response Bryan and College Station page: 10, 20, 30, and 40 yard roll-off boxes. Same-day delivery is advertised. No rental price, included days, included tons, per-ton fee, extra day fee, or delivery dollar amount is published.
 - Pronto Services residential page: 20-yard up to 8,000 lbs, 30-yard up to 10,000 lbs, 40-yard up to 12,000 lbs. Rentals run 7 to 10 days with daily extensions. No dollar rental price, per-ton fee, or extra day price is published.
+
+## Recheck on 2026-11-22
+
+BVR Waste and Recycling, Texas Commercial Waste, and Texas Disposal Systems were the companies still dated 2026-11-19, so their pages were read again. No dollar rental price was published. No rental price field changed. Their checked dates moved to 2026-11-22.
+
+- BVR homepage, https://www.bvrwasteandrecycling.com/residential-roll-off-dumpsters, and https://www.bvrwasteandrecycling.com/commercial-roll-off-dumpsters: still no yard size and no dollar price.
+- Texas Commercial Waste dumpster rental page: still no yard size, days, tons, or dollar price. The page shows 979-314-3238, 800-299-7171, 979-822-5826, and 855-231-0194.
+- Texas Disposal Systems College Station roll-off page: still no dollar price, included days, per-ton fee, or extra day fee. The size section now lists dimensions and a hold weight. 20-yard: 22L x 8W x 3.5H, holds 5,000-8,000 lbs. 30-yard: 22L x 8W x 6H, holds 8,000-12,000 lbs. 40-yard: 22L x 8W x 8H, holds 12,000-16,000 lbs. The page does not name the unit on those dimensions, so the file does not add feet. The hold range is not stored as included tons or a single weight limit. The page says the price is customized.
+
+BCS Junk Removal pricing and live load pages were read the same day for the dumpster vs junk removal guide. The junk removal dollar amounts were the same: minimum $125, tires $10 each, furniture and appliances $20 to $30 each, full 15-yard haul-off $650, 45-minute live load $325, 90-minute live load $385 with up to 1 ton permitted and then $60 per ton. The junk removal checked date moved to 2026-11-22. The dumpster rental prices on https://bcsjunkremoval.com/dumpster-rental-service were still $380 for 3 days and $420 for 7 days, with a $60 per ton dump fee. Those offer dates stay 2026-11-20.
+
+ME3 Junk Solutions (https://www.me3junksolutions.com/pricing) and 979 Junk Removal (https://www.979junkremoval.com/) publish their own prices for this area. Those prices are on the comparison guide only. They are not dumpster rental rows.

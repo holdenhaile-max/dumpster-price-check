@@ -32,6 +32,8 @@ const junkItem = z.object({
   label: z.string(),
   amount: z.number().nullable(),
   detail: z.string().nullable(),
+  sourceUrl: z.string().url().optional(),
+  sourceLabel: z.string().optional(),
 });
 
 const companies = defineCollection({
@@ -51,6 +53,7 @@ const companies = defineCollection({
     junkRemoval: z
       .object({
         summary: z.string(),
+        checked: date.optional(),
         items: z.array(junkItem),
         sources: z.array(z.object({ label: z.string(), url: z.string().url() })),
       })

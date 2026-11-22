@@ -1,0 +1,201 @@
+---
+import { getCollection } from "astro:content";
+import haulers from "../data/junk-haulers.json";
+import { selectOffers } from "../lib/filters.mjs";
+import { money } from "../lib/format.mjs";
+import { daysText, priceText, sizeDetail, sizeText, taxLine } from "../lib/present.mjs";
+import { href } from "../lib/paths";
+import { numberSort, sortRows, textSortValue } from "../lib/sort-keys.mjs";
+import CheckedNote from "./CheckedNote.astro";
+import SourceCite from "./SourceCite.astro";
+import StatusPill from "./StatusPill.astro";
+
+interface Props {
+  caption?: string;
+}
+
+const { caption = "Published dumpster prices and junk removal prices" } = Astro.props;
+
+const companies = await getCollection("companies");
+const dumpsters = selectOffers(companies, { pricedOnly: true, product: "rental" });
+
+const rows = [];
+
+for (const row of dumpsters) {
+  const size = sizeText(row.offer);
+  const days = daysText(row.offer);
+  const whatParts = [];
+  if (size !== "Not listed") whatParts.push(size);
+  if (days !== "Not listed") whatParts.push(days);
+  rows.push({
+    service: "Dumpster rental",
+    companyName: row.company.name,
+    companyHref: href(`/companies/${row.companyId}`),
+    external: false,
+    phone: row.company.phone,
+    what: whatParts.join(", ") || "Not listed",
+    whatDetail: sizeDetail(row.company, row.offer),
+    priceMain: priceText(row.offer),
+    priceNote: [taxLine(row.offer), row.offer.shortNote].filter(Boolean).join(" "),
+    status: row.offer.status,
+    sourceUrl: row.offer.sourceUrl,
+    sourceLabel: row.offer.sourceLabel,
+    checked: row.offer.checked,
+    serviceSort: textSortValue("Dumpster rental"),
+    nameSort: textSortValue(row.company.name),
+    whatSort: textSortValue(whatParts.join(", ") || "Not listed"),
+    priceSort: numberSort(row.offer.price),
+  });
+}
+
+for (const company of companies) {
+  const junk = company.data.junkRemoval;
+  if (!junk) continue;
+  for (const item of junk.items) {
+    let priceMain = null;
+    let priceNote = null;
+    let sortValue = null;
+    if (item.amount != null) {
+      priceMain = money(item.amount);
+      priceNote = item.detail;
+      sortValue = item.amount;
+    } else if (item.detail && item.detail.includes("$")) {
+      priceMain = item.detail;
+      const match = item.detail.match(/\$([\d,]+)/);
+      sortValue = match ? Number(match[1].replace(/,/g, "")) : null;
+    } else {
+      continue;
+    }
+    rows.push({
+      service: "Junk removal",
+      companyName: company.data.name,
+      companyHref: href(`/companies/${company.id}`),
+      external: false,
+      phone: company.data.phone,
+      what: item.label,
+      whatDetail: null,
+      priceMain,
+      priceNote,
+      status: "verified",
+      sourceUrl: item.sourceUrl || junk.sources[0]?.url,
+      sourceLabel: item.sourceLabel || junk.sources[0]?.label,
+      checked: junk.checked,
+      serviceSort: textSortValue("Junk removal"),
+      nameSort: textSortValue(company.data.name),
+      whatSort: textSortValue(item.label),
+      priceSort: numberSort(sortValue),
+    });
+  }
+}
+
+for (const hauler of haulers) {
+  for (const item of hauler.items) {
+    const priceMain = item.priceText || (item.amount == null ? null : money(item.amount));
+    if (!priceMain) continue;
+    rows.push({
+      service: "Junk removal",
+      companyName: hauler.name,
+      companyHref: item.sourceUrl,
+      external: true,
+      phone: hauler.phone,
+      what: item.label,
+      whatDetail: null,
+      priceMain,
+      priceNote: item.detail,
+      status: "verified",
+      sourceUrl: item.sourceUrl,
+      sourceLabel: item.sourceLabel,
+      checked: hauler.checked,
+      serviceSort: textSortValue("Junk removal"),
+      nameSort: textSortValue(hauler.name),
+      whatSort: textSortValue(item.label),
+      priceSort: numberSort(item.amount),
+    });
+  }
+}
+
+const sorted = sortRows(rows, "priceSort", "asc");
+---
+
+<div class="table-scroll">
+  <CheckedNote />
+  <table data-sortable="true">
+    <caption>{caption}</caption>
+    <thead>
+      <tr>
+        <th scope="col" aria-sort="none">
+          <button type="button" class="sort-button" data-sort="service" data-sort-name="service">
+            Service
+          </button>
+        </th>
+        <th scope="col" aria-sort="none">
+          <button type="button" class="sort-button" data-sort="name" data-sort-name="company">
+            Company
+          </button>
+        </th>
+        <th scope="col" aria-sort="none">
+          <button type="button" class="sort-button" data-sort="what" data-sort-name="what">
+            What
+          </button>
+        </th>
+        <th scope="col" aria-sort="ascending">
+          <button type="button" class="sort-button" data-sort="price" data-sort-name="price">
+            Price
+          </button>
+        </th>
+        <th scope="col">Status</th>
+        <th scope="col">Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        sorted.map((row, index) => (
+          <tr
+            data-original={index}
+            data-service={row.serviceSort.missing ? undefined : row.serviceSort.value}
+            data-service-missing={String(row.serviceSort.missing)}
+            data-name={row.nameSort.missing ? undefined : row.nameSort.value}
+            data-name-missing={String(row.nameSort.missing)}
+            data-what={row.whatSort.missing ? undefined : row.whatSort.value}
+            data-what-missing={String(row.whatSort.missing)}
+            data-price={row.priceSort.missing ? undefined : String(row.priceSort.value)}
+            data-price-missing={String(row.priceSort.missing)}
+            data-price-type="number"
+          >
+            <td>{row.service}</td>
+            <th scope="row">
+              <a href={row.companyHref} rel={row.external ? "noopener noreferrer" : undefined}>
+                {row.companyName}
+              </a>
+              {row.phone && <div class="small muted">{row.phone}</div>}
+            </th>
+            <td>
+              {row.what}
+              {row.whatDetail && <div class="small muted">{row.whatDetail}</div>}
+            </td>
+            <td>
+              <div class="price-main">{row.priceMain}</div>
+              {row.priceNote && <div class="small">{row.priceNote}</div>}
+            </td>
+            <td>
+              <StatusPill status={row.status} />
+            </td>
+            <td>
+              <SourceCite href={row.sourceUrl} label={row.sourceLabel} lastVerified={row.checked} />
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+  <p class="sort-note">
+    Sort by service, company, what, or price. Lowest price first. A range or a "from" price sorts
+    by the low number printed on the page. About $900 sorts by 900. That row is the company's
+    target, not a single firm price.
+  </p>
+</div>
+
+<script>
+  import { initSortableTables } from "../scripts/sort-table.mjs";
+  initSortableTables();
+</script>
