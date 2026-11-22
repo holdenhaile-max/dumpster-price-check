@@ -5,7 +5,7 @@
   "cities": ["college-station", "bryan"],
   "kind": "roll-off",
   "summary": "Roll-off dumpsters in College Station, Bryan, Wellborn, Millican, Kurten, Snook, and parts of Navasota and Caldwell. The College Station page says the price is customized. No dollar rate is published.",
-  "checked": "2026-11-19",
+  "checked": "2026-11-22",
   "accepted": "Most common household and construction debris, including furniture, appliances with Freon removed, lumber, drywall, roofing shingles, concrete, rock, dirt, brush, and general household junk.",
   "prohibited": "Hazardous waste, paint, motor oil, gasoline, pesticides, tires, and batteries.",
   "address": null,
@@ -23,8 +23,8 @@
       "id": "20-yard",
       "product": "rental",
       "sizeYards": 20,
-      "dimensions": null,
-      "fit": "Listed as a 20-yard container. The page does not publish dimensions.",
+      "dimensions": "22L x 8W x 3.5H. Unit not stated.",
+      "fit": "Listed as a 20-yard container. The page lists dimensions 22L x 8W x 3.5H and does not name the unit. It says the container holds 5,000-8,000 lbs.",
       "daysIncluded": null,
       "daysAreTypical": false,
       "includedTons": null,
@@ -36,18 +36,18 @@
       "extraDayLabel": null,
       "deliveryLabel": null,
       "status": "quote",
-      "shortNote": "The page says pricing is customized. It describes delivery, a rental period, a weight allowance, and pickup, without dollar amounts.",
-      "note": "College Station roll-off page lists 20, 30, and 40 yard containers and says pricing depends on size, debris, weight, duration, and location. No dollar price, included days, included tons, or overage rate is published.",
+      "shortNote": "Pricing is customized. No dollar price is published. The size section says it holds 5,000-8,000 lbs.",
+      "note": "College Station roll-off page lists a 20-yard container. Dimensions on the page: 22L x 8W x 3.5H. The page does not name the unit. The size section says it holds 5,000-8,000 lbs of debris. The pricing section says the price is customized. No dollar price, included days, per-ton fee, or extra day fee is published. The page says delivery, haul-away, and pickup are part of the rental and does not list a dollar amount for them.",
       "sourceUrl": "https://www.texasdisposal.com/roll-off-dumpster-rental-college-station/",
       "sourceLabel": "Texas Disposal Systems College Station roll-off",
-      "checked": "2026-11-19"
+      "checked": "2026-11-22"
     },
     {
       "id": "30-yard",
       "product": "rental",
       "sizeYards": 30,
-      "dimensions": null,
-      "fit": "Listed as a 30-yard container. The page does not publish dimensions.",
+      "dimensions": "22L x 8W x 6H. Unit not stated.",
+      "fit": "Listed as a 30-yard container. The page lists dimensions 22L x 8W x 6H and does not name the unit. It says the container holds 8,000-12,000 lbs.",
       "daysIncluded": null,
       "daysAreTypical": false,
       "includedTons": null,
@@ -59,18 +59,18 @@
       "extraDayLabel": null,
       "deliveryLabel": null,
       "status": "quote",
-      "shortNote": "The page says pricing is customized. No dollar amount is published.",
-      "note": "College Station roll-off page lists 20, 30, and 40 yard containers and says pricing depends on size, debris, weight, duration, and location. No dollar price, included days, included tons, or overage rate is published.",
+      "shortNote": "Pricing is customized. No dollar price is published. The size section says it holds 8,000-12,000 lbs.",
+      "note": "College Station roll-off page lists a 30-yard container. Dimensions on the page: 22L x 8W x 6H. The page does not name the unit. The size section says it holds 8,000-12,000 lbs of debris. The pricing section says the price is customized. No dollar price, included days, per-ton fee, or extra day fee is published. The page says delivery, haul-away, and pickup are part of the rental and does not list a dollar amount for them.",
       "sourceUrl": "https://www.texasdisposal.com/roll-off-dumpster-rental-college-station/",
       "sourceLabel": "Texas Disposal Systems College Station roll-off",
-      "checked": "2026-11-19"
+      "checked": "2026-11-22"
     },
     {
       "id": "40-yard",
       "product": "rental",
       "sizeYards": 40,
-      "dimensions": null,
-      "fit": "Listed as a 40-yard container. The page does not publish dimensions.",
+      "dimensions": "22L x 8W x 8H. Unit not stated.",
+      "fit": "Listed as a 40-yard container. The page lists dimensions 22L x 8W x 8H and does not name the unit. It says the container holds 12,000-16,000 lbs.",
       "daysIncluded": null,
       "daysAreTypical": false,
       "includedTons": null,
@@ -82,11 +82,11 @@
       "extraDayLabel": null,
       "deliveryLabel": null,
       "status": "quote",
-      "shortNote": "The page says pricing is customized. No dollar amount is published.",
-      "note": "College Station roll-off page lists 20, 30, and 40 yard containers and says pricing depends on size, debris, weight, duration, and location. No dollar price, included days, included tons, or overage rate is published.",
+      "shortNote": "Pricing is customized. No dollar price is published. The size section says it holds 12,000-16,000 lbs.",
+      "note": "College Station roll-off page lists a 40-yard container. Dimensions on the page: 22L x 8W x 8H. The page does not name the unit. The size section says it holds 12,000-16,000 lbs of debris. The pricing section says the price is customized. No dollar price, included days, per-ton fee, or extra day fee is published. The page says delivery, haul-away, and pickup are part of the rental and does not list a dollar amount for them.",
       "sourceUrl": "https://www.texasdisposal.com/roll-off-dumpster-rental-college-station/",
       "sourceLabel": "Texas Disposal Systems College Station roll-off",
-      "checked": "2026-11-19"
+      "checked": "2026-11-22"
     }
   ]
 }

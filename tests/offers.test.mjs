@@ -37,6 +37,11 @@ const recheckedOnNov21 = new Set([
   "cti-response",
   "pronto-services",
 ]);
+const recheckedOnNov22 = new Set([
+  "bvr-waste-and-recycling",
+  "texas-commercial-waste",
+  "texas-disposal-systems",
+]);
 
 test("excluded companies are not in the price files", () => {
   const blob = JSON.stringify(companies);
@@ -52,6 +57,7 @@ test("every published dollar amount is one of the checked prices", () => {
     let expectedChecked = "2026-11-19";
     if (recheckedOnNov20.has(company.id)) expectedChecked = "2026-11-20";
     if (recheckedOnNov21.has(company.id)) expectedChecked = "2026-11-21";
+    if (recheckedOnNov22.has(company.id)) expectedChecked = "2026-11-22";
     assert.equal(company.data.checked, expectedChecked);
     for (const offer of company.data.offers) {
       assert.equal(offer.checked, expectedChecked);
@@ -229,6 +235,83 @@ test("the what's included guide is linked and uses published inclusion facts", a
   assert.match(header, /\/guides\/whats-included-dumpster-rental/);
   assert.match(footer, /\/guides\/whats-included-dumpster-rental/);
   assert.match(cities, /\/guides\/whats-included-dumpster-rental/);
+});
+
+test("the Nov 22 recheck kept call-for-quote prices and moved only the date", () => {
+  for (const id of recheckedOnNov22) {
+    const company = companies.find((item) => item.id === id);
+    assert.equal(company.data.checked, "2026-11-22");
+    for (const offer of company.data.offers) {
+      assert.equal(offer.price, null);
+      assert.equal(offer.status, "quote");
+      assert.equal(offer.checked, "2026-11-22");
+      assert.equal(offer.perTon, null);
+      assert.equal(offer.extraDay, null);
+    }
+  }
+  const tds = companies.find((company) => company.id === "texas-disposal-systems");
+  assert.deepEqual(
+    tds.data.offers.map((offer) => [offer.id, offer.dimensions, offer.price]),
+    [
+      ["20-yard", "22L x 8W x 3.5H. Unit not stated.", null],
+      ["30-yard", "22L x 8W x 6H. Unit not stated.", null],
+      ["40-yard", "22L x 8W x 8H. Unit not stated.", null],
+    ],
+  );
+  for (const offer of tds.data.offers) {
+    assert.equal(/ft|feet|foot/i.test(offer.dimensions), false);
+    assert.equal(offer.weightLimitTons, null);
+    assert.equal(offer.includedTons, null);
+  }
+  const bcs = companies.find((company) => company.id === "bcs-junk-removal");
+  assert.equal(bcs.data.checked, "2026-11-20");
+  assert.equal(bcs.data.junkRemoval.checked, "2026-11-22");
+  assert.deepEqual(
+    bcs.data.junkRemoval.items.map((item) => item.amount),
+    [125, null, 10, 650, 325, 385, null],
+  );
+});
+
+test("the dumpster vs junk removal guide uses published prices and is linked", async () => {
+  const guide = await readFile(
+    path.resolve("src/content/guides/dumpster-vs-junk-removal.mdx"),
+    "utf8",
+  );
+  const header = await readFile(path.resolve("src/components/Header.astro"), "utf8");
+  const footer = await readFile(path.resolve("src/components/Footer.astro"), "utf8");
+  const cities = await readFile(path.resolve("src/pages/cities/[slug].astro"), "utf8");
+  const companyPage = await readFile(path.resolve("src/pages/companies/[slug].astro"), "utf8");
+  const haulers = JSON.parse(
+    await readFile(path.resolve("src/data/junk-haulers.json"), "utf8"),
+  );
+  assert.match(guide, /title: Dumpster vs junk removal/);
+  assert.match(guide, /ServiceCompareTable/);
+  assert.match(guide, /\$380/);
+  assert.match(guide, /\$650/);
+  assert.match(guide, /\$325/);
+  assert.match(guide, /\$385/);
+  assert.match(guide, /\$20 to \$30/);
+  assert.match(guide, /About \$900|about \$900/);
+  assert.match(guide, /\$40 to \$60/);
+  assert.equal(guide.includes("\u2014") || guide.includes("\u2013"), false);
+  assert.match(header, /\/guides\/dumpster-vs-junk-removal/);
+  assert.match(footer, /\/guides\/dumpster-vs-junk-removal/);
+  assert.match(cities, /\/guides\/dumpster-vs-junk-removal/);
+  assert.match(companyPage, /\/guides\/dumpster-vs-junk-removal/);
+  const names = haulers.map((hauler) => hauler.name).sort();
+  assert.deepEqual(names, ["979 Junk Removal", "ME3 Junk Solutions"]);
+  for (const hauler of haulers) {
+    assert.equal(hauler.checked, "2026-11-22");
+    for (const item of hauler.items) {
+      assert.match(item.sourceUrl, /^https:\/\//);
+      assert.equal(item.amount == null, false);
+      if (item.priceText) assert.match(item.priceText, /\$/);
+    }
+  }
+  const target = haulers
+    .find((hauler) => hauler.name === "ME3 Junk Solutions")
+    .items.find((item) => item.amount === 900);
+  assert.equal(target.priceText, "About $900");
 });
 
 test("missing prices sort last and call for quote does not look like a dollar amount", () => {

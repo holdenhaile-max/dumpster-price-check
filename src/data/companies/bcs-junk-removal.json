@@ -17,42 +17,57 @@
     "Whether tax is included"
   ],
   "junkRemoval": {
-    "summary": "Junk removal prices from the company's own pages, checked Nov 20, 2026. The company says online prices can change with the job.",
+    "summary": "Junk removal prices from the company's own pages, checked Nov 22, 2026. The company says online prices can change with the job. The detailed list shows furniture and appliances at $20 to $30 each. The same page also says the cost of additional items is set when you get a quote.",
+    "checked": "2026-11-22",
     "items": [
       {
         "label": "Minimum",
         "amount": 125,
-        "detail": "Includes one item of your choice"
+        "detail": "Includes one item of your choice",
+        "sourceUrl": "https://bcsjunkremoval.com/junk-removal-pricing",
+        "sourceLabel": "BCS Junk Removal pricing"
       },
       {
         "label": "Additional furniture or appliances",
         "amount": null,
-        "detail": "$20 to $30 each"
+        "detail": "$20 to $30 each",
+        "sourceUrl": "https://bcsjunkremoval.com/junk-removal-pricing",
+        "sourceLabel": "BCS Junk Removal pricing"
       },
       {
         "label": "Tires",
         "amount": 10,
-        "detail": "Each, on junk removal jobs"
+        "detail": "Each, on junk removal jobs",
+        "sourceUrl": "https://bcsjunkremoval.com/junk-removal-pricing",
+        "sourceLabel": "BCS Junk Removal pricing"
       },
       {
         "label": "Full 15-yard haul-off",
         "amount": 650,
-        "detail": null
+        "detail": "Flat price. The page says they fill the 15-yard container.",
+        "sourceUrl": "https://bcsjunkremoval.com/junk-removal-pricing",
+        "sourceLabel": "BCS Junk Removal pricing"
       },
       {
         "label": "Live load, 15-yard, 45 minutes",
         "amount": 325,
-        "detail": null
+        "detail": "You load it while the driver waits.",
+        "sourceUrl": "https://bcsjunkremoval.com/live-loads",
+        "sourceLabel": "BCS Junk Removal live loads"
       },
       {
         "label": "Live load, 15-yard, 90 minutes",
         "amount": 385,
-        "detail": "1 ton included, then $60 per ton"
+        "detail": "You load it while the driver waits. Up to 1 ton permitted, then $60 per ton.",
+        "sourceUrl": "https://bcsjunkremoval.com/live-loads",
+        "sourceLabel": "BCS Junk Removal live loads"
       },
       {
         "label": "Late cancel",
         "amount": null,
-        "detail": "Less than 24 hours notice: half of the appointment total"
+        "detail": "Less than 24 hours notice: half of the appointment total",
+        "sourceUrl": "https://bcsjunkremoval.com/junk-removal-pricing",
+        "sourceLabel": "BCS Junk Removal pricing"
       }
     ],
     "sources": [

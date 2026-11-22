@@ -1,0 +1,288 @@
+[
+  {
+    "name": "ME3 Junk Solutions",
+    "phone": "214-699-7855",
+    "checked": "2026-11-22",
+    "items": [
+      {
+        "label": "Minimum pickup",
+        "amount": 150,
+        "priceText": null,
+        "detail": "Any job, any size.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Full service, 4 cubic yards",
+        "amount": 225,
+        "priceText": null,
+        "detail": "Full service price for standard household material. The page says dense material is quoted on its own.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Full service, 8 cubic yards",
+        "amount": 450,
+        "priceText": null,
+        "detail": "Full service price for standard household material. The page says dense material is quoted on its own.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Full service, 12 cubic yards",
+        "amount": 650,
+        "priceText": null,
+        "detail": "Full service price for standard household material. The page says dense material is quoted on its own.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Full service, 16 to 16.5 cubic yards",
+        "amount": 900,
+        "priceText": "About $900",
+        "detail": "The page lists a $900 target and says a full load targets about $900. Standard household material.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Minimum or easy curbside item, starting range",
+        "amount": 150,
+        "priceText": "$150 and up",
+        "detail": "The page prints $150+. It says the spot in a starting range depends on access, stairs, and taking things apart.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Washer or dryer pair, starting range",
+        "amount": 150,
+        "priceText": "$150 to $225",
+        "detail": "Starting range. Outside or garage at the low end. Inside or stairs is higher.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Sofa, recliner, or bulky chair, starting range",
+        "amount": 150,
+        "priceText": "$150 to $225",
+        "detail": "Starting range. The page says access and taking the item apart set the final price.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Exercise equipment, starting range",
+        "amount": 150,
+        "priceText": "$150 to $250 and up",
+        "detail": "The page prints $150 to $250+. Weight, stairs, and taking the item apart matter.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Refrigerator or freezer, starting range",
+        "amount": 150,
+        "priceText": "$150 to $225 and up",
+        "detail": "The page prints $150 to $225+. Disposal requirements may add cost.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Bulky hutch, buffet, or cabinet, starting range",
+        "amount": 150,
+        "priceText": "$150 to $225 and up",
+        "detail": "The page prints $150 to $225+. Garage or easy access is the low end.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Tire, up to 24.5 in",
+        "amount": 15,
+        "priceText": null,
+        "detail": "Each.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      },
+      {
+        "label": "Tire, over 24.5 in",
+        "amount": 40,
+        "priceText": null,
+        "detail": "Each.",
+        "sourceUrl": "https://www.me3junksolutions.com/pricing",
+        "sourceLabel": "ME3 Junk Solutions pricing"
+      }
+    ]
+  },
+  {
+    "name": "979 Junk Removal",
+    "phone": "979-402-0707",
+    "checked": "2026-11-22",
+    "items": [
+      {
+        "label": "Small bag or box of junk",
+        "amount": 10,
+        "priceText": "$10 to $15",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Large bag of trash",
+        "amount": 15,
+        "priceText": "$15 to $25",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Pallet",
+        "amount": 15,
+        "priceText": "$15 to $25",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Small chair",
+        "amount": 20,
+        "priceText": "$20 to $30",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Office chair",
+        "amount": 20,
+        "priceText": "$20 to $30",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Recliner",
+        "amount": 30,
+        "priceText": "$30 to $45",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Small couch or loveseat",
+        "amount": 50,
+        "priceText": "$50 to $75",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Large couch",
+        "amount": 75,
+        "priceText": "$75 to $100",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Sectional",
+        "amount": 100,
+        "priceText": "$100 to $175",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Mattress",
+        "amount": 40,
+        "priceText": "$40 to $60",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Box spring",
+        "amount": 30,
+        "priceText": "$30 to $40",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Twin or full mattress and box spring",
+        "amount": 60,
+        "priceText": "$60 to $80",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Queen or king mattress and box spring",
+        "amount": 80,
+        "priceText": "$80 to $100",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Dresser",
+        "amount": 40,
+        "priceText": "$40 to $60",
+        "detail": "Published range. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Refrigerator",
+        "amount": 75,
+        "priceText": "$75 to $100",
+        "detail": "Published range on the page. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Washer or dryer",
+        "amount": 60,
+        "priceText": "$60 to $90",
+        "detail": "Published range on the page. The page says the text quote is the price you pay.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Furniture removal",
+        "amount": 20,
+        "priceText": "From $20",
+        "detail": "Service card. Couches, recliners, dressers, desks, and tables.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Mattress and box spring removal",
+        "amount": 40,
+        "priceText": "From $40",
+        "detail": "Service card.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Appliance removal",
+        "amount": 40,
+        "priceText": "From $40",
+        "detail": "Service card. Refrigerators, washers, dryers, dishwashers, and grills.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "Yard waste and brush",
+        "amount": 50,
+        "priceText": "From $50",
+        "detail": "Service card.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      },
+      {
+        "label": "TV and electronics",
+        "amount": 25,
+        "priceText": "From $25",
+        "detail": "Service card.",
+        "sourceUrl": "https://www.979junkremoval.com/",
+        "sourceLabel": "979 Junk Removal"
+      }
+    ]
+  }
+]
