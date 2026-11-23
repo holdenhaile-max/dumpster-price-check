@@ -1,0 +1,122 @@
+---
+import { getCollection } from "astro:content";
+import {
+  allowedText,
+  bannedText,
+  materialSources,
+  publishedItemFees,
+} from "../lib/present.mjs";
+import { href } from "../lib/paths";
+import { sortRows, textSortValue } from "../lib/sort-keys.mjs";
+import SourceCite from "./SourceCite.astro";
+
+interface Props {
+  caption?: string;
+}
+
+const { caption = "Allowed, banned, and extra item fees" } = Astro.props;
+
+const companies = await getCollection("companies");
+const rows = sortRows(
+  companies.map((company) => {
+    const allowed = allowedText(company.data);
+    const banned = bannedText(company.data);
+    const fees = publishedItemFees(company.data);
+    return {
+      id: company.id,
+      name: company.data.name,
+      phone: company.data.phone,
+      allowed,
+      banned,
+      fees,
+      sources: materialSources(company.id, company.data),
+      checked: company.data.checked,
+      nameSort: textSortValue(company.data.name),
+      allowedSort: textSortValue(allowed),
+      bannedSort: textSortValue(banned),
+      feesSort: textSortValue(fees),
+    };
+  }),
+  "nameSort",
+  "asc",
+);
+---
+
+{
+  rows.length === 0 ? (
+    <p class="notice">No company file is on this page.</p>
+  ) : (
+    <div class="table-scroll">
+      <p class="small muted checked-line">
+        Allowed, banned, and extra item fees come from that company's page. Checked is the day the
+        page was read.
+      </p>
+      <table class="wide" data-sortable="true">
+        <caption>{caption}</caption>
+        <thead>
+          <tr>
+            <th scope="col" aria-sort="ascending">
+              <button type="button" class="sort-button" data-sort="name" data-sort-name="company">
+                Company
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="allowed" data-sort-name="allowed">
+                Allowed
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="banned" data-sort-name="banned">
+                Banned
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="fees" data-sort-name="extra item fee">
+                Extra item fee
+              </button>
+            </th>
+            <th scope="col">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row, index) => (
+              <tr
+                data-original={index}
+                data-name={row.nameSort.missing ? undefined : row.nameSort.value}
+                data-name-missing={String(row.nameSort.missing)}
+                data-allowed={row.allowedSort.missing ? undefined : row.allowedSort.value}
+                data-allowed-missing={String(row.allowedSort.missing)}
+                data-banned={row.bannedSort.missing ? undefined : row.bannedSort.value}
+                data-banned-missing={String(row.bannedSort.missing)}
+                data-fees={row.feesSort.missing ? undefined : row.feesSort.value}
+                data-fees-missing={String(row.feesSort.missing)}
+              >
+                <th scope="row">
+                  <a href={href(`/companies/${row.id}`)}>{row.name}</a>
+                  {row.phone && <div class="small muted">{row.phone}</div>}
+                </th>
+                <td>{row.allowed}</td>
+                <td>{row.banned}</td>
+                <td>{row.fees}</td>
+                <td>
+                  {row.sources.map((source) => (
+                    <SourceCite href={source.url} label={source.label} lastVerified={row.checked} />
+                  ))}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+      <p class="sort-note">
+        Sort by company, allowed, banned, or extra item fee. Not published stays at the bottom.
+      </p>
+    </div>
+  )
+}
+
+<script>
+  import { initSortableTables } from "../scripts/sort-table.mjs";
+  initSortableTables();
+</script>

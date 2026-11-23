@@ -5,9 +5,9 @@
   "cities": ["college-station", "bryan"],
   "kind": "dump-trailer",
   "summary": "Dump trailers for Bryan and College Station. The company does not state an exact yard size. The FAQ says the trailers average just under 20 yards and sit within a few yards of each other.",
-  "checked": "2026-11-20",
+  "checked": "2026-11-23",
   "accepted": "The FAQ says no items are completely prohibited. Extra fees apply if tires, Freon units, or chemicals are disposed of. Those fee amounts are not published.",
-  "prohibited": "The FAQ says no items are completely prohibited. Tires, Freon units, and chemicals can add a fee. The fee amounts are not published.",
+  "prohibited": "The FAQ says no items are completely prohibited.",
   "address": null,
   "gaps": [
     "Exact yard size",
@@ -39,7 +39,7 @@
       "note": "Dump trailer, not a roll-off box. The FAQ says units average just under 20 yards. Homepage price is plus tax. Rate includes 2 tons and delivery within 20 miles of 77845. $50 if farther. Mid-rental swap is $125. Extra day fee is not published.",
       "sourceUrl": "https://aggielanddumpsters.com/",
       "sourceLabel": "Aggieland Dumpster Rentals",
-      "checked": "2026-11-20"
+      "checked": "2026-11-23"
     },
     {
       "id": "2-day",
@@ -62,7 +62,7 @@
       "note": "Dump trailer, not a roll-off box. The FAQ says units average just under 20 yards. Homepage price is plus tax. Rate includes 2 tons and delivery within 20 miles of 77845. $50 if farther. Mid-rental swap is $125. Extra day fee is not published.",
       "sourceUrl": "https://aggielanddumpsters.com/",
       "sourceLabel": "Aggieland Dumpster Rentals",
-      "checked": "2026-11-20"
+      "checked": "2026-11-23"
     },
     {
       "id": "3-day",
@@ -85,7 +85,7 @@
       "note": "Dump trailer, not a roll-off box. The FAQ says units average just under 20 yards. Homepage price is plus tax. Rate includes 2 tons and delivery within 20 miles of 77845. $50 if farther. Mid-rental swap is $125. Extra day fee is not published.",
       "sourceUrl": "https://aggielanddumpsters.com/",
       "sourceLabel": "Aggieland Dumpster Rentals",
-      "checked": "2026-11-20"
+      "checked": "2026-11-23"
     },
     {
       "id": "7-day",
@@ -108,7 +108,7 @@
       "note": "Dump trailer, not a roll-off box. The FAQ says units average just under 20 yards. Homepage price is plus tax. Rate includes 2 tons and delivery within 20 miles of 77845. $50 if farther. Mid-rental swap is $125. Extra day fee is not published.",
       "sourceUrl": "https://aggielanddumpsters.com/",
       "sourceLabel": "Aggieland Dumpster Rentals",
-      "checked": "2026-11-20"
+      "checked": "2026-11-23"
     }
   ]
 }

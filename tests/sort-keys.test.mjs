@@ -19,7 +19,7 @@ test("missing numbers sort last in both directions, and zero stays a real value"
   );
 });
 
-test("not listed text sorts as missing", () => {
+test("not listed and not published text sorts as missing", () => {
   const rows = [
     { name: "bryan", location: textSortValue("Bryan") },
     { name: "gap", location: textSortValue("Not listed") },
@@ -30,4 +30,5 @@ test("not listed text sorts as missing", () => {
     ["bryan", "station", "gap"],
   );
   assert.equal(compareSortValues(rows[1].location, rows[0].location, "desc"), 1);
+  assert.equal(textSortValue("Not published").missing, true);
 });

@@ -9,6 +9,10 @@ import {
   deliveryText,
   extraDayText,
   extraFeesText,
+  allowedText,
+  bannedText,
+  materialSources,
+  publishedItemFees,
   perTonText,
   priceText,
   sizeText,
@@ -27,7 +31,7 @@ const companies = await Promise.all(
 
 const priced = new Set([300, 350, 400, 450, 365, 380, 420, 425, 475]);
 const perTon = new Set([50, 60, 42]);
-const recheckedOnNov20 = new Set([
+const recheckedOnNov23 = new Set([
   "aggieland-dumpster-rentals",
   "bcs-junk-removal",
   "waste-falcon",
@@ -55,7 +59,7 @@ test("every published dollar amount is one of the checked prices", () => {
   assert.equal(offers.length, 28);
   for (const company of companies) {
     let expectedChecked = "2026-11-19";
-    if (recheckedOnNov20.has(company.id)) expectedChecked = "2026-11-20";
+    if (recheckedOnNov23.has(company.id)) expectedChecked = "2026-11-23";
     if (recheckedOnNov21.has(company.id)) expectedChecked = "2026-11-21";
     if (recheckedOnNov22.has(company.id)) expectedChecked = "2026-11-22";
     assert.equal(company.data.checked, expectedChecked);
@@ -157,7 +161,7 @@ test("the 1-3 day guide is linked and uses only those published short prices", a
   assert.match(guide, /maxDays: 3/);
   assert.match(guide, /pricedOnly: true/);
   assert.match(guide, /exactDays: true/);
-  assert.match(guide, /updated: "2026-11-20"/);
+  assert.match(guide, /updated: "2026-11-23"/);
   assert.match(guide, /\$300 plus tax/);
   assert.match(guide, /\$350 plus tax/);
   assert.match(guide, /\$400 plus tax/);
@@ -264,8 +268,8 @@ test("the Nov 22 recheck kept call-for-quote prices and moved only the date", ()
     assert.equal(offer.includedTons, null);
   }
   const bcs = companies.find((company) => company.id === "bcs-junk-removal");
-  assert.equal(bcs.data.checked, "2026-11-20");
-  assert.equal(bcs.data.junkRemoval.checked, "2026-11-22");
+  assert.equal(bcs.data.checked, "2026-11-23");
+  assert.equal(bcs.data.junkRemoval.checked, "2026-11-23");
   assert.deepEqual(
     bcs.data.junkRemoval.items.map((item) => item.amount),
     [125, null, 10, 650, 325, 385, null],
@@ -327,5 +331,92 @@ test("missing prices sort last and call for quote does not look like a dollar am
   assert.equal(rows[0].label, "Call for quote");
   assert.equal(rows[1].label, "$300 plus tax");
   assert.equal(textSortValue("Not listed").missing, true);
+  assert.equal(textSortValue("Not published").missing, true);
   assert.match(extraFeesText({ perTon: null, extraDay: null, extraDayLabel: null, deliveryLabel: null }), /Not listed/);
+});
+
+test("the Nov 23 recheck kept the same dollar amounts", () => {
+  for (const id of recheckedOnNov23) {
+    const company = companies.find((item) => item.id === id);
+    assert.equal(company.data.checked, "2026-11-23");
+    for (const offer of company.data.offers) assert.equal(offer.checked, "2026-11-23");
+  }
+  const aggieland = companies.find((company) => company.id === "aggieland-dumpster-rentals");
+  assert.deepEqual(
+    aggieland.data.offers.map((offer) => offer.price),
+    [300, 350, 400, 450],
+  );
+  const bcs = companies.find((company) => company.id === "bcs-junk-removal");
+  assert.deepEqual(
+    bcs.data.offers.map((offer) => [offer.price, offer.perTon]),
+    [
+      [380, 60],
+      [420, 60],
+    ],
+  );
+  assert.deepEqual(
+    bcs.data.junkRemoval.items.map((item) => item.amount),
+    [125, null, 10, 650, 325, 385, null],
+  );
+  const falcon = companies.find((company) => company.id === "waste-falcon");
+  const twenty = falcon.data.offers.find((offer) => offer.id === "20-yard");
+  const thirty = falcon.data.offers.find((offer) => offer.id === "30-yard");
+  assert.equal(twenty.status, "conflict");
+  assert.equal(twenty.price, 425);
+  assert.equal(twenty.perTon, 42);
+  assert.equal(thirty.status, "conflict");
+  assert.equal(thirty.price, 475);
+  assert.equal(thirty.perTon, 42);
+});
+
+test("item rules use the company file and say Not published when a page is silent", () => {
+  const bvr = companies.find((company) => company.id === "bvr-waste-and-recycling");
+  assert.equal(allowedText(bvr.data), "Not published");
+  assert.equal(bannedText(bvr.data), "Not published");
+  assert.equal(publishedItemFees(bvr.data), "Not published");
+  const cti = companies.find((company) => company.id === "cti-response");
+  assert.equal(allowedText(cti.data), "Not published");
+  assert.match(bannedText(cti.data), /Hazardous materials/);
+  assert.equal(publishedItemFees(cti.data), "Not published");
+  const aggieland = companies.find((company) => company.id === "aggieland-dumpster-rentals");
+  assert.match(publishedItemFees(aggieland.data), /tires, Freon units, or chemicals/);
+  assert.match(publishedItemFees(aggieland.data), /not published/i);
+  assert.equal(materialSources(aggieland.id, aggieland.data)[0].url, "https://aggielanddumpsters.com/faqs/");
+  const bcs = companies.find((company) => company.id === "bcs-junk-removal");
+  assert.match(publishedItemFees(bcs.data), /\$10 each/);
+  assert.match(materialSources(bcs.id, bcs.data)[0].url, /terms-conditions/);
+  const falcon = companies.find((company) => company.id === "waste-falcon");
+  assert.match(publishedItemFees(falcon.data), /\$10 each/);
+  assert.match(publishedItemFees(falcon.data), /\$25 each/);
+  assert.match(falcon.data.prohibited, /not allowed/);
+  assert.equal(materialSources(falcon.id, falcon.data).length, 2);
+  for (const company of companies) {
+    for (const source of materialSources(company.id, company.data)) {
+      assert.match(source.url, /^https:\/\//);
+      assert.equal(source.label.length > 0, true);
+    }
+  }
+});
+
+test("the what can go in guide is linked and does not invent a price", async () => {
+  const guide = await readFile(
+    path.resolve("src/content/guides/what-can-you-put-in-a-dumpster.mdx"),
+    "utf8",
+  );
+  const header = await readFile(path.resolve("src/components/Header.astro"), "utf8");
+  const footer = await readFile(path.resolve("src/components/Footer.astro"), "utf8");
+  const cities = await readFile(path.resolve("src/pages/cities/[slug].astro"), "utf8");
+  const companyPage = await readFile(path.resolve("src/pages/companies/[slug].astro"), "utf8");
+  assert.match(guide, /title: What you can and can't put in a dumpster/);
+  assert.match(guide, /AllowedItemsTable/);
+  assert.match(guide, /Not published/);
+  assert.match(guide, /That is general guidance/);
+  assert.match(guide, /\$10 each/);
+  assert.match(guide, /\$25 each/);
+  assert.match(guide, /updated: "2026-11-23"/);
+  assert.equal(guide.includes("\u2014") || guide.includes("\u2013"), false);
+  assert.match(header, /\/guides\/what-can-you-put-in-a-dumpster/);
+  assert.match(footer, /\/guides\/what-can-you-put-in-a-dumpster/);
+  assert.match(cities, /\/guides\/what-can-you-put-in-a-dumpster/);
+  assert.match(companyPage, /\/guides\/what-can-you-put-in-a-dumpster/);
 });

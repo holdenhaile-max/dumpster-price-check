@@ -36,6 +36,7 @@ const weekend = path.join("guides", "1-3-day-weekend-dumpster-prices", "index.ht
 const week = path.join("guides", "cheapest-7-day-dumpster-brazos-valley", "index.html");
 const included = path.join("guides", "whats-included-dumpster-rental", "index.html");
 const versus = path.join("guides", "dumpster-vs-junk-removal", "index.html");
+const materials = path.join("guides", "what-can-you-put-in-a-dumpster", "index.html");
 const required = [
   "index.html",
   path.join("cities", "college-station", "index.html"),
@@ -45,6 +46,7 @@ const required = [
   weekend,
   included,
   versus,
+  materials,
   about,
 ];
 
@@ -58,14 +60,14 @@ for (const rel of required) {
     problems.push(`${rel} contains a dash that is not a hyphen`);
   }
   if (rel === weekend) {
-    if (!html.includes("Nov 20, 2026") || !html.includes('datetime="2026-11-20"')) {
-      problems.push(`${rel} is missing the Nov 20 checked date`);
+    if (!html.includes("Nov 23, 2026") || !html.includes('datetime="2026-11-23"')) {
+      problems.push(`${rel} is missing the Nov 23 checked date`);
     }
     continue;
   }
   if (rel === week) {
-    if (!html.includes("Nov 20, 2026") || !html.includes('datetime="2026-11-20"')) {
-      problems.push(`${rel} is missing the Nov 20 checked date`);
+    if (!html.includes("Nov 23, 2026") || !html.includes('datetime="2026-11-23"')) {
+      problems.push(`${rel} is missing the Nov 23 checked date`);
     }
     if (!html.includes("Nov 21, 2026") || !html.includes('datetime="2026-11-21"')) {
       problems.push(`${rel} is missing the Nov 21 checked date`);
@@ -92,7 +94,7 @@ for (const rel of required) {
       "979 Junk Removal",
       "Call for quote",
       'datetime="2026-11-22"',
-      'datetime="2026-11-20"',
+      'datetime="2026-11-23"',
     ]) {
       if (!html.includes(phrase)) problems.push(`Dumpster vs junk removal page is missing ${phrase}`);
     }
@@ -164,6 +166,39 @@ if (!includedHtml.includes(`${normalized}/guides/whats-included-dumpster-rental/
   problems.push("What's included page is missing its own nav link");
 }
 
+const materialsHtml = must(materials);
+for (const phrase of [
+  "Allowed, banned, and extra item fees",
+  "That is general guidance",
+  "Not published",
+  "Extra fees apply if tires, Freon units, or chemicals",
+  "$10 each",
+  "$25 each",
+  "brush or hazardous waste",
+  "chemicals and asbestos",
+  "Oil, asbestos, gasoline, tires",
+  "appliances with Freon removed",
+  "BVR Waste and Recycling",
+  'datetime="2026-11-23"',
+  'datetime="2026-11-22"',
+  'datetime="2026-11-21"',
+]) {
+  if (!materialsHtml.includes(phrase)) problems.push(`What can go in page is missing ${phrase}`);
+}
+if (!materialsHtml.includes(`${normalized}/guides/what-can-you-put-in-a-dumpster/`)) {
+  problems.push("What can go in page is missing its own nav link");
+}
+
+for (const id of ["aggieland-dumpster-rentals", "bcs-junk-removal", "waste-falcon"]) {
+  const html = must(path.join("companies", id, "index.html"));
+  if (!html.includes('datetime="2026-11-23"')) {
+    problems.push(`${id} is missing the Nov 23 checked date`);
+  }
+  if (html.includes("2026-11-20")) {
+    problems.push(`${id} still shows the old checked date`);
+  }
+}
+
 for (const id of ["bvr-waste-and-recycling", "texas-commercial-waste", "texas-disposal-systems"]) {
   const html = must(path.join("companies", id, "index.html"));
   if (!html.includes('datetime="2026-11-22"')) {
@@ -209,6 +244,9 @@ if (!sitemap.includes("/guides/whats-included-dumpster-rental/")) {
 }
 if (!sitemap.includes("/guides/dumpster-vs-junk-removal/")) {
   problems.push("Sitemap is missing the dumpster vs junk removal guide");
+}
+if (!sitemap.includes("/guides/what-can-you-put-in-a-dumpster/")) {
+  problems.push("Sitemap is missing the what can go in guide");
 }
 
 if (problems.length) {
