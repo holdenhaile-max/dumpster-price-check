@@ -1,4 +1,4 @@
-import { CALL_FOR_QUOTE, NOT_LISTED, money } from "./format.mjs";
+import { CALL_FOR_QUOTE, NOT_LISTED, NOT_PUBLISHED, money } from "./format.mjs";
 
 export function priceText(offer) {
   if (offer.price == null) {
@@ -73,6 +73,62 @@ export function extraFeesText(offer) {
     offer.extraDayLabel || offer.extraDay != null ? extraDayText(offer) : `Extra day: ${NOT_LISTED}`;
   const delivery = offer.deliveryLabel ? `Delivery: ${deliveryText(offer)}` : `Delivery: ${NOT_LISTED}`;
   return `${ton}. ${extraDay}. ${delivery}`;
+}
+
+export function allowedText(company) {
+  const text = company.accepted?.trim();
+  return text || NOT_PUBLISHED;
+}
+
+export function bannedText(company) {
+  const text = company.prohibited?.trim();
+  return text || NOT_PUBLISHED;
+}
+
+export function publishedItemFees(company) {
+  const seen = new Set();
+  const parts = [];
+  for (const field of [company.accepted, company.prohibited]) {
+    if (!field) continue;
+    const sentences = field.match(/[^.!?]+[.!?]+/g) || [field];
+    for (const raw of sentences) {
+      const sentence = raw.trim();
+      if (!/fee|\$\d/i.test(sentence)) continue;
+      const key = sentence.toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      parts.push(sentence);
+    }
+  }
+  if (!parts.length) return NOT_PUBLISHED;
+  return parts.join(" ");
+}
+
+export function materialSources(companyId, company) {
+  if (companyId === "aggieland-dumpster-rentals") {
+    return [{ label: "Aggieland Dumpster Rentals FAQ", url: "https://aggielanddumpsters.com/faqs/" }];
+  }
+  if (companyId === "bcs-junk-removal") {
+    const terms = company.junkRemoval?.sources?.find((source) =>
+      source.url.includes("terms-conditions"),
+    );
+    if (terms) return [{ label: terms.label, url: terms.url }];
+  }
+  if (companyId === "waste-falcon") {
+    return [
+      { label: "Waste Falcon", url: "https://wastefalcon.com/" },
+      { label: "Waste Falcon pricing page", url: "https://wastefalcon.com/pricing/" },
+    ];
+  }
+  const sources = [];
+  const seen = new Set();
+  for (const offer of company.offers) {
+    if (seen.has(offer.sourceUrl)) continue;
+    seen.add(offer.sourceUrl);
+    sources.push({ label: offer.sourceLabel, url: offer.sourceUrl });
+  }
+  if (sources.length) return sources;
+  return [{ label: company.name, url: company.website }];
 }
 
 export function kindLabel(kind) {

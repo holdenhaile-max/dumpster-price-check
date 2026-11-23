@@ -9,7 +9,12 @@ export function textSortValue(text) {
   const value = String(text ?? "").trim();
   if (!value) return { missing: true, value: null };
   const lower = value.toLowerCase();
-  if (lower === "not listed" || lower === "not yet verified" || lower === "call for quote") {
+  if (
+    lower === "not listed" ||
+    lower === "not published" ||
+    lower === "not yet verified" ||
+    lower === "call for quote"
+  ) {
     return { missing: true, value: null };
   }
   return { missing: false, value: lower };

@@ -1,4 +1,5 @@
 export const NOT_LISTED = "Not listed";
+export const NOT_PUBLISHED = "Not published";
 export const CALL_FOR_QUOTE = "Call for quote";
 
 export function formatDate(iso) {

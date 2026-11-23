@@ -342,6 +342,10 @@ table {
   font-size: 0.95rem;
 }
 
+table.wide {
+  min-width: 72rem;
+}
+
 caption {
   text-align: left;
   caption-side: top;

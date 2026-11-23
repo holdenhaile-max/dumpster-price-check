@@ -5,9 +5,9 @@
   "cities": ["college-station", "bryan"],
   "kind": "roll-off",
   "summary": "A 15-yard dumpster with rear double doors. The company says it fits in one parking space. Serves College Station, Bryan, and nearby towns including Navasota, Brenham, Caldwell, Somerville, and Iola.",
-  "checked": "2026-11-20",
-  "accepted": "Terms say any non-flammable junk. Tires are accepted on junk removal jobs for $10 each.",
-  "prohibited": "Brush and hazardous waste. If you are not sure, call before you load.",
+  "checked": "2026-11-23",
+  "accepted": "Terms say any non-flammable junk. Tires are taken for an extra fee of $10 each.",
+  "prohibited": "Terms say they do not accept brush or hazardous waste. If you are not sure, call before the appointment.",
   "address": null,
   "gaps": [
     "Included tons on the dumpster rental (the dump fee is per ton)",
@@ -17,8 +17,8 @@
     "Whether tax is included"
   ],
   "junkRemoval": {
-    "summary": "Junk removal prices from the company's own pages, checked Nov 22, 2026. The company says online prices can change with the job. The detailed list shows furniture and appliances at $20 to $30 each. The same page also says the cost of additional items is set when you get a quote.",
-    "checked": "2026-11-22",
+    "summary": "Junk removal prices from the company's own pages, checked Nov 23, 2026. The company says online prices can change with the job. The detailed list shows furniture and appliances at $20 to $30 each. The same page also says the cost of additional items is set when you get a quote.",
+    "checked": "2026-11-23",
     "items": [
       {
         "label": "Minimum",
@@ -111,7 +111,7 @@
       "note": "Compact 15-yard dumpster with rear double doors. The company says it fits in one parking space. Dump fee is $60 per ton. No included tonnage is stated. Tax, deposit, extra day fee, and delivery fee are not published. Next-day delivery when they have a truck open.",
       "sourceUrl": "https://bcsjunkremoval.com/dumpster-rental-service",
       "sourceLabel": "BCS Junk Removal dumpster rental",
-      "checked": "2026-11-20"
+      "checked": "2026-11-23"
     },
     {
       "id": "15-yard-7-day",
@@ -134,7 +134,7 @@
       "note": "Compact 15-yard dumpster with rear double doors. The company says it fits in one parking space. Dump fee is $60 per ton. No included tonnage is stated. Tax, deposit, extra day fee, and delivery fee are not published. Next-day delivery when they have a truck open.",
       "sourceUrl": "https://bcsjunkremoval.com/dumpster-rental-service",
       "sourceLabel": "BCS Junk Removal dumpster rental",
-      "checked": "2026-11-20"
+      "checked": "2026-11-23"
     }
   ]
 }
