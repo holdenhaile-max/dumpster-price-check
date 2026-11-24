@@ -5,7 +5,7 @@
   "cities": ["college-station", "bryan"],
   "kind": "roll-off",
   "summary": "Dumpster rental in Bryan and College Station. The residential page publishes sizes and weight limits. It does not publish a dollar rental rate.",
-  "checked": "2026-11-21",
+  "checked": "2026-11-24",
   "accepted": "Household junk and furniture, wood, drywall, construction debris, roofing shingles, flooring, yard waste, and landscaping debris. The FAQ says appliances, electronics, mattresses, and box springs are typically accepted, sometimes with an extra disposal fee. That fee is not published.",
   "prohibited": "Oil, asbestos, gasoline, tires, and other hazardous waste.",
   "address": null,
@@ -48,7 +48,7 @@
       "note": "Residential page states a 20-yard weight limit of up to 8,000 lbs (4 tons). Dollar rental rates, overage per ton, extra day fee, and delivery fee amounts are not published. The FAQ says a usual rental is 7 to 10 days, with extensions at a flat daily rate that is not published. Same-day delivery is advertised. A trip fee is mentioned if the site is not ready, and the amount is not published.",
       "sourceUrl": "https://www.prontoservices.net/dumpsters/residential-dumpster-rental",
       "sourceLabel": "Pronto Services residential dumpster rental",
-      "checked": "2026-11-21"
+      "checked": "2026-11-24"
     },
     {
       "id": "30-yard",
@@ -71,7 +71,7 @@
       "note": "Residential page states a 30-yard weight limit of up to 10,000 lbs (5 tons). Dollar rental rates, overage per ton, extra day fee, and delivery fee amounts are not published. The FAQ says a usual rental is 7 to 10 days, with extensions at a flat daily rate that is not published.",
       "sourceUrl": "https://www.prontoservices.net/dumpsters/residential-dumpster-rental",
       "sourceLabel": "Pronto Services residential dumpster rental",
-      "checked": "2026-11-21"
+      "checked": "2026-11-24"
     },
     {
       "id": "40-yard",
@@ -94,7 +94,7 @@
       "note": "Residential page states a 40-yard weight limit of up to 12,000 lbs (6 tons). Dollar rental rates, overage per ton, extra day fee, and delivery fee amounts are not published. The FAQ says a usual rental is 7 to 10 days, with extensions at a flat daily rate that is not published.",
       "sourceUrl": "https://www.prontoservices.net/dumpsters/residential-dumpster-rental",
       "sourceLabel": "Pronto Services residential dumpster rental",
-      "checked": "2026-11-21"
+      "checked": "2026-11-24"
     }
   ]
 }

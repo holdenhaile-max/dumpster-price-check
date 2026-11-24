@@ -13,6 +13,8 @@ import {
   bannedText,
   materialSources,
   publishedItemFees,
+  overagePriceText,
+  overageTotal,
   perTonText,
   priceText,
   sizeText,
@@ -36,7 +38,7 @@ const recheckedOnNov23 = new Set([
   "bcs-junk-removal",
   "waste-falcon",
 ]);
-const recheckedOnNov21 = new Set([
+const recheckedOnNov24 = new Set([
   "bin-there-dump-that-aggieland",
   "cti-response",
   "pronto-services",
@@ -60,7 +62,7 @@ test("every published dollar amount is one of the checked prices", () => {
   for (const company of companies) {
     let expectedChecked = "2026-11-19";
     if (recheckedOnNov23.has(company.id)) expectedChecked = "2026-11-23";
-    if (recheckedOnNov21.has(company.id)) expectedChecked = "2026-11-21";
+    if (recheckedOnNov24.has(company.id)) expectedChecked = "2026-11-24";
     if (recheckedOnNov22.has(company.id)) expectedChecked = "2026-11-22";
     assert.equal(company.data.checked, expectedChecked);
     for (const offer of company.data.offers) {
@@ -173,14 +175,14 @@ test("the 1-3 day guide is linked and uses only those published short prices", a
   assert.match(footer, /\/guides\/1-3-day-weekend-dumpster-prices/);
 });
 
-test("the Nov 21 recheck kept call-for-quote prices and moved only the date", () => {
-  for (const id of recheckedOnNov21) {
+test("the Nov 24 recheck kept call-for-quote prices and moved the date", () => {
+  for (const id of recheckedOnNov24) {
     const company = companies.find((item) => item.id === id);
-    assert.equal(company.data.checked, "2026-11-21");
+    assert.equal(company.data.checked, "2026-11-24");
     for (const offer of company.data.offers) {
       assert.equal(offer.price, null);
       assert.equal(offer.status, "quote");
-      assert.equal(offer.checked, "2026-11-21");
+      assert.equal(offer.checked, "2026-11-24");
       assert.equal(offer.perTon, null);
       assert.equal(offer.extraDay, null);
     }
@@ -196,7 +198,69 @@ test("the Nov 21 recheck kept call-for-quote prices and moved only the date", ()
   );
   const bin = companies.find((company) => company.id === "bin-there-dump-that-aggieland");
   assert.equal(daysText(bin.data.offers[0]), "7 days, typical");
+  assert.equal(bin.data.phone, "346-742-1020");
+  assert.equal(bin.data.address, "41900 N. MIll Drive, Magnolia, Texas 77354");
+  assert.equal(JSON.stringify(bin.data).includes("979-205-7587"), false);
+  assert.equal(JSON.stringify(bin.data).includes("3608 E. 29th"), false);
+  assert.deepEqual(
+    bin.data.offers.map((offer) => [offer.id, offer.dimensions, offer.price]),
+    [
+      ["4-yard", "10 ft long, 5.5 ft wide, 2 ft high", null],
+      ["6-yard", "10 ft long, 5.5 ft wide, 3 ft high", null],
+      ["10-yard", "10 ft long, 7 ft wide, 4 ft high", null],
+      ["15-yard", "11 ft long, 8 ft wide, 4.5 ft high", null],
+      ["20-yard", "11 ft long, 8 ft wide, 6 ft high", null],
+    ],
+  );
   assert.equal(statusLabel("unverified"), "Unverified");
+});
+
+test("ton totals use the published allowance and do not treat a blank allowance as zero", () => {
+  const aggieland = companies.find((company) => company.id === "aggieland-dumpster-rentals");
+  const oneDay = aggieland.data.offers[0];
+  assert.equal(overagePriceText(oneDay, 1, "stated"), "$300 plus tax");
+  assert.equal(overagePriceText(oneDay, 2, "stated"), "$300 plus tax");
+  assert.equal(overagePriceText(oneDay, 3, "stated"), "$350 plus tax");
+  assert.equal(overagePriceText(oneDay, 4, "stated"), "$400 plus tax");
+  assert.equal(overageTotal(oneDay, 2, "every-ton"), null);
+  const falcon = companies.find((company) => company.id === "waste-falcon");
+  const twenty = falcon.data.offers.find((offer) => offer.id === "20-yard");
+  const thirty = falcon.data.offers.find((offer) => offer.id === "30-yard");
+  const ten = falcon.data.offers.find((offer) => offer.id === "10-yard");
+  assert.deepEqual(
+    [1, 2, 3, 4].map((tons) => overageTotal(twenty, tons, "stated").total),
+    [467, 509, 551, 593],
+  );
+  assert.equal(overageTotal(thirty, 2, "stated").total, 559);
+  assert.equal(overageTotal(thirty, 4, "stated").total, 643);
+  assert.equal(overageTotal(ten, 2, "stated"), null);
+  const bcs = companies.find((company) => company.id === "bcs-junk-removal");
+  const threeDay = bcs.data.offers[0];
+  const sevenDay = bcs.data.offers[1];
+  assert.equal(overageTotal(threeDay, 2, "stated"), null);
+  assert.equal(overageTotal(threeDay, 2, "every-ton").total, 500);
+  assert.equal(overageTotal(sevenDay, 1, "every-ton").total, 480);
+  assert.equal(overageTotal(sevenDay, 2, "every-ton").total, 540);
+  assert.equal(overageTotal(sevenDay, 4, "every-ton").total, 660);
+});
+
+test("the ton fee guide is linked and uses published rates only", async () => {
+  const guide = await readFile(path.resolve("src/content/guides/what-extra-tons-cost.mdx"), "utf8");
+  const header = await readFile(path.resolve("src/components/Header.astro"), "utf8");
+  const footer = await readFile(path.resolve("src/components/Footer.astro"), "utf8");
+  const cities = await readFile(path.resolve("src/pages/cities/[slug].astro"), "utf8");
+  assert.match(guide, /title: What 1, 2, 3, and 4 tons add to the price/);
+  assert.match(guide, /OverageTable mode="stated"/);
+  assert.match(guide, /OverageTable mode="every-ton"/);
+  assert.match(guide, /\$509/);
+  assert.match(guide, /\$540/);
+  assert.match(guide, /\$45 per ton/);
+  assert.match(guide, /does not guess/);
+  assert.match(guide, /updated: "2026-11-24"/);
+  assert.equal(guide.includes("\u2014") || guide.includes("\u2013"), false);
+  assert.match(header, /\/guides\/what-extra-tons-cost/);
+  assert.match(footer, /\/guides\/what-extra-tons-cost/);
+  assert.match(cities, /\/guides\/what-extra-tons-cost/);
 });
 
 test("inclusion cells use the published fee and say Not listed when the page does not", () => {
