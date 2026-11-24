@@ -1,0 +1,167 @@
+---
+import { getCollection } from "astro:content";
+import { selectOffers } from "../lib/filters.mjs";
+import {
+  OVERAGE_TONS,
+  daysText,
+  overagePriceText,
+  overageTotal,
+  perTonText,
+  sizeDetail,
+  sizeText,
+  tonsText,
+} from "../lib/present.mjs";
+import { href } from "../lib/paths";
+import { numberSort, sortRows, textSortValue } from "../lib/sort-keys.mjs";
+import CheckedNote from "./CheckedNote.astro";
+import SourceCite from "./SourceCite.astro";
+
+interface Props {
+  caption: string;
+  mode: "stated" | "every-ton";
+}
+
+const { caption, mode } = Astro.props;
+const companies = await getCollection("companies");
+const selected = selectOffers(companies, { product: "rental" }).filter(
+  (row) => overageTotal(row.offer, 1, mode) != null,
+);
+
+const rows = sortRows(
+  selected.map((row) => {
+    const totals = Object.fromEntries(
+      OVERAGE_TONS.map((tons) => [tons, overageTotal(row.offer, tons, mode)]),
+    );
+    return {
+      ...row,
+      totals,
+      nameSort: textSortValue(row.company.name),
+      sizeSort: numberSort(row.offer.sizeYards),
+      daysSort: numberSort(row.offer.daysIncluded),
+      ton2Sort: numberSort(totals[2]?.total),
+      tonSorts: Object.fromEntries(
+        OVERAGE_TONS.map((tons) => [tons, numberSort(totals[tons]?.total)]),
+      ),
+    };
+  }),
+  "ton2Sort",
+  "asc",
+);
+---
+
+{
+  rows.length === 0 ? (
+    <p class="notice">No published row matches this list.</p>
+  ) : (
+    <div class="table-scroll">
+      <CheckedNote />
+      <table data-sortable="true">
+        <caption>{caption}</caption>
+        <thead>
+          <tr>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="name" data-sort-name="company">
+                Company
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="size" data-sort-name="size">
+                Size
+              </button>
+            </th>
+            <th scope="col" aria-sort="none">
+              <button type="button" class="sort-button" data-sort="days" data-sort-name="days">
+                Days
+              </button>
+            </th>
+            <th scope="col">Tons on the page</th>
+            <th scope="col">Per ton</th>
+            {
+              OVERAGE_TONS.map((tons) => (
+                <th scope="col" aria-sort={tons === 2 ? "ascending" : "none"}>
+                  <button
+                    type="button"
+                    class="sort-button"
+                    data-sort={`ton${tons}`}
+                    data-sort-name={`${tons} ton total`}
+                  >
+                    {tons} {tons === 1 ? "ton" : "tons"}
+                  </button>
+                </th>
+              ))
+            }
+            <th scope="col">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row, index) => {
+              const detail = sizeDetail(row.company, row.offer);
+              return (
+                <tr
+                  data-original={index}
+                  data-name={row.nameSort.missing ? undefined : row.nameSort.value}
+                  data-name-missing={String(row.nameSort.missing)}
+                  data-size={row.sizeSort.missing ? undefined : String(row.sizeSort.value)}
+                  data-size-missing={String(row.sizeSort.missing)}
+                  data-size-type="number"
+                  data-days={row.daysSort.missing ? undefined : String(row.daysSort.value)}
+                  data-days-missing={String(row.daysSort.missing)}
+                  data-days-type="number"
+                  data-ton1={row.tonSorts[1].missing ? undefined : String(row.tonSorts[1].value)}
+                  data-ton1-missing={String(row.tonSorts[1].missing)}
+                  data-ton1-type="number"
+                  data-ton2={row.tonSorts[2].missing ? undefined : String(row.tonSorts[2].value)}
+                  data-ton2-missing={String(row.tonSorts[2].missing)}
+                  data-ton2-type="number"
+                  data-ton3={row.tonSorts[3].missing ? undefined : String(row.tonSorts[3].value)}
+                  data-ton3-missing={String(row.tonSorts[3].missing)}
+                  data-ton3-type="number"
+                  data-ton4={row.tonSorts[4].missing ? undefined : String(row.tonSorts[4].value)}
+                  data-ton4-missing={String(row.tonSorts[4].missing)}
+                  data-ton4-type="number"
+                >
+                  <th scope="row">
+                    <a href={href(`/companies/${row.companyId}`)}>{row.company.name}</a>
+                    {row.company.phone && <div class="small muted">{row.company.phone}</div>}
+                  </th>
+                  <td>
+                    {sizeText(row.offer)}
+                    {detail && <div class="small muted">{detail}</div>}
+                  </td>
+                  <td>{daysText(row.offer)}</td>
+                  <td>{tonsText(row.offer)}</td>
+                  <td>
+                    {perTonText(row.offer)}
+                    {row.offer.status === "conflict" && row.offer.shortNote && (
+                      <div class="small">{row.offer.shortNote}</div>
+                    )}
+                  </td>
+                  {OVERAGE_TONS.map((tons) => (
+                    <td>{overagePriceText(row.offer, tons, mode)}</td>
+                  ))}
+                  <td>
+                    <SourceCite
+                      href={row.offer.sourceUrl}
+                      label={row.offer.sourceLabel}
+                      lastVerified={row.offer.checked}
+                    />
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+      <p class="sort-note">
+        Sort by company, size, days, or a ton column. The 2-ton column starts lowest first. These
+        totals are addition from the published rate. They are not quotes.
+      </p>
+    </div>
+  )
+}
+
+<script>
+  import { initSortableTables } from "../scripts/sort-table.mjs";
+  initSortableTables();
+</script>

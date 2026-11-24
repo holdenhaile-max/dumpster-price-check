@@ -1,0 +1,68 @@
+---
+title: What 1, 2, 3, and 4 tons add to the price
+description: The rental price plus the published per-ton fee at 1, 2, 3, and 4 tons. No company page here states how many tons a bathroom, a roof, or a cleanout weighs.
+eyebrow: Ton fee
+updated: "2026-11-24"
+order: 7
+featured: true
+tables: []
+faqs:
+  - question: How many tons will my project weigh?
+    answer: No company page used here states the weight of a bathroom, a roof, or a cleanout. This page does not guess it. Use a ton count you already know, or ask the company to weigh the load. The tables use 1, 2, 3, and 4 tons only so the published rates can be compared.
+  - question: What does 2 tons add to a 7-day rental?
+    answer: Aggieland Dumpster Rentals is $450 plus tax, and the 2 tons are included. Waste Falcon's 20-yard booking page is $425 plus $84, which is $509. Tax on that row is not listed. BCS Junk Removal is $420 plus $120, which is $540, if every ton is billed. BCS does not state included tons, so that total is not a claim that the allowance is zero.
+  - question: Why is Aggieland's 1-ton total the same as the base price?
+    answer: The rate includes 2 tons, then $50 per ton. One ton does not add the $50 fee. Three tons adds $50. Four tons adds $100. The price is plus tax, and the tax amount is not published.
+  - question: Why is the $365 10-yard price missing from the ton table?
+    answer: Waste Falcon's 10-yard booking page lists $365 and does not list a per-ton fee. The 15-yard booking page lists $380 and does not list one either. The $42 per ton on the 20-yard booking page, and the $45 per ton on the marketing page, are not copied onto those rows.
+sources:
+  - label: Aggieland Dumpster Rentals
+    url: https://aggielanddumpsters.com/
+  - label: Aggieland Dumpster Rentals FAQ
+    url: https://aggielanddumpsters.com/faqs/
+  - label: BCS Junk Removal dumpster rental
+    url: https://bcsjunkremoval.com/dumpster-rental-service
+  - label: Waste Falcon 10-yard booking page
+    url: https://book.wastefalcon.com/items/10-yard-dumpster/
+  - label: Waste Falcon 15-yard booking page
+    url: https://book.wastefalcon.com/items/15-yard-dumpster/
+  - label: Waste Falcon 20-yard booking page
+    url: https://book.wastefalcon.com/items/20-yard-dumpster/
+  - label: Waste Falcon 30-yard booking page
+    url: https://book.wastefalcon.com/items/30-yard-dumpster/
+  - label: Waste Falcon pricing page
+    url: https://wastefalcon.com/pricing/
+---
+
+import OverageTable from "../../components/OverageTable.astro";
+import PriceTable from "../../components/PriceTable.astro";
+
+<OverageTable mode="stated" caption="Price plus the published ton fee, when the page states included tons" />
+
+## When the page states the included tons
+
+Aggieland Dumpster Rentals includes 2 tons, then $50 per ton. At 1 ton and at 2 tons the ton fee is $0, so the total is the base price plus tax. At 3 tons the fee is $50. At 4 tons the fee is $100. A 1-day rental is $300 plus tax at 1 or 2 tons, and $350 plus tax at 3 tons. Delivery inside 20 miles of 77845 is included. The tax dollar amount is not published. The yard size is not exact.
+
+Waste Falcon's 20-yard booking page includes 0 tons, then $42 per ton, for up to 7 days, at $425. One ton is $42, and $425 plus $42 is $467. Two tons is $84, and $425 plus $84 is $509. Three tons is $126, and $425 plus $126 is $551. Four tons is $168, and $425 plus $168 is $593.
+
+The 30-yard booking page is $475 for up to 10 days, with 0 tons included and the same $42 per ton. Two tons is $84, and $475 plus $84 is $559. Four tons is $168, and $475 plus $168 is $643.
+
+The marketing page says $45 per ton. At 2 tons that is $90. $425 plus $90 is $515. $475 plus $90 is $565. The table uses the booking page. Tax on the Waste Falcon rows is not listed.
+
+## When included tons are not stated
+
+BCS Junk Removal lists a dump fee of $60 per ton and does not state how many tons are included. The next table bills every ton. That is addition from the published rate. It is not a statement that the allowance is 0 tons.
+
+<OverageTable mode="every-ton" caption="BCS totals if every ton is billed at $60. Included tons are not listed." />
+
+A 7-day BCS rental at 2 tons is $420 plus $120, which is $540. A 3-day rental at 2 tons is $380 plus $120, which is $500. At 4 tons the 7-day line is $420 plus $240, which is $660. Tax is not listed.
+
+## A price with no per-ton fee on that page
+
+These booking pages list a dollar price and do not list a per-ton fee. The fee from another Waste Falcon page is not copied here.
+
+<PriceTable caption="Priced rows with no per-ton fee on the booking page" only="waste-falcon/10-yard,waste-falcon/15-yard" />
+
+Pronto Services lists weight limits of 4 tons (8,000 lbs), 5 tons (10,000 lbs), and 6 tons (12,000 lbs). It does not publish a rental price or a fee past that limit. Bin There Dump That Aggieland, CTI Response, Texas Disposal Systems, Texas Commercial Waste, and BVR Waste and Recycling do not publish a per-ton fee. A dollar total for those rows would be a guess.
+
+Included tons, delivery, and extra days for every company are in the [what's included guide](/guides/whats-included-dumpster-rental). The 7-day base prices are in the [7-day price guide](/guides/cheapest-7-day-dumpster-brazos-valley).

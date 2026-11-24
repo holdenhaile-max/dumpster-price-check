@@ -136,3 +136,31 @@ export function kindLabel(kind) {
   if (kind === "roll-off") return "Roll-off";
   return kind;
 }
+
+export const OVERAGE_TONS = [1, 2, 3, 4];
+
+export function overageTotal(offer, tons, mode) {
+  if (!offer || offer.price == null || offer.perTon == null) return null;
+  if (offer.product && offer.product !== "rental") return null;
+  if (!Number.isInteger(tons) || tons < 0) return null;
+  let extraTons;
+  if (mode === "stated") {
+    if (offer.includedTons == null) return null;
+    extraTons = Math.max(0, tons - offer.includedTons);
+  } else if (mode === "every-ton") {
+    if (offer.includedTons != null) return null;
+    extraTons = tons;
+  } else {
+    return null;
+  }
+  const tonCharge = extraTons * offer.perTon;
+  return { extraTons, tonCharge, total: offer.price + tonCharge };
+}
+
+export function overagePriceText(offer, tons, mode) {
+  const result = overageTotal(offer, tons, mode);
+  if (!result) return NOT_LISTED;
+  const amount = money(result.total);
+  if (offer.taxIncluded === false) return `${amount} plus tax`;
+  return amount;
+}

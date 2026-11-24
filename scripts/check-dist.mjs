@@ -37,6 +37,7 @@ const week = path.join("guides", "cheapest-7-day-dumpster-brazos-valley", "index
 const included = path.join("guides", "whats-included-dumpster-rental", "index.html");
 const versus = path.join("guides", "dumpster-vs-junk-removal", "index.html");
 const materials = path.join("guides", "what-can-you-put-in-a-dumpster", "index.html");
+const tons = path.join("guides", "what-extra-tons-cost", "index.html");
 const required = [
   "index.html",
   path.join("cities", "college-station", "index.html"),
@@ -47,6 +48,7 @@ const required = [
   included,
   versus,
   materials,
+  tons,
   about,
 ];
 
@@ -69,9 +71,12 @@ for (const rel of required) {
     if (!html.includes("Nov 23, 2026") || !html.includes('datetime="2026-11-23"')) {
       problems.push(`${rel} is missing the Nov 23 checked date`);
     }
-    if (!html.includes("Nov 21, 2026") || !html.includes('datetime="2026-11-21"')) {
-      problems.push(`${rel} is missing the Nov 21 checked date`);
+    if (!html.includes("Nov 24, 2026") || !html.includes('datetime="2026-11-24"')) {
+      problems.push(`${rel} is missing the Nov 24 checked date`);
     }
+    continue;
+  }
+  if (rel === tons) {
     continue;
   }
   if (rel === versus) {
@@ -158,7 +163,7 @@ for (const phrase of [
   "4 tons limit",
   "7 days, typical",
   "Not listed",
-  'datetime="2026-11-21"',
+  'datetime="2026-11-24"',
 ]) {
   if (!includedHtml.includes(phrase)) problems.push(`What's included page is missing ${phrase}`);
 }
@@ -181,7 +186,7 @@ for (const phrase of [
   "BVR Waste and Recycling",
   'datetime="2026-11-23"',
   'datetime="2026-11-22"',
-  'datetime="2026-11-21"',
+  'datetime="2026-11-24"',
 ]) {
   if (!materialsHtml.includes(phrase)) problems.push(`What can go in page is missing ${phrase}`);
 }
@@ -221,15 +226,49 @@ if (/\bft\b|feet|foot/i.test(tdsPage.match(/22L x 8W x 3\.5H[\s\S]{0,80}/)?.[0] 
 
 for (const id of ["bin-there-dump-that-aggieland", "cti-response", "pronto-services"]) {
   const html = must(path.join("companies", id, "index.html"));
-  if (!html.includes('datetime="2026-11-21"')) {
-    problems.push(`${id} is missing the Nov 21 checked date`);
+  if (!html.includes('datetime="2026-11-24"')) {
+    problems.push(`${id} is missing the Nov 24 checked date`);
   }
-  if (html.includes("2026-11-19")) {
-    problems.push(`${id} still shows the old checked date`);
+  if (html.includes("2026-11-21") || html.includes("2026-11-19")) {
+    problems.push(`${id} still shows an old checked date`);
   }
   if (!html.includes("Call for quote")) {
     problems.push(`${id} no longer shows Call for quote`);
   }
+}
+const binPage = must(path.join("companies", "bin-there-dump-that-aggieland", "index.html"));
+for (const phrase of [
+  "10 ft long, 5.5 ft wide, 2 ft high",
+  "11 ft long, 8 ft wide, 4.5 ft high",
+  "346-742-1020",
+  "346-590-7202",
+  "41900 N. MIll Drive",
+]) {
+  if (!binPage.includes(phrase)) problems.push(`Bin There Dump That page is missing ${phrase}`);
+}
+if (binPage.includes("979-205-7587") || binPage.includes("3608 E. 29th")) {
+  problems.push("Bin There Dump That page still shows the old phone or Bryan suite address");
+}
+
+const tonsHtml = must(tons);
+for (const phrase of [
+  "$300 plus tax",
+  "$350 plus tax",
+  "$467",
+  "$509",
+  "$559",
+  "$540",
+  "$500",
+  "$45 per ton",
+  "does not guess",
+  "Included tons are not listed",
+  "8,000 lbs",
+  'datetime="2026-11-23"',
+]) {
+  if (!tonsHtml.includes(phrase)) problems.push(`Ton fee page is missing ${phrase}`);
+}
+if (!tonsHtml.includes(`${normalized}/guides/what-extra-tons-cost/`)) {
+  problems.push("Ton fee page is missing its own nav link");
 }
 
 const sitemapNames = (await readdir(dist)).filter((name) => name.startsWith("sitemap") && name.endsWith(".xml"));
@@ -247,6 +286,9 @@ if (!sitemap.includes("/guides/dumpster-vs-junk-removal/")) {
 }
 if (!sitemap.includes("/guides/what-can-you-put-in-a-dumpster/")) {
   problems.push("Sitemap is missing the what can go in guide");
+}
+if (!sitemap.includes("/guides/what-extra-tons-cost/")) {
+  problems.push("Sitemap is missing the ton fee guide");
 }
 
 if (problems.length) {
