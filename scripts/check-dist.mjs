@@ -38,6 +38,7 @@ const included = path.join("guides", "whats-included-dumpster-rental", "index.ht
 const versus = path.join("guides", "dumpster-vs-junk-removal", "index.html");
 const materials = path.join("guides", "what-can-you-put-in-a-dumpster", "index.html");
 const tons = path.join("guides", "what-extra-tons-cost", "index.html");
+const projectSize = path.join("guides", "what-size-dumpster-for-a-roof-remodel-or-cleanout", "index.html");
 const required = [
   "index.html",
   path.join("cities", "college-station", "index.html"),
@@ -49,6 +50,7 @@ const required = [
   versus,
   materials,
   tons,
+  projectSize,
   about,
 ];
 
@@ -76,7 +78,7 @@ for (const rel of required) {
     }
     continue;
   }
-  if (rel === tons) {
+  if (rel === tons || rel === projectSize) {
     continue;
   }
   if (rel === versus) {
@@ -108,12 +110,15 @@ for (const rel of required) {
     }
     continue;
   }
-  const hasNov19 =
-    html.includes("Nov 19, 2026") && html.includes('datetime="2026-11-19"');
-  const hasNov22 =
-    html.includes("Nov 22, 2026") && html.includes('datetime="2026-11-22"');
-  if (rel !== about && !hasNov19 && !hasNov22) {
-    problems.push(`${rel} is missing a Nov 19 or Nov 22 checked date`);
+  const dated = [
+    ["Nov 19, 2026", "2026-11-19"],
+    ["Nov 22, 2026", "2026-11-22"],
+    ["Nov 23, 2026", "2026-11-23"],
+    ["Nov 24, 2026", "2026-11-24"],
+    ["Nov 25, 2026", "2026-11-25"],
+  ].some(([label, iso]) => html.includes(label) && html.includes(`datetime="${iso}"`));
+  if (rel !== about && !dated) {
+    problems.push(`${rel} is missing a checked date`);
   }
 }
 
@@ -184,8 +189,9 @@ for (const phrase of [
   "Oil, asbestos, gasoline, tires",
   "appliances with Freon removed",
   "BVR Waste and Recycling",
+  "asbestos, batteries, and flammable liquids",
   'datetime="2026-11-23"',
-  'datetime="2026-11-22"',
+  'datetime="2026-11-25"',
   'datetime="2026-11-24"',
 ]) {
   if (!materialsHtml.includes(phrase)) problems.push(`What can go in page is missing ${phrase}`);
@@ -206,19 +212,26 @@ for (const id of ["aggieland-dumpster-rentals", "bcs-junk-removal", "waste-falco
 
 for (const id of ["bvr-waste-and-recycling", "texas-commercial-waste", "texas-disposal-systems"]) {
   const html = must(path.join("companies", id, "index.html"));
-  if (!html.includes('datetime="2026-11-22"')) {
-    problems.push(`${id} is missing the Nov 22 checked date`);
+  if (!html.includes('datetime="2026-11-25"')) {
+    problems.push(`${id} is missing the Nov 25 checked date`);
   }
-  if (html.includes("2026-11-19")) {
-    problems.push(`${id} still shows the old checked date`);
+  if (html.includes("2026-11-22") || html.includes("2026-11-19")) {
+    problems.push(`${id} still shows an old checked date`);
   }
   if (!html.includes("Call for quote")) {
     problems.push(`${id} no longer shows Call for quote`);
   }
 }
+const bvrPage = must(path.join("companies", "bvr-waste-and-recycling", "index.html"));
+for (const phrase of ["14 yard", "6 pickup loads", "8 pickup loads", "14 pickup loads", "16 pickup loads"]) {
+  if (!bvrPage.includes(phrase)) problems.push(`BVR page is missing ${phrase}`);
+}
 const tdsPage = must(path.join("companies", "texas-disposal-systems", "index.html"));
 if (!tdsPage.includes("22L x 8W x 3.5H") || !tdsPage.includes("Unit not stated")) {
   problems.push("Texas Disposal Systems page is missing the published dimensions");
+}
+if (!tdsPage.includes("roof tear-offs")) {
+  problems.push("Texas Disposal Systems page is missing the published roof use");
 }
 if (/\bft\b|feet|foot/i.test(tdsPage.match(/22L x 8W x 3\.5H[\s\S]{0,80}/)?.[0] || "")) {
   problems.push("Texas Disposal Systems dimensions were given a unit the page did not name");
@@ -289,6 +302,28 @@ if (!sitemap.includes("/guides/what-can-you-put-in-a-dumpster/")) {
 }
 if (!sitemap.includes("/guides/what-extra-tons-cost/")) {
   problems.push("Sitemap is missing the ton fee guide");
+}
+if (!sitemap.includes("/guides/what-size-dumpster-for-a-roof-remodel-or-cleanout/")) {
+  problems.push("Sitemap is missing the project size guide");
+}
+
+const projectHtml = must(projectSize);
+for (const phrase of [
+  "Size, days, included tons, and price",
+  "6 pickup loads",
+  "14 pickup loads",
+  "roof tear-offs",
+  "$425",
+  "$380",
+  "$42 per ton",
+  "Call for quote",
+  "does not guess",
+  'datetime="2026-11-25"',
+]) {
+  if (!projectHtml.includes(phrase)) problems.push(`Project size page is missing ${phrase}`);
+}
+if (!projectHtml.includes(`${normalized}/guides/what-size-dumpster-for-a-roof-remodel-or-cleanout/`)) {
+  problems.push("Project size page is missing its own nav link");
 }
 
 if (problems.length) {
