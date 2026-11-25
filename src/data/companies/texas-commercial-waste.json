@@ -5,7 +5,7 @@
   "cities": ["college-station", "bryan"],
   "kind": "roll-off",
   "summary": "Roll-off containers, open-top boxes, and compactors for Caldwell, Bryan, College Station, and the broader Brazos Valley. Sizes and dollar prices are not published.",
-  "checked": "2026-11-22",
+  "checked": "2026-11-25",
   "accepted": "The page says dumpsters can hold construction debris, old furniture, yard waste, and general clutter. A detailed allowed list is not published.",
   "prohibited": null,
   "address": "1820 N Harvey Mitchell Parkway, Bryan, TX 77807",
@@ -39,7 +39,7 @@
       "note": "Dumpster rental page says the company offers roll-off containers, open-top boxes, and compactors for Caldwell, Bryan, College Station, and the broader Brazos Valley, including Anderson, Leon, Grimes, Madison, Robertson, and Burleson counties. Yard sizes, rental periods, included tons, and all dollar prices are unpublished. Address listed: 1820 N Harvey Mitchell Parkway, Bryan, TX 77807.",
       "sourceUrl": "https://www.texascommercialwaste.com/dumpster-rental",
       "sourceLabel": "Texas Commercial Waste dumpster rental",
-      "checked": "2026-11-22"
+      "checked": "2026-11-25"
     }
   ]
 }

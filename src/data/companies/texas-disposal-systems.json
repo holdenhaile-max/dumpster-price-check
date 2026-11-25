@@ -4,8 +4,8 @@
   "phone": "979-321-4015",
   "cities": ["college-station", "bryan"],
   "kind": "roll-off",
-  "summary": "Roll-off dumpsters in College Station, Bryan, Wellborn, Millican, Kurten, Snook, and parts of Navasota and Caldwell. The College Station page says the price is customized. No dollar rate is published.",
-  "checked": "2026-11-22",
+  "summary": "Roll-off dumpsters in College Station, Bryan, Wellborn, Millican, Kurten, Snook, and parts of Navasota and Caldwell. The College Station page names a project use for each size and says the price is customized. No dollar rate is published.",
+  "checked": "2026-11-25",
   "accepted": "Most common household and construction debris, including furniture, appliances with Freon removed, lumber, drywall, roofing shingles, concrete, rock, dirt, brush, and general household junk.",
   "prohibited": "Hazardous waste, paint, motor oil, gasoline, pesticides, tires, and batteries.",
   "address": null,
@@ -24,7 +24,7 @@
       "product": "rental",
       "sizeYards": 20,
       "dimensions": "22L x 8W x 3.5H. Unit not stated.",
-      "fit": "Listed as a 20-yard container. The page lists dimensions 22L x 8W x 3.5H and does not name the unit. It says the container holds 5,000-8,000 lbs.",
+      "fit": "Listed as a 20-yard container. The page lists dimensions 22L x 8W x 3.5H and does not name the unit. It says the container holds 5,000-8,000 lbs. Best use on the page: single-room renovations, flooring removal, deck demolition, and moderate landscaping. The FAQ says a 20-yard is sufficient for most single-room renovations.",
       "daysIncluded": null,
       "daysAreTypical": false,
       "includedTons": null,
@@ -37,17 +37,17 @@
       "deliveryLabel": null,
       "status": "quote",
       "shortNote": "Pricing is customized. No dollar price is published. The size section says it holds 5,000-8,000 lbs.",
-      "note": "College Station roll-off page lists a 20-yard container. Dimensions on the page: 22L x 8W x 3.5H. The page does not name the unit. The size section says it holds 5,000-8,000 lbs of debris. The pricing section says the price is customized. No dollar price, included days, per-ton fee, or extra day fee is published. The page says delivery, haul-away, and pickup are part of the rental and does not list a dollar amount for them.",
+      "note": "College Station roll-off page lists a 20-yard container. Dimensions on the page: 22L x 8W x 3.5H. The page does not name the unit. The size section says it holds 5,000-8,000 lbs of debris. Best use on the page: single-room renovations, flooring removal, deck demolition, and moderate landscaping debris. The FAQ says a 20-yard is sufficient for most single-room renovations. The pricing section says the price is customized. No dollar price, included day count, per-ton fee, or extra day fee is published. The page says delivery, haul-away, and pickup are part of the rental. It also says a weight allowance is included and that an overweight load can add a charge. It does not publish the allowance in tons or the charge.",
       "sourceUrl": "https://www.texasdisposal.com/roll-off-dumpster-rental-college-station/",
       "sourceLabel": "Texas Disposal Systems College Station roll-off",
-      "checked": "2026-11-22"
+      "checked": "2026-11-25"
     },
     {
       "id": "30-yard",
       "product": "rental",
       "sizeYards": 30,
       "dimensions": "22L x 8W x 6H. Unit not stated.",
-      "fit": "Listed as a 30-yard container. The page lists dimensions 22L x 8W x 6H and does not name the unit. It says the container holds 8,000-12,000 lbs.",
+      "fit": "Listed as a 30-yard container. The page lists dimensions 22L x 8W x 6H and does not name the unit. It says the container holds 8,000-12,000 lbs. Best use on the page: multi-room renovations, roof tear-offs, and mid-size construction and demolition. The FAQ recommends a 30-yard for a multi-room remodel, a kitchen gut, or a full home renovation.",
       "daysIncluded": null,
       "daysAreTypical": false,
       "includedTons": null,
@@ -60,17 +60,17 @@
       "deliveryLabel": null,
       "status": "quote",
       "shortNote": "Pricing is customized. No dollar price is published. The size section says it holds 8,000-12,000 lbs.",
-      "note": "College Station roll-off page lists a 30-yard container. Dimensions on the page: 22L x 8W x 6H. The page does not name the unit. The size section says it holds 8,000-12,000 lbs of debris. The pricing section says the price is customized. No dollar price, included days, per-ton fee, or extra day fee is published. The page says delivery, haul-away, and pickup are part of the rental and does not list a dollar amount for them.",
+      "note": "College Station roll-off page lists a 30-yard container. Dimensions on the page: 22L x 8W x 6H. The page does not name the unit. The size section says it holds 8,000-12,000 lbs of debris. Best use on the page: multi-room renovations, roof tear-offs, and mid-size construction and demolition. The FAQ recommends a 30-yard for a multi-room remodel, a kitchen gut, or a full home renovation. The pricing section says the price is customized. No dollar price, included day count, per-ton fee, or extra day fee is published. The page says a weight allowance is included and that an overweight load can add a charge. It does not publish the allowance in tons or the charge.",
       "sourceUrl": "https://www.texasdisposal.com/roll-off-dumpster-rental-college-station/",
       "sourceLabel": "Texas Disposal Systems College Station roll-off",
-      "checked": "2026-11-22"
+      "checked": "2026-11-25"
     },
     {
       "id": "40-yard",
       "product": "rental",
       "sizeYards": 40,
       "dimensions": "22L x 8W x 8H. Unit not stated.",
-      "fit": "Listed as a 40-yard container. The page lists dimensions 22L x 8W x 8H and does not name the unit. It says the container holds 12,000-16,000 lbs.",
+      "fit": "Listed as a 40-yard container. The page lists dimensions 22L x 8W x 8H and does not name the unit. It says the container holds 12,000-16,000 lbs. Best use on the page: commercial construction, full home demolitions, storm cleanups, and major renovations.",
       "daysIncluded": null,
       "daysAreTypical": false,
       "includedTons": null,
@@ -83,10 +83,10 @@
       "deliveryLabel": null,
       "status": "quote",
       "shortNote": "Pricing is customized. No dollar price is published. The size section says it holds 12,000-16,000 lbs.",
-      "note": "College Station roll-off page lists a 40-yard container. Dimensions on the page: 22L x 8W x 8H. The page does not name the unit. The size section says it holds 12,000-16,000 lbs of debris. The pricing section says the price is customized. No dollar price, included days, per-ton fee, or extra day fee is published. The page says delivery, haul-away, and pickup are part of the rental and does not list a dollar amount for them.",
+      "note": "College Station roll-off page lists a 40-yard container. Dimensions on the page: 22L x 8W x 8H. The page does not name the unit. The size section says it holds 12,000-16,000 lbs of debris. Best use on the page: commercial construction, full home demolitions, storm cleanups, and major renovations. The pricing section says the price is customized. No dollar price, included day count, per-ton fee, or extra day fee is published. The page says a weight allowance is included and that an overweight load can add a charge. It does not publish the allowance in tons or the charge.",
       "sourceUrl": "https://www.texasdisposal.com/roll-off-dumpster-rental-college-station/",
       "sourceLabel": "Texas Disposal Systems College Station roll-off",
-      "checked": "2026-11-22"
+      "checked": "2026-11-25"
     }
   ]
 }
