@@ -5,7 +5,7 @@
   "cities": ["college-station", "bryan"],
   "kind": "roll-off",
   "summary": "A 15-yard dumpster with rear double doors. The company says it fits in one parking space. Serves College Station, Bryan, and nearby towns including Navasota, Brenham, Caldwell, Somerville, and Iola.",
-  "checked": "2026-11-23",
+  "checked": "2026-11-26",
   "accepted": "Terms say any non-flammable junk. Tires are taken for an extra fee of $10 each.",
   "prohibited": "Terms say they do not accept brush or hazardous waste. If you are not sure, call before the appointment.",
   "address": null,
@@ -111,7 +111,7 @@
       "note": "Compact 15-yard dumpster with rear double doors. The company says it fits in one parking space. Dump fee is $60 per ton. No included tonnage is stated. Tax, deposit, extra day fee, and delivery fee are not published. Next-day delivery when they have a truck open.",
       "sourceUrl": "https://bcsjunkremoval.com/dumpster-rental-service",
       "sourceLabel": "BCS Junk Removal dumpster rental",
-      "checked": "2026-11-23"
+      "checked": "2026-11-26"
     },
     {
       "id": "15-yard-7-day",
@@ -134,7 +134,7 @@
       "note": "Compact 15-yard dumpster with rear double doors. The company says it fits in one parking space. Dump fee is $60 per ton. No included tonnage is stated. Tax, deposit, extra day fee, and delivery fee are not published. Next-day delivery when they have a truck open.",
       "sourceUrl": "https://bcsjunkremoval.com/dumpster-rental-service",
       "sourceLabel": "BCS Junk Removal dumpster rental",
-      "checked": "2026-11-23"
+      "checked": "2026-11-26"
     }
   ]
 }

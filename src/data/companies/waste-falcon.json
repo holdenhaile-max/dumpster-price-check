@@ -5,7 +5,7 @@
   "cities": ["college-station", "bryan"],
   "kind": "roll-off",
   "summary": "Roll-off dumpsters with prices on the booking pages. Those prices are for rentals within 25 miles of College Station. A travel fee applies farther out, and the amount is not published. Loading help is referred to BCS Junk Removal. No Waste Falcon junk removal price list was published.",
-  "checked": "2026-11-23",
+  "checked": "2026-11-26",
   "accepted": "The homepage FAQ lists most construction debris, household junk, furniture, appliances, roofing materials, drywall, and yard waste.",
   "prohibited": "The homepage FAQ says hazardous materials such as paint, chemicals, batteries, and tires are not allowed. The homepage cost answer and the pricing page list tires at $10 each and Freon units at $25 each, which disagrees with the tire ban.",
   "address": null,
@@ -39,7 +39,7 @@
       "note": "Booking page lists $365 and dimensions 12 ft long, 3 ft high, and 6.5 ft wide. It does not list included days, included tons, or a per-ton fee. The marketing site says every rental includes delivery, pickup, disposal, and 7 days, with landfill tonnage at $45 per ton and $8 a day after day 7. The 20- and 30-yard booking pages say $42 per ton and $8 a day after day 10. This row keeps only what this booking page states. Price shown is for rentals within 25 miles of College Station.",
       "sourceUrl": "https://book.wastefalcon.com/items/10-yard-dumpster/",
       "sourceLabel": "Waste Falcon 10-yard booking page",
-      "checked": "2026-11-23"
+      "checked": "2026-11-26"
     },
     {
       "id": "15-yard",
@@ -62,7 +62,7 @@
       "note": "Booking page lists $380 only. No dimensions, days, or tons on that page. The marketing site says every rental includes 7 days, $45 per ton, and $8 a day after day 7. The 20- and 30-yard booking pages say $42 per ton and $8 a day after day 10. This row keeps only what this booking page states. Price shown is for rentals within 25 miles of College Station.",
       "sourceUrl": "https://book.wastefalcon.com/items/15-yard-dumpster/",
       "sourceLabel": "Waste Falcon 15-yard booking page",
-      "checked": "2026-11-23"
+      "checked": "2026-11-26"
     },
     {
       "id": "15-yard-swap",
@@ -85,7 +85,7 @@
       "note": "Booking site lists a 15-yard dumpster swapout at $380. The item page has no dimensions, days, or tons. Treat it as a mid-rental swap, not a standard first rental, unless the company says otherwise. Marketing page fees are not copied onto this row. Price shown is for rentals within 25 miles of College Station.",
       "sourceUrl": "https://book.wastefalcon.com/items/15-yard-dumpster-swapout/",
       "sourceLabel": "Waste Falcon 15-yard swap booking page",
-      "checked": "2026-11-23"
+      "checked": "2026-11-26"
     },
     {
       "id": "20-yard",
@@ -108,7 +108,7 @@
       "note": "Booking page: 14 ft long, 8 ft wide, 6 ft high. Up to 7 days included. Rent time extension is $8 a day after day 10. The page does not explain the gap between day 7 and day 10. 0 tons included. Extra weight is $42 per ton. The marketing page says $45 per ton and $8 a day after day 7. This row uses the booking page. Price shown is for rentals within 25 miles of College Station. Travel fee outside that area is not published.",
       "sourceUrl": "https://book.wastefalcon.com/items/20-yard-dumpster/",
       "sourceLabel": "Waste Falcon 20-yard booking page",
-      "checked": "2026-11-23"
+      "checked": "2026-11-26"
     },
     {
       "id": "30-yard",
@@ -131,7 +131,7 @@
       "note": "Booking page: 22 ft long, 8 ft wide, 6 ft high. Up to 10 days included. $8 a day after day 10. 0 tons included. Extra weight is $42 per ton. The marketing page says a standard 7-day period and $45 per ton. This row uses the booking page. Price shown is for rentals within 25 miles of College Station. Travel fee outside that area is not published.",
       "sourceUrl": "https://book.wastefalcon.com/items/30-yard-dumpster/",
       "sourceLabel": "Waste Falcon 30-yard booking page",
-      "checked": "2026-11-23"
+      "checked": "2026-11-26"
     }
   ]
 }
