@@ -2,7 +2,7 @@
 title: Cheapest 7-day dumpster in the Brazos Valley
 description: The lowest published 7-day dumpster price in Bryan and College Station, with the tons and fees that change the bill.
 eyebrow: 7-day price
-updated: "2026-11-19"
+updated: "2026-11-26"
 order: 2
 featured: true
 tables:
@@ -18,6 +18,8 @@ faqs:
     answer: Waste Falcon's 10-yard booking page lists $365 and does not list the days. The marketing page says rentals include 7 days. Because the booking page does not say 7 days, that $365 is not counted as a checked 7-day price.
   - question: What if the load is 2 tons?
     answer: Aggieland's 7-day price is $450 plus tax and includes 2 tons. BCS is $420 plus $60 per ton, which is $540 for 2 tons before any tax the page does not list. Waste Falcon's 20-yard booking page is $425 plus $42 per ton, which is $509 for 2 tons. This is arithmetic from the published rates, not a quote. The 2-ton line is Aggieland's included weight, used so you can compare. It is not a guess about your debris.
+  - question: Is the $295 10-yard a 7-day price?
+    answer: No. Rocking H Dumpsters lists that 10-yard at $295 for up to 10 days. The 20-yard is $395, the 30-yard is $495, and the 40-yard is $595, all for up to 10 days. None of those pages states 7 days, so they are not in the 7-day ranking. Tonnage is $32 or $73 per ton, and the page does not say which rate applies.
   - question: What is the cheapest short rental?
     answer: Aggieland lists 1 day at $300 plus tax, with 2 tons included. That is a dump trailer, and the yard size is not exact.
 sources:
@@ -31,6 +33,14 @@ sources:
     url: https://wastefalcon.com/pricing/
   - label: Aggieland Dumpster Rentals
     url: https://aggielanddumpsters.com/
+  - label: Rocking H Dumpsters 10-yard item page
+    url: https://www.rockinghdumpsters.com/items/10_yard_dumpster_(10_day)/
+  - label: Rocking H Dumpsters 20-yard item page
+    url: https://www.rockinghdumpsters.com/items/20_yard_dumpster_(10_day)/
+  - label: Rocking H Dumpsters 30-yard item page
+    url: https://www.rockinghdumpsters.com/items/30_yard_dumpster_(10_day)/
+  - label: Rocking H Dumpsters 40-yard item page
+    url: https://www.rockinghdumpsters.com/items/40_yard_dumpster/
 ---
 
 import PriceTable from "../../components/PriceTable.astro";
@@ -52,6 +62,10 @@ The [what's included guide](/guides/whats-included-dumpster-rental) lists tons, 
 ## Prices that are not a checked 7-day rental
 
 Waste Falcon's smaller booking pages list a dollar price and do not list the days. The 30-yard booking page includes 10 days, not 7. They are real prices. They are not in the 7-day ranking.
+
+Rocking H Dumpsters lists 10, 20, 30, and 40 yard roll-offs for up to 10 days at $295, $395, $495, and $595. Those pages do not state a 7-day price. They are not in the 7-day ranking. Tonnage is $32 or $73 per ton, and the page does not say which rate applies. Included tons are not stated.
+
+<PriceTable caption="Rocking H prices. The page states up to 10 days, not 7." companies="rocking-h-dumpsters" product="rental" />
 
 <PriceTable caption="Booked prices that do not state a 7-day rental" only="waste-falcon/10-yard,waste-falcon/15-yard,waste-falcon/15-yard-swap,waste-falcon/30-yard" />
 

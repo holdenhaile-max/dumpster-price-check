@@ -64,14 +64,14 @@ for (const rel of required) {
     problems.push(`${rel} contains a dash that is not a hyphen`);
   }
   if (rel === weekend) {
-    if (!html.includes("Nov 23, 2026") || !html.includes('datetime="2026-11-23"')) {
-      problems.push(`${rel} is missing the Nov 23 checked date`);
+    if (!html.includes("Nov 26, 2026") || !html.includes('datetime="2026-11-26"')) {
+      problems.push(`${rel} is missing the Nov 26 checked date`);
     }
     continue;
   }
   if (rel === week) {
-    if (!html.includes("Nov 23, 2026") || !html.includes('datetime="2026-11-23"')) {
-      problems.push(`${rel} is missing the Nov 23 checked date`);
+    if (!html.includes("Nov 26, 2026") || !html.includes('datetime="2026-11-26"')) {
+      problems.push(`${rel} is missing the Nov 26 checked date`);
     }
     if (!html.includes("Nov 24, 2026") || !html.includes('datetime="2026-11-24"')) {
       problems.push(`${rel} is missing the Nov 24 checked date`);
@@ -101,7 +101,7 @@ for (const rel of required) {
       "979 Junk Removal",
       "Call for quote",
       'datetime="2026-11-22"',
-      'datetime="2026-11-23"',
+      'datetime="2026-11-26"',
     ]) {
       if (!html.includes(phrase)) problems.push(`Dumpster vs junk removal page is missing ${phrase}`);
     }
@@ -116,6 +116,7 @@ for (const rel of required) {
     ["Nov 23, 2026", "2026-11-23"],
     ["Nov 24, 2026", "2026-11-24"],
     ["Nov 25, 2026", "2026-11-25"],
+    ["Nov 26, 2026", "2026-11-26"],
   ].some(([label, iso]) => html.includes(label) && html.includes(`datetime="${iso}"`));
   if (rel !== about && !dated) {
     problems.push(`${rel} is missing a checked date`);
@@ -190,7 +191,7 @@ for (const phrase of [
   "appliances with Freon removed",
   "BVR Waste and Recycling",
   "asbestos, batteries, and flammable liquids",
-  'datetime="2026-11-23"',
+  'datetime="2026-11-26"',
   'datetime="2026-11-25"',
   'datetime="2026-11-24"',
 ]) {
@@ -202,8 +203,8 @@ if (!materialsHtml.includes(`${normalized}/guides/what-can-you-put-in-a-dumpster
 
 for (const id of ["aggieland-dumpster-rentals", "bcs-junk-removal", "waste-falcon"]) {
   const html = must(path.join("companies", id, "index.html"));
-  if (!html.includes('datetime="2026-11-23"')) {
-    problems.push(`${id} is missing the Nov 23 checked date`);
+  if (!html.includes('datetime="2026-11-26"')) {
+    problems.push(`${id} is missing the Nov 26 checked date`);
   }
   if (html.includes("2026-11-20")) {
     problems.push(`${id} still shows the old checked date`);
@@ -263,6 +264,30 @@ if (binPage.includes("979-205-7587") || binPage.includes("3608 E. 29th")) {
   problems.push("Bin There Dump That page still shows the old phone or Bryan suite address");
 }
 
+const rocking = must(path.join("companies", "rocking-h-dumpsters", "index.html"));
+for (const phrase of [
+  "$295",
+  "$395",
+  "$495",
+  "$595",
+  "$32 or $73",
+  "$5 per day to extend rental",
+  "Fuel surcharge",
+  "979-398-2755",
+  'datetime="2026-11-26"',
+]) {
+  if (!rocking.includes(phrase)) problems.push(`Rocking H page is missing ${phrase}`);
+}
+for (const city of ["bryan", "college-station"]) {
+  const html = must(path.join("cities", city, "index.html"));
+  if (!html.includes("Rocking H Dumpsters")) {
+    problems.push(`${city} page is missing Rocking H Dumpsters`);
+  }
+  if (!html.includes("$295") || !html.includes("$595")) {
+    problems.push(`${city} page is missing a Rocking H price`);
+  }
+}
+
 const tonsHtml = must(tons);
 for (const phrase of [
   "$300 plus tax",
@@ -276,7 +301,7 @@ for (const phrase of [
   "does not guess",
   "Included tons are not listed",
   "8,000 lbs",
-  'datetime="2026-11-23"',
+  'datetime="2026-11-26"',
 ]) {
   if (!tonsHtml.includes(phrase)) problems.push(`Ton fee page is missing ${phrase}`);
 }

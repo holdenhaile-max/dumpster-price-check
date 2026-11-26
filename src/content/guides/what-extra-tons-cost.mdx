@@ -2,7 +2,7 @@
 title: What 1, 2, 3, and 4 tons add to the price
 description: The rental price plus the published per-ton fee at 1, 2, 3, and 4 tons. No company page here states how many tons a bathroom, a roof, or a cleanout weighs.
 eyebrow: Ton fee
-updated: "2026-11-24"
+updated: "2026-11-26"
 order: 7
 featured: true
 tables: []
@@ -15,6 +15,8 @@ faqs:
     answer: The rate includes 2 tons, then $50 per ton. One ton does not add the $50 fee. Three tons adds $50. Four tons adds $100. The price is plus tax, and the tax amount is not published.
   - question: Why is the $365 10-yard price missing from the ton table?
     answer: Waste Falcon's 10-yard booking page lists $365 and does not list a per-ton fee. The 15-yard booking page lists $380 and does not list one either. The $42 per ton on the 20-yard booking page, and the $45 per ton on the marketing page, are not copied onto those rows.
+  - question: Why is Rocking H missing from the ton tables?
+    answer: The item pages list $32 or $73 per ton and do not say which landfill rate applies. They also do not state included tons. The tables need one published rate. Two rates are not added together and not averaged. The base prices are $295, $395, $495, and $595 for up to 10 days.
 sources:
   - label: Aggieland Dumpster Rentals
     url: https://aggielanddumpsters.com/
@@ -32,6 +34,14 @@ sources:
     url: https://book.wastefalcon.com/items/30-yard-dumpster/
   - label: Waste Falcon pricing page
     url: https://wastefalcon.com/pricing/
+  - label: Rocking H Dumpsters 10-yard item page
+    url: https://www.rockinghdumpsters.com/items/10_yard_dumpster_(10_day)/
+  - label: Rocking H Dumpsters 20-yard item page
+    url: https://www.rockinghdumpsters.com/items/20_yard_dumpster_(10_day)/
+  - label: Rocking H Dumpsters 30-yard item page
+    url: https://www.rockinghdumpsters.com/items/30_yard_dumpster_(10_day)/
+  - label: Rocking H Dumpsters 40-yard item page
+    url: https://www.rockinghdumpsters.com/items/40_yard_dumpster/
 ---
 
 import OverageTable from "../../components/OverageTable.astro";
@@ -64,5 +74,11 @@ These booking pages list a dollar price and do not list a per-ton fee. The fee f
 <PriceTable caption="Priced rows with no per-ton fee on the booking page" only="waste-falcon/10-yard,waste-falcon/15-yard" />
 
 Pronto Services lists weight limits of 4 tons (8,000 lbs), 5 tons (10,000 lbs), and 6 tons (12,000 lbs). It does not publish a rental price or a fee past that limit. Bin There Dump That Aggieland, CTI Response, Texas Disposal Systems, Texas Commercial Waste, and BVR Waste and Recycling do not publish a per-ton fee. A dollar total for those rows would be a guess.
+
+## Two ton rates, no single total
+
+Rocking H Dumpsters lists tonnage at $32 or $73 per ton. The page says the rate is determined by the nearest landfill and does not say which rate applies. It does not state included tons. A single total would pick a rate, so these rows are not in the tables above. The base prices are $295, $395, $495, and $595 for up to 10 days. Tax is not stated. A fuel surcharge is based on distance, and the amount is not published.
+
+<PriceTable caption="Rocking H base prices. The ton rate is $32 or $73, and the page does not pick one." companies="rocking-h-dumpsters" product="rental" />
 
 Included tons, delivery, and extra days for every company are in the [what's included guide](/guides/whats-included-dumpster-rental). The 7-day base prices are in the [7-day price guide](/guides/cheapest-7-day-dumpster-brazos-valley). Which size a company names for a roof, a remodel, or a cleanout is in the [project size guide](/guides/what-size-dumpster-for-a-roof-remodel-or-cleanout).
