@@ -5,7 +5,7 @@
   "cities": ["college-station", "bryan"],
   "kind": "roll-off",
   "summary": "Roll-off boxes for Bryan, College Station, and nearby towns including Hearne, Franklin, Navasota, Brenham, Caldwell, Madisonville, and Hempstead. The page lists sizes and same-day delivery. It does not list a price.",
-  "checked": "2026-11-24",
+  "checked": "2026-11-27",
   "accepted": null,
   "prohibited": "Hazardous materials. The page says to call about special waste before loading.",
   "address": null,
@@ -41,7 +41,7 @@
       "note": "Bryan and College Station page lists 10, 20, 30, and 40 yard roll-off boxes, same-day delivery when available, and 24/7 dispatch. No rental price, included days, included tons, overage, extra day fee, or trip fee is published.",
       "sourceUrl": "https://ctisvc.com/roll-off-dumpster-rental-bryan-college-station-tx/",
       "sourceLabel": "CTI Response Bryan and College Station",
-      "checked": "2026-11-24"
+      "checked": "2026-11-27"
     },
     {
       "id": "20-yard",
@@ -64,7 +64,7 @@
       "note": "Bryan and College Station page lists 10, 20, 30, and 40 yard roll-off boxes, same-day delivery when available, and 24/7 dispatch. No rental price, included days, included tons, overage, extra day fee, or trip fee is published.",
       "sourceUrl": "https://ctisvc.com/roll-off-dumpster-rental-bryan-college-station-tx/",
       "sourceLabel": "CTI Response Bryan and College Station",
-      "checked": "2026-11-24"
+      "checked": "2026-11-27"
     },
     {
       "id": "30-yard",
@@ -87,7 +87,7 @@
       "note": "Bryan and College Station page lists 10, 20, 30, and 40 yard roll-off boxes, same-day delivery when available, and 24/7 dispatch. No rental price, included days, included tons, overage, extra day fee, or trip fee is published.",
       "sourceUrl": "https://ctisvc.com/roll-off-dumpster-rental-bryan-college-station-tx/",
       "sourceLabel": "CTI Response Bryan and College Station",
-      "checked": "2026-11-24"
+      "checked": "2026-11-27"
     },
     {
       "id": "40-yard",
@@ -110,7 +110,7 @@
       "note": "Bryan and College Station page lists 10, 20, 30, and 40 yard roll-off boxes, same-day delivery when available, and 24/7 dispatch. No rental price, included days, included tons, overage, extra day fee, or trip fee is published.",
       "sourceUrl": "https://ctisvc.com/roll-off-dumpster-rental-bryan-college-station-tx/",
       "sourceLabel": "CTI Response Bryan and College Station",
-      "checked": "2026-11-24"
+      "checked": "2026-11-27"
     }
   ]
 }

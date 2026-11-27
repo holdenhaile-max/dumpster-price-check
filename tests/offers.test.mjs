@@ -39,11 +39,8 @@ const recheckedOnNov26 = new Set([
   "waste-falcon",
   "rocking-h-dumpsters",
 ]);
-const recheckedOnNov24 = new Set([
-  "bin-there-dump-that-aggieland",
-  "cti-response",
-  "pronto-services",
-]);
+const recheckedOnNov24 = new Set(["bin-there-dump-that-aggieland"]);
+const recheckedOnNov27 = new Set(["cti-response", "pronto-services"]);
 const recheckedOnNov25 = new Set([
   "bvr-waste-and-recycling",
   "texas-commercial-waste",
@@ -65,6 +62,7 @@ test("every published dollar amount is one of the checked prices", () => {
     if (recheckedOnNov24.has(company.id)) expectedChecked = "2026-11-24";
     if (recheckedOnNov25.has(company.id)) expectedChecked = "2026-11-25";
     if (recheckedOnNov26.has(company.id)) expectedChecked = "2026-11-26";
+    if (recheckedOnNov27.has(company.id)) expectedChecked = "2026-11-27";
     assert.equal(company.data.checked, expectedChecked);
     for (const offer of company.data.offers) {
       assert.equal(offer.checked, expectedChecked);
@@ -184,6 +182,17 @@ test("the Nov 24 recheck kept call-for-quote prices and moved the date", () => {
       assert.equal(offer.price, null);
       assert.equal(offer.status, "quote");
       assert.equal(offer.checked, "2026-11-24");
+      assert.equal(offer.perTon, null);
+      assert.equal(offer.extraDay, null);
+    }
+  }
+  for (const id of recheckedOnNov27) {
+    const company = companies.find((item) => item.id === id);
+    assert.equal(company.data.checked, "2026-11-27");
+    for (const offer of company.data.offers) {
+      assert.equal(offer.price, null);
+      assert.equal(offer.status, "quote");
+      assert.equal(offer.checked, "2026-11-27");
       assert.equal(offer.perTon, null);
       assert.equal(offer.extraDay, null);
     }
@@ -349,7 +358,7 @@ test("the Nov 25 recheck kept call-for-quote prices and moved only the date", ()
   }
   const bcs = companies.find((company) => company.id === "bcs-junk-removal");
   assert.equal(bcs.data.checked, "2026-11-26");
-  assert.equal(bcs.data.junkRemoval.checked, "2026-11-23");
+  assert.equal(bcs.data.junkRemoval.checked, "2026-11-27");
   assert.deepEqual(
     bcs.data.junkRemoval.items.map((item) => item.amount),
     [125, null, 10, 650, 325, 385, null],
@@ -578,4 +587,29 @@ test("Rocking H prices come from its item pages and do not pick a landfill rate"
     week.some((row) => row.companyId === "rocking-h-dumpsters"),
     false,
   );
+});
+
+test("the placement guide cites city pages and does not invent a permit price", async () => {
+  const guide = await readFile(
+    path.resolve("src/content/guides/where-to-put-a-dumpster-college-station-bryan.mdx"),
+    "utf8",
+  );
+  const header = await readFile(path.resolve("src/components/Header.astro"), "utf8");
+  const footer = await readFile(path.resolve("src/components/Footer.astro"), "utf8");
+  const cities = await readFile(path.resolve("src/pages/cities/[slug].astro"), "utf8");
+  const companyPage = await readFile(path.resolve("src/pages/companies/[slug].astro"), "utf8");
+  assert.match(guide, /title: Where to put a dumpster in College Station and Bryan/);
+  assert.match(guide, /pricedOnly: true/);
+  assert.match(guide, /\$100/);
+  assert.match(guide, /not on private property/);
+  assert.match(guide, /Section 26-10/);
+  assert.match(guide, /Section 2-117/);
+  assert.match(guide, /does not print those dollar amounts/);
+  assert.match(guide, /no checked rental price/);
+  assert.match(guide, /updated: "2026-11-27"/);
+  assert.equal(guide.includes("\u2014") || guide.includes("\u2013"), false);
+  assert.match(header, /\/guides\/where-to-put-a-dumpster-college-station-bryan/);
+  assert.match(footer, /\/guides\/where-to-put-a-dumpster-college-station-bryan/);
+  assert.match(cities, /\/guides\/where-to-put-a-dumpster-college-station-bryan/);
+  assert.match(companyPage, /\/guides\/where-to-put-a-dumpster-college-station-bryan/);
 });
