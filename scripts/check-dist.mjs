@@ -39,6 +39,7 @@ const versus = path.join("guides", "dumpster-vs-junk-removal", "index.html");
 const materials = path.join("guides", "what-can-you-put-in-a-dumpster", "index.html");
 const tons = path.join("guides", "what-extra-tons-cost", "index.html");
 const projectSize = path.join("guides", "what-size-dumpster-for-a-roof-remodel-or-cleanout", "index.html");
+const placement = path.join("guides", "where-to-put-a-dumpster-college-station-bryan", "index.html");
 const required = [
   "index.html",
   path.join("cities", "college-station", "index.html"),
@@ -51,6 +52,7 @@ const required = [
   materials,
   tons,
   projectSize,
+  placement,
   about,
 ];
 
@@ -78,7 +80,7 @@ for (const rel of required) {
     }
     continue;
   }
-  if (rel === tons || rel === projectSize) {
+  if (rel === tons || rel === projectSize || rel === placement) {
     continue;
   }
   if (rel === versus) {
@@ -238,7 +240,7 @@ if (/\bft\b|feet|foot/i.test(tdsPage.match(/22L x 8W x 3\.5H[\s\S]{0,80}/)?.[0] 
   problems.push("Texas Disposal Systems dimensions were given a unit the page did not name");
 }
 
-for (const id of ["bin-there-dump-that-aggieland", "cti-response", "pronto-services"]) {
+for (const id of ["bin-there-dump-that-aggieland"]) {
   const html = must(path.join("companies", id, "index.html"));
   if (!html.includes('datetime="2026-11-24"')) {
     problems.push(`${id} is missing the Nov 24 checked date`);
@@ -249,6 +251,25 @@ for (const id of ["bin-there-dump-that-aggieland", "cti-response", "pronto-servi
   if (!html.includes("Call for quote")) {
     problems.push(`${id} no longer shows Call for quote`);
   }
+}
+for (const id of ["cti-response", "pronto-services"]) {
+  const html = must(path.join("companies", id, "index.html"));
+  if (!html.includes('datetime="2026-11-27"')) {
+    problems.push(`${id} is missing the Nov 27 checked date`);
+  }
+  if (html.includes("2026-11-24") || html.includes("2026-11-21") || html.includes("2026-11-19")) {
+    problems.push(`${id} still shows an old checked date`);
+  }
+  if (!html.includes("Call for quote")) {
+    problems.push(`${id} no longer shows Call for quote`);
+  }
+}
+const bcsPage = must(path.join("companies", "bcs-junk-removal", "index.html"));
+if (!bcsPage.includes("Nov 27, 2026")) {
+  problems.push("BCS junk removal summary is missing Nov 27, 2026");
+}
+if (bcsPage.includes("Nov 23, 2026") || bcsPage.includes('datetime="2026-11-23"')) {
+  problems.push("BCS junk removal summary still says Nov 23, 2026");
 }
 const binPage = must(path.join("companies", "bin-there-dump-that-aggieland", "index.html"));
 for (const phrase of [
@@ -331,6 +352,9 @@ if (!sitemap.includes("/guides/what-extra-tons-cost/")) {
 if (!sitemap.includes("/guides/what-size-dumpster-for-a-roof-remodel-or-cleanout/")) {
   problems.push("Sitemap is missing the project size guide");
 }
+if (!sitemap.includes("/guides/where-to-put-a-dumpster-college-station-bryan/")) {
+  problems.push("Sitemap is missing the placement guide");
+}
 
 const projectHtml = must(projectSize);
 for (const phrase of [
@@ -349,6 +373,30 @@ for (const phrase of [
 }
 if (!projectHtml.includes(`${normalized}/guides/what-size-dumpster-for-a-roof-remodel-or-cleanout/`)) {
   problems.push("Project size page is missing its own nav link");
+}
+
+const placementHtml = must(placement);
+for (const phrase of [
+  "$100",
+  "not on private property",
+  "Nov 27, 2026",
+  "Section 26-10",
+  "ROWpermit@bryantx.gov",
+  "979-209-5030",
+  "fits in one parking space",
+  "fits most residential driveways",
+  "$325",
+  "$385",
+  "no checked rental price",
+  "979-775-7171",
+  "979-321-4123",
+  'datetime="2026-11-26"',
+  '"2026-11-27"',
+]) {
+  if (!placementHtml.includes(phrase)) problems.push(`Placement page is missing ${phrase}`);
+}
+if (!placementHtml.includes(`${normalized}/guides/where-to-put-a-dumpster-college-station-bryan/`)) {
+  problems.push("Placement page is missing its own nav link");
 }
 
 if (problems.length) {

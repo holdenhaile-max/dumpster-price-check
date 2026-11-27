@@ -152,3 +152,32 @@ Rocking H Dumpsters was added from its own pages, checked 2026-11-26. It serves 
 - Tires are $10 to $25 each. Appliances with Freon are $20 each. A fuel surcharge is calculated from the distance to the jobsite. The service area page says a fuel surcharge may be added outside the normal service area. The amount is not published. Tax is not stated. Rentals can be kept for a maximum of 3 months.
 - The item pages do not accept heavy fill such as rock, gravel, stone, dirt, sand, brick, concrete, asphalt, or rubber pellets. They do not accept liquids, paint, batteries, asbestos, harmful chemicals, flammable liquids, or other environmental hazards.
 - The homepage business details list 12098 FM 1940, Franklin, TX 77856, and (979) 398-2755. Bryan and College Station landing pages do not publish a separate dollar price.
+
+## Recheck on 2026-11-27
+
+BCS Junk Removal junk prices, CTI Response, and Pronto Services were read again. No dollar amount changed. BCS junk removal checked date moved to 2026-11-27. CTI and Pronto checked dates moved to 2026-11-27. Dumpster rental offers for BCS stayed 2026-11-26 because that rental page was not the assigned recheck. The dumpster page still showed $380 for 3 days and $420 for 7 days, with a $60 per ton dump fee, in the same public text as the file.
+
+- BCS junk removal pricing, https://bcsjunkremoval.com/junk-removal-pricing: minimum $125 including one item, tires +$10 each, furniture and appliances +$20 to $30 each, full 15-yard haul-off $650. Late cancel under 24 hours is still half of the appointment total. The page still says additional item cost is set at the quote, and the detailed list still prints the $20 to $30 line.
+- BCS live loads, https://bcsjunkremoval.com/live-loads: 45 minutes $325, 90 minutes $385, up to 1 ton then $60 per ton.
+- CTI Response, https://ctisvc.com/roll-off-dumpster-rental-bryan-college-station-tx/: still 10, 20, 30, and 40 yard boxes, same-day delivery, and no dollar price.
+- Pronto Services, https://www.prontoservices.net/dumpsters/residential-dumpster-rental: still 20-yard up to 8,000 lbs, 30-yard up to 10,000 lbs, 40-yard up to 12,000 lbs, and no dollar price.
+
+## Placement guide on 2026-11-27
+
+No new city page was added. A nearby city page needs two companies that publish a dollar rental price and that state they serve that city. Navasota, Hearne, Caldwell, Brenham, and Madisonville each still have one priced company, not two.
+
+- Navasota, Brenham, and Caldwell: BCS Junk Removal names them and publishes $380 and $420. Waste Falcon's homepage names them, and the booking pages still limit the displayed price to rentals within 25 miles of College Station, with a travel fee outside that area. The travel fee is not published, and the booking page does not name those cities. That price was not copied onto those cities. CTI Response, BVR, Bin There Dump That Aggieland, and Texas Disposal Systems name one or more of those places and publish no dollar price.
+- Hearne and Madisonville: Rocking H Dumpsters names them and publishes $295, $395, $495, and $595. The Hearne landing page does not print a dollar price. Waste Falcon's homepage names both cities, with the same 25-mile limit on the booking price. BCS does not name Hearne or Madisonville. CTI names both and publishes no dollar price.
+- Iola is named by both BCS and Rocking H, and both publish dollar prices. Neither page prints an Iola-only rate. Iola was not one of the requested city examples. A city page would repeat the same rental rows already on College Station and Bryan. That page was not added.
+
+The new page is the placement guide at /guides/where-to-put-a-dumpster-college-station-bryan/. City pages were read on 2026-11-27.
+
+- Bryan right-of-way page: Type A Special is $100 and includes placing a dumpster in the right-of-way and placing a dumpster that is not on private property. Inquiries go to ROWpermit@bryantx.gov. Phone 979-209-5030.
+- Bryan Ordinance 2229, Section 106-172: the same $100 Type A fee, and the fee line names dumpsters.
+- Bryan permitted roll-off providers: the city does not provide roll-off service. The fee is paid to the provider. The page lists eight names. This site has no checked rental price for Brazos Valley Trash Valet and Recycling, Container Source Storage and Rolloff, or Maroon Dumpsters. The city page phone for Texas Commercial Waste is 979-775-7171. The company file lists 979-314-3238. The city page phone for Texas Disposal Systems is 979-321-4123. The company file lists 979-321-4015.
+- College Station franchise page: a debris hauling franchise lets a company use public streets, alleys, and public ways. No resident permit fee is printed there.
+- College Station Code Section 26-10: no storing construction materials or other solid waste on a city road, street, or right-of-way without city permission.
+- College Station Code Section 40-402: construction demolition waste stays on-site. The city roll-off fee dollar amounts are pointed to Section 2-117 and are not printed on the ordinance page that was read.
+- College Station Code Section 40-391: commercial collection. A refuse container does not go on a sidewalk or right-of-way unless it is out for approved collection. This was not rewritten as a homeowner driveway permit.
+- College Station driveway and curb cut page: it is about building or changing a driveway. It does not mention a dumpster.
+- BCS live load page: some HOAs will not allow a dumpster on the lot, and the company says a short live load does not need a city permit. The city pages do not say a short live load is exempt.
