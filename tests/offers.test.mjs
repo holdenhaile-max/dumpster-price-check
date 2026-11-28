@@ -39,12 +39,13 @@ const recheckedOnNov26 = new Set([
   "waste-falcon",
   "rocking-h-dumpsters",
 ]);
-const recheckedOnNov24 = new Set(["bin-there-dump-that-aggieland"]);
+const recheckedOnNov24 = new Set();
 const recheckedOnNov27 = new Set(["cti-response", "pronto-services"]);
-const recheckedOnNov25 = new Set([
+const recheckedOnNov25 = new Set(["texas-disposal-systems"]);
+const recheckedOnNov28 = new Set([
+  "bin-there-dump-that-aggieland",
   "bvr-waste-and-recycling",
   "texas-commercial-waste",
-  "texas-disposal-systems",
 ]);
 
 test("excluded companies are not in the price files", () => {
@@ -63,6 +64,7 @@ test("every published dollar amount is one of the checked prices", () => {
     if (recheckedOnNov25.has(company.id)) expectedChecked = "2026-11-25";
     if (recheckedOnNov26.has(company.id)) expectedChecked = "2026-11-26";
     if (recheckedOnNov27.has(company.id)) expectedChecked = "2026-11-27";
+    if (recheckedOnNov28.has(company.id)) expectedChecked = "2026-11-28";
     assert.equal(company.data.checked, expectedChecked);
     for (const offer of company.data.offers) {
       assert.equal(offer.checked, expectedChecked);
@@ -174,14 +176,14 @@ test("the 1-3 day guide is linked and uses only those published short prices", a
   assert.match(footer, /\/guides\/1-3-day-weekend-dumpster-prices/);
 });
 
-test("the Nov 24 recheck kept call-for-quote prices and moved the date", () => {
-  for (const id of recheckedOnNov24) {
+test("the Nov 28 recheck kept call-for-quote prices and moved the date", () => {
+  for (const id of recheckedOnNov28) {
     const company = companies.find((item) => item.id === id);
-    assert.equal(company.data.checked, "2026-11-24");
+    assert.equal(company.data.checked, "2026-11-28");
     for (const offer of company.data.offers) {
       assert.equal(offer.price, null);
       assert.equal(offer.status, "quote");
-      assert.equal(offer.checked, "2026-11-24");
+      assert.equal(offer.checked, "2026-11-28");
       assert.equal(offer.perTon, null);
       assert.equal(offer.extraDay, null);
     }
@@ -543,7 +545,7 @@ test("Rocking H prices come from its item pages and do not pick a landfill rate"
   const company = companies.find((item) => item.id === "rocking-h-dumpsters");
   assert.equal(company.data.name, "Rocking H Dumpsters");
   assert.equal(company.data.phone, "979-398-2755");
-  assert.deepEqual(company.data.cities, ["college-station", "bryan"]);
+  assert.deepEqual(company.data.cities, ["college-station", "bryan", "iola"]);
   assert.equal(company.data.checked, "2026-11-26");
   assert.equal(company.data.address, "12098 FM 1940, Franklin, TX 77856");
   assert.deepEqual(
@@ -612,4 +614,42 @@ test("the placement guide cites city pages and does not invent a permit price", 
   assert.match(footer, /\/guides\/where-to-put-a-dumpster-college-station-bryan/);
   assert.match(cities, /\/guides\/where-to-put-a-dumpster-college-station-bryan/);
   assert.match(companyPage, /\/guides\/where-to-put-a-dumpster-college-station-bryan/);
+});
+
+test("Iola lists only companies whose own pages name the town", async () => {
+  const city = JSON.parse(await readFile(path.resolve("src/data/cities/iola.json"), "utf8"));
+  assert.equal(city.name, "Iola");
+  assert.equal(city.order, 3);
+  assert.match(city.summary, /\$295/);
+  assert.match(city.summary, /Nov 26, 2026/);
+  assert.match(city.summary, /Nov 28, 2026/);
+  assert.equal(city.faqs.length >= 4, true);
+  const named = new Set([
+    "bcs-junk-removal",
+    "rocking-h-dumpsters",
+    "bvr-waste-and-recycling",
+    "texas-commercial-waste",
+  ]);
+  for (const company of companies) {
+    const serves = company.data.cities.includes("iola");
+    assert.equal(serves, named.has(company.id), company.id);
+  }
+  const rows = selectOffers(companies, { city: "iola", pricedOnly: true, product: "rental" });
+  assert.deepEqual(
+    rows.map((row) => [row.companyId, row.offer.price]).sort(),
+    [
+      ["bcs-junk-removal", 380],
+      ["bcs-junk-removal", 420],
+      ["rocking-h-dumpsters", 295],
+      ["rocking-h-dumpsters", 395],
+      ["rocking-h-dumpsters", 495],
+      ["rocking-h-dumpsters", 595],
+    ].sort(),
+  );
+  const header = await readFile(path.resolve("src/components/Header.astro"), "utf8");
+  const footer = await readFile(path.resolve("src/components/Footer.astro"), "utf8");
+  assert.match(header, /\/cities\/iola/);
+  assert.match(footer, /\/cities\/iola/);
+  const blob = JSON.stringify(city);
+  assert.equal(blob.includes("\u2014") || blob.includes("\u2013"), false);
 });

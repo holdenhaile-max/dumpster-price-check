@@ -5,7 +5,7 @@
   "cities": ["college-station", "bryan"],
   "kind": "roll-off",
   "summary": "The rates page says to contact them for a quote. No dollar rate is published. The FAQ says a typical rental is 7 days. Call buttons list 346-742-1020. The homepage business details list 346-590-7202. The homepage prints the address as 41900 N. MIll Drive, Magnolia, Texas 77354.",
-  "checked": "2026-11-24",
+  "checked": "2026-11-28",
   "accepted": "Household junk, construction debris, yard waste, and renovation materials. Size pages also mention furniture, roof shingles, and heavy items such as gravel, plus flood and fire debris on the larger bins.",
   "prohibited": "Hazardous materials such as chemicals and asbestos.",
   "address": "41900 N. MIll Drive, Magnolia, Texas 77354",
@@ -39,7 +39,7 @@
       "note": "Bin rates page says to contact them for a personalized quote and does not publish dollar rates. The rates page lists the box as 10 ft long, 5.5 ft wide, and 2 ft high. The FAQ says a typical rental is 7 days. Included tons, overage, extra day fee, and deposit are not published. Delivery and pickup are described as included, without a dollar split.",
       "sourceUrl": "https://www.bintheredumpthat.com/aggieland-dumpster-rentals/bin-rates-sizes/",
       "sourceLabel": "Bin There Dump That Aggieland rates",
-      "checked": "2026-11-24"
+      "checked": "2026-11-28"
     },
     {
       "id": "6-yard",
@@ -62,7 +62,7 @@
       "note": "Bin rates page says to contact them for a personalized quote and does not publish dollar rates. The rates page lists the box as 10 ft long, 5.5 ft wide, and 3 ft high. The FAQ says a typical rental is 7 days.",
       "sourceUrl": "https://www.bintheredumpthat.com/aggieland-dumpster-rentals/bin-rates-sizes/",
       "sourceLabel": "Bin There Dump That Aggieland rates",
-      "checked": "2026-11-24"
+      "checked": "2026-11-28"
     },
     {
       "id": "10-yard",
@@ -85,7 +85,7 @@
       "note": "Bin rates page says to contact them for a personalized quote and does not publish dollar rates. The rates page lists the box as 10 ft long, 7 ft wide, and 4 ft high. The FAQ says a typical rental is 7 days.",
       "sourceUrl": "https://www.bintheredumpthat.com/aggieland-dumpster-rentals/bin-rates-sizes/",
       "sourceLabel": "Bin There Dump That Aggieland rates",
-      "checked": "2026-11-24"
+      "checked": "2026-11-28"
     },
     {
       "id": "15-yard",
@@ -108,7 +108,7 @@
       "note": "Bin rates page says to contact them for a personalized quote and does not publish dollar rates. The rates page lists the box as 11 ft long, 8 ft wide, and 4.5 ft high. The FAQ says a typical rental is 7 days.",
       "sourceUrl": "https://www.bintheredumpthat.com/aggieland-dumpster-rentals/bin-rates-sizes/",
       "sourceLabel": "Bin There Dump That Aggieland rates",
-      "checked": "2026-11-24"
+      "checked": "2026-11-28"
     },
     {
       "id": "20-yard",
@@ -131,7 +131,7 @@
       "note": "Bin rates page says to contact them for a personalized quote and does not publish dollar rates. The rates page lists the box as 11 ft long, 8 ft wide, and 6 ft high. The FAQ says a typical rental is 7 days.",
       "sourceUrl": "https://www.bintheredumpthat.com/aggieland-dumpster-rentals/bin-rates-sizes/",
       "sourceLabel": "Bin There Dump That Aggieland rates",
-      "checked": "2026-11-24"
+      "checked": "2026-11-28"
     }
   ]
 }

@@ -75,8 +75,8 @@ for (const rel of required) {
     if (!html.includes("Nov 26, 2026") || !html.includes('datetime="2026-11-26"')) {
       problems.push(`${rel} is missing the Nov 26 checked date`);
     }
-    if (!html.includes("Nov 24, 2026") || !html.includes('datetime="2026-11-24"')) {
-      problems.push(`${rel} is missing the Nov 24 checked date`);
+    if (!html.includes("Nov 28, 2026") || !html.includes('datetime="2026-11-28"')) {
+      problems.push(`${rel} is missing the Nov 28 checked date`);
     }
     continue;
   }
@@ -119,6 +119,7 @@ for (const rel of required) {
     ["Nov 24, 2026", "2026-11-24"],
     ["Nov 25, 2026", "2026-11-25"],
     ["Nov 26, 2026", "2026-11-26"],
+    ["Nov 28, 2026", "2026-11-28"],
   ].some(([label, iso]) => html.includes(label) && html.includes(`datetime="${iso}"`));
   if (rel !== about && !dated) {
     problems.push(`${rel} is missing a checked date`);
@@ -171,7 +172,7 @@ for (const phrase of [
   "4 tons limit",
   "7 days, typical",
   "Not listed",
-  'datetime="2026-11-24"',
+  'datetime="2026-11-28"',
 ]) {
   if (!includedHtml.includes(phrase)) problems.push(`What's included page is missing ${phrase}`);
 }
@@ -195,7 +196,7 @@ for (const phrase of [
   "asbestos, batteries, and flammable liquids",
   'datetime="2026-11-26"',
   'datetime="2026-11-25"',
-  'datetime="2026-11-24"',
+  'datetime="2026-11-28"',
 ]) {
   if (!materialsHtml.includes(phrase)) problems.push(`What can go in page is missing ${phrase}`);
 }
@@ -213,7 +214,20 @@ for (const id of ["aggieland-dumpster-rentals", "bcs-junk-removal", "waste-falco
   }
 }
 
-for (const id of ["bvr-waste-and-recycling", "texas-commercial-waste", "texas-disposal-systems"]) {
+for (const id of ["bvr-waste-and-recycling", "texas-commercial-waste"]) {
+  const html = must(path.join("companies", id, "index.html"));
+  if (!html.includes('datetime="2026-11-28"')) {
+    problems.push(`${id} is missing the Nov 28 checked date`);
+  }
+  if (html.includes("2026-11-25") || html.includes("2026-11-22") || html.includes("2026-11-19")) {
+    problems.push(`${id} still shows an old checked date`);
+  }
+  if (!html.includes("Call for quote")) {
+    problems.push(`${id} no longer shows Call for quote`);
+  }
+}
+{
+  const id = "texas-disposal-systems";
   const html = must(path.join("companies", id, "index.html"));
   if (!html.includes('datetime="2026-11-25"')) {
     problems.push(`${id} is missing the Nov 25 checked date`);
@@ -242,10 +256,10 @@ if (/\bft\b|feet|foot/i.test(tdsPage.match(/22L x 8W x 3\.5H[\s\S]{0,80}/)?.[0] 
 
 for (const id of ["bin-there-dump-that-aggieland"]) {
   const html = must(path.join("companies", id, "index.html"));
-  if (!html.includes('datetime="2026-11-24"')) {
-    problems.push(`${id} is missing the Nov 24 checked date`);
+  if (!html.includes('datetime="2026-11-28"')) {
+    problems.push(`${id} is missing the Nov 28 checked date`);
   }
-  if (html.includes("2026-11-21") || html.includes("2026-11-19")) {
+  if (html.includes("2026-11-24") || html.includes("2026-11-21") || html.includes("2026-11-19")) {
     problems.push(`${id} still shows an old checked date`);
   }
   if (!html.includes("Call for quote")) {
@@ -354,6 +368,27 @@ if (!sitemap.includes("/guides/what-size-dumpster-for-a-roof-remodel-or-cleanout
 }
 if (!sitemap.includes("/guides/where-to-put-a-dumpster-college-station-bryan/")) {
   problems.push("Sitemap is missing the placement guide");
+}
+if (!sitemap.includes("/cities/iola/")) {
+  problems.push("Sitemap is missing the Iola city page");
+}
+const iolaHtml = must(path.join("cities", "iola", "index.html"));
+for (const phrase of [
+  "Dumpster rental prices in Iola",
+  "$295",
+  "$380",
+  "$420",
+  "$595",
+  "Call for quote",
+  "BVR Waste and Recycling",
+  "Texas Commercial Waste",
+  "Nov 26, 2026",
+  "Nov 28, 2026",
+]) {
+  if (!iolaHtml.includes(phrase)) problems.push(`Iola page is missing ${phrase}`);
+}
+if (iolaHtml.includes("\u2014") || iolaHtml.includes("\u2013")) {
+  problems.push("Iola page contains a dash that is not a hyphen");
 }
 
 const projectHtml = must(projectSize);
